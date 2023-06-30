@@ -14,13 +14,7 @@ function onSubmit(e){
 
 
 function handleChange(e){
-    if(e.target.name === "name"){
-        setBody(name : e.target.value)
-    } else if (e.target.name === "email") {
-        setBody(...body,email : e.target.value);
-      }else if (e.target.name === "password") {
-        setBody(...body,password : e.target.vale);
-      }
+
 }
 
     return(
