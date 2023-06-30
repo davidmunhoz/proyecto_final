@@ -1,13 +1,11 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import {Link} from "react-router-dom"
 import { Grid } from '@mui/material';
 
-import Login from "../../views/Login/Login"
-import Register from "../../views/Register/Register"
+import logo from "../../assets/logo.jpg"
 
 const headerStyle = {
   position: 'fixed',
@@ -31,9 +29,7 @@ export default function Header() {
         ></IconButton>
 
         <Grid container justifyContent="flex-start">
-          <Typography variant="h6" component="div">
-            AUTOCTONO LOGO
-          </Typography>
+        <Link to="" relative=''><img src={logo}/></Link>
         </Grid>
 
         <Grid container justifyContent="flex-end">
