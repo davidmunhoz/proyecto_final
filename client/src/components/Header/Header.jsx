@@ -51,49 +51,7 @@ export default function Header() {
         </Grid>
       </Toolbar>
     </AppBar>
-    <List>
-    {drawerMenu.map(({ label, icon, path }) => {
-      const Icon = icon;
-      return (
-        <ListItem
-          key={label}
-          disablePadding
-          sx={{
-            display: "block",
-            backgroundColor:
-              location.pathname === path
-                ? theme.palette.primary.light
-                : null,
-          }}
-          onClick={open && handleDrawer}
-        >
-          <Link to={path}>
-            <ListItemButton
-              sx={{
-                minHeight: 48,
-                justifyContent: open ? "initial" : "center",
-                px: 2.5,
-              }}
-            >
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                }}
-              >
-                <Icon />
-              </ListItemIcon>
-              <ListItemText
-                primary={label}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-          </Link>
-        </ListItem>
-      );
-    })}
-  </List>
+ 
   </Box>
   );
 }
