@@ -19,6 +19,7 @@ async function onSubmit(values, actions) {
       console.log(data)
     }catch(error){
       console.log(error)
+      //shuspula
     }
 
   actions.resetForm();
