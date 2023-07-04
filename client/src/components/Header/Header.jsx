@@ -3,8 +3,7 @@ import Toolbar from '@mui/material/Toolbar';
 // import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import {Link} from "react-router-dom"
-import { Grid } from '@mui/material';
-import { drawerMenu } from '../Const/drawerMenu';
+import { Grid, Box} from '@mui/material';
 
 
 
@@ -45,7 +44,7 @@ export default function Header() {
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        <Link to="register" relative="">
+        <Link to="/register" relative="">
         Registrate
     </Link>
         </Grid>

@@ -4,7 +4,6 @@ import  Home from "./views/Home/Home"
 import Login from "./views/Login/Login"
 import Register from "./views/Register/Register"
 import Header from './components/Header/Header';
-
 function App() {
   return (
     <BrowserRouter>

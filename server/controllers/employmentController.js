@@ -26,16 +26,16 @@ employmentController.addEmployment = async (req,res) =>{
 }
 
 employmentController.getEmployment = async (req,res) =>{
-    const { titulo } = req.body
+    const { provincia } = req.params;
 
-    if(!titulo){
-        return res.status(400).send({message: "Title neccesary"})
+    if(!provincia){
+        return res.status(400).send({message: "Provincia necesaria"})
     }
 
     try{
-        const employment = await employmentDao.getEmployment(titulo)
+        const employment = await employmentDao.getEmployment(provincia)
         if(employment.length === 0){
-            return res.status(404).send({message: "employment not found"})
+            return res.status(404).send({message: "Provincia no encontrada"})
         }
        return res.send({employment})
 
