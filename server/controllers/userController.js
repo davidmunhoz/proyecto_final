@@ -13,7 +13,7 @@ userController.addUser = async (req,res) =>{
     }
 
     try{
-        const user = await userDao.addUser(req.body)
+        const user = await userDao.loginUser(req.body.email)
         console.log(user);
 
         if(user.length > 0){
@@ -36,7 +36,7 @@ userController.userLogin = async (req,res) =>{
     }
 
     try{
-        const user = await userDao.getUserbyEmail(email)
+        const user = await userDao.loginUser(email)
         if(user.length === 0){
             return res.status(404).send({message: "User not found"})
         }

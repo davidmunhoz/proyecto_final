@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import {useState} from "react";
 import { useFormik } from "formik";
 import { Grid, TextField, Typography, Button, Checkbox } from "@mui/material";
 
@@ -6,30 +6,28 @@ import { initialValues } from "./utils/initialValues";
 import { RegisterFormikSchema } from "./RegisterFormikSchema";
 
 async function onSubmit(values, actions) {
-  const [data, setData] = useState([])
-
   console.log(values);
   console.log(actions);
-  await new Promise((resolve) => setTimeout(resolve, 1500));
 
-  useEffect(() =>{
-    fetch("localhost:3001/user/register",  
-    {method: "POST",
-   headers: {
-     "Content-Type": "application/json",
-   }, body: JSON.stringify(values)
- })
-   .then(response => response.json())
-   .then(data => setData(values))
- },[])
-
+    try{
+    const response = await fetch("http://localhost:3001/user/register",{
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: { "Content-Type": "application/json" },
+    })
+      const data = await response.json()
+      console.log(data)
+    }catch(error){
+      console.log(error)
+    }
 
   actions.resetForm();
-}
+  }
+
 
 const label = { inputProps: { "aria-label": "¿Eres empresario?" } };
 
-export default function RegisterFormik() {
+export default function RegisterFormik(){
   const [click, setClick] = useState(false);
   
   const handleCheckBox = () => {

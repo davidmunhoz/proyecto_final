@@ -68,6 +68,9 @@ button:focus-visible {
   }
 }
 
+.pad{
+  align-content: center;
+}
 /* #malaga:hover{
   background-color: #646cff;
 }
