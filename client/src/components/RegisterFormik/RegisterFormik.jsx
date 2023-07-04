@@ -6,13 +6,13 @@ import { initialValues } from "./utils/initialValues";
 import { RegisterFormikSchema } from "./RegisterFormikSchema";
 
 async function onSubmit(values, actions) {
-  const [data, setData] = useState([])
+  const [data, setData] = UseState([])
 
   console.log(values);
   console.log(actions);
   await new Promise((resolve) => setTimeout(resolve, 1500));
 
-  useEffect(() =>{
+  UseEffect(() =>{
     fetch("localhost:3001/user/register",  
     {method: "POST",
    headers: {
@@ -30,7 +30,7 @@ async function onSubmit(values, actions) {
 const label = { inputProps: { "aria-label": "¿Eres empresario?" } };
 
 export default function RegisterFormik() {
-  const [click, setClick] = useState(false);
+  const [click, setClick] = UseState(false);
   
   const handleCheckBox = () => {
     setClick(!click);

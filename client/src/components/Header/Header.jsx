@@ -1,16 +1,10 @@
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
-// import Button from '@mui/material/Button';
+// import Button from '@mui/material/Button'
 import IconButton from '@mui/material/IconButton';
 import {Link} from "react-router-dom"
 import { Grid } from '@mui/material';
-import { drawerMenu } from '../Const/drawerMenu';
-
-
-
-
-
-import logo from "../../assets/logo.jpg"
+import logo from "../../assets/logo.jpg";
 
 const headerStyle = {
   position: 'fixed',
@@ -18,13 +12,13 @@ const headerStyle = {
   left: 0,
   right: 0,
   zIndex: 9999,
-  backgroundColor: 'green', // Agregamos el estilo para el color de fondo
+  backgroundColor: 'green', 
 };
 
 export default function Header() {
   return (
-    <Box>
-    <AppBar position="static" style={headerStyle}>
+   
+    <AppBar position="relative" style={headerStyle}>
       <Toolbar>
         <IconButton
           size="large"
@@ -39,7 +33,7 @@ export default function Header() {
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        <Link to="/login" relative="">
+        <Link to="login" relative="">
         Iniciar Sesion
       </Link>
         </Grid>
@@ -52,6 +46,6 @@ export default function Header() {
       </Toolbar>
     </AppBar>
  
-  </Box>
+  
   );
 }
