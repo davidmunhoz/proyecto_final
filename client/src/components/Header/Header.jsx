@@ -33,8 +33,9 @@ export default function Header() {
           sx={{ mr: 2 }}
         ></IconButton>
 
-        <Grid container justifyContent="flex-start">
-        <Link to="" relative=''><img src={logo}/></Link>
+        <Grid p={2} container justifyContent="flex-start"  alignItems={'center'}>
+        <Link to="" relative=''><Box component={'img'} sx={{width: '50px',mr:1}} src={logo}/></Link>
+        Autoctono
         </Grid>
 
         <Grid container justifyContent="flex-end">

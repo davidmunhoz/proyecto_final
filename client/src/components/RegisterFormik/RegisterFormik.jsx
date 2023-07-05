@@ -52,11 +52,11 @@ export default function RegisterFormik(){
   return (
     <form onSubmit={handleSubmit}>
       <Grid container>
-        <Grid item xs={12}>
-          <Typography variant="h3"> Registrate </Typography>
+        <Grid item xs={12} mb={2}>
+          <Typography variant="h3" > Registrate </Typography>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid  mb={2} item xs={12}>
           <TextField
             label="nombre"
             type="text"
@@ -64,13 +64,14 @@ export default function RegisterFormik(){
             value={values.nombre}
             onChange={handleChange}
             onBlur={handleBlur}
+            size="small"
             className={errors.nombre && touched.nombre ? "input-error" : ""}
           />
           {errors.nombre && touched.nombre && (
             <p className="error">{errors.nombre}</p>
           )}
         </Grid>
-        <Grid item xs={12}>
+        <Grid  mb={2} item xs={12}>
           <TextField
             label="email"
             type="email"
@@ -78,6 +79,7 @@ export default function RegisterFormik(){
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
+            size="small"
             className={errors.email && touched.email ? "input-error" : ""}
           />
           {errors.email && touched.email && (
@@ -85,7 +87,7 @@ export default function RegisterFormik(){
           )}
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid  mb={2} item xs={12}>    
           <TextField
             label="contraseña"
             type="password"
@@ -93,6 +95,7 @@ export default function RegisterFormik(){
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
+            size="small"
             className={errors.password && touched.password ? "input-error" : ""}
           />
           {errors.password && touched.password && (
@@ -100,7 +103,7 @@ export default function RegisterFormik(){
           )}
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid  mb={2} item xs={12}>
           <TextField
             label="confirmar contraseña"
             type="password"
@@ -108,6 +111,7 @@ export default function RegisterFormik(){
             value={values.confirmPassword}
             onChange={handleChange}
             onBlur={handleBlur}
+            size="small"
             className={
               errors.confirmPassword && touched.confirmPassword
                 ? "input-error"
@@ -119,7 +123,7 @@ export default function RegisterFormik(){
           )}
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid  mb={2} item xs={12}>
           <TextField
             label="telefono"
             type="number"
@@ -127,6 +131,7 @@ export default function RegisterFormik(){
             value={values.telefono}
             onChange={handleChange}
             onBlur={handleBlur}
+            size="small"
             className={errors.telefono && touched.telefono ? "input-error" : ""}
           />
           {errors.telefono && touched.telofono && (
@@ -134,7 +139,7 @@ export default function RegisterFormik(){
           )}
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid  mb={2} item xs={12}>
           <TextField
             label="direccion"
             type="text"
@@ -142,13 +147,14 @@ export default function RegisterFormik(){
             value={values.direccion}
             onChange={handleChange}
             onBlur={handleBlur}
+            size="small"
             className={
               errors.direccion && touched.direccion ? "input-error" : ""
             }
           />
         </Grid>
 
-        <Grid item xs={12}>
+          <Grid  mb={2} item xs={12}>
           <Checkbox
             color="danger"
             {...label}
@@ -159,7 +165,7 @@ export default function RegisterFormik(){
         </Grid>
 
         {click && (
-          <Grid item xs={12}>
+          <Grid mb={2} item xs={12}>
             <TextField
             type="text"
             name="cif"
@@ -167,6 +173,7 @@ export default function RegisterFormik(){
               onChange={handleChange}
               onBlur={handleBlur}
               label="Introduce tu C.I.F"
+              size="small"
               className={
               errors.direccion && touched.direccion ? "input-error" : ""
             }

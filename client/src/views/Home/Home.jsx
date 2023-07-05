@@ -25,7 +25,7 @@ const [empleo,setEmpleo] = useState("")
 
     return(
         <Grid container>
-        <Grid container item xs={6} className="pad">
+        <Grid container item xs={6} className="pad"  alignItems={'center'}>
         {!provincia ? (<Typography>¿En que provincia deseas trabajar?</Typography>): 
         (<EmpleoCard/>)
         }
