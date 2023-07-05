@@ -11,8 +11,6 @@ async function onSubmit(values, actions) {
 
 }
 
-const [usuario,setUsuario] = useState("")
-console.log(usuario)
 
 async function fetchLogin(values){
  
@@ -24,7 +22,10 @@ async function fetchLogin(values){
   })
     const data = await response.json()
     console.log(data)
-    setUsuario(data)
+    if(response.status === 200){
+      const token = data.token
+      console.log(token)}
+      
   }catch(error){
     console.log(error)
   }}
