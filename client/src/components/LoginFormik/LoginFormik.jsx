@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import { Grid, TextField, Typography, Button } from "@mui/material";
+import { Grid, TextField, Typography, Button} from "@mui/material";
 import { initialValues } from "./utils/initialValues";
-
+import PopVerde from "../PopUp/PopUpVerde";
+import PopRojo from "../PopUp/PopUpRojo";
 
 
 
@@ -12,11 +13,11 @@ export default function LoginFormik() {
     console.log(actions);
   
     fetchLogin(values);
-  
-  
+
+    actions.resetForm();
   }
   const [tokenState,setTokenState] = useState("")
-  const [errorState,setErrorState] = useState("")
+  const [errorState,setErrorState] = useState(false)
   
   async function fetchLogin(values){
     
@@ -31,9 +32,9 @@ export default function LoginFormik() {
       if(response.status === 200){
         const token = data.token
         setTokenState(token)
-        console.log(token)}
-        if(response.status === 400){
-          setErrorState(data.error)
+        console.log(token)
+      }else{
+          setErrorState(true)
         }
     }catch(error){
       console.log(error)
@@ -92,12 +93,16 @@ export default function LoginFormik() {
             Enviar
           </Button>
         </Grid>
-      {tokenState && (<Grid item xs={12}>
-        <Typography variant="h3">Bienvenido</Typography>
-      </Grid>)}
-      {errorState && (<Grid item xs={12}>
-        <Typography variant="h3">Shuspula</Typography>
-      </Grid>)}
+        {tokenState  && (
+          <Grid item xs={12}>
+            <PopVerde />
+          </Grid>
+        )}
+        {errorState  && (
+          <Grid item xs={12}>
+            <PopRojo />
+          </Grid>
+        )}
       </Grid>
     </form>
   

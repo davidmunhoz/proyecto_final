@@ -38,13 +38,13 @@ userController.userLogin = async (req,res) =>{
     try{
         const user = await userDao.loginUser(email)
         if(user.length === 0){
-            return res.status(404).send({message: "User not found"})
+            return res.status(404).send({message: "Usuario no encontrado"})
         }
 
         const userPassword = md5(password)
         [user] = user
-        if(user.password === !userPassword){
-            return res.status(401).send({message: "Invalid password"})
+        if(user.password !== userPassword){
+            return res.status(401).send({message: "Contraseña incorrecta"})
         }
 
         const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn:'1h'})
