@@ -12,6 +12,7 @@ const [empleo,setEmpleo] = useState("")
             const response = await fetch(`localhost:3001/employment/${provincia}`);
             const data = await response.json()
             setEmpleo(data)
+            console.log(empleo)
         }
 
     if(provincia){

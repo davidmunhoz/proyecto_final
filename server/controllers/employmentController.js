@@ -3,22 +3,16 @@ const employmentDao = require("../services/dao/employmentDao");
 const employmentController = {}
 
 employmentController.addEmployment = async (req,res) =>{
-    const {titulo,salario,jornadas,vacante,direccion} = req.body;
+    const {titulo,descripcion,salario,jornadas,vacante,direccion,tipotrabajo,especialidad,provincia} = req.body;
 
-    if( !titulo || !salario || !jornadas || !vacante || !direccion){
-        return res.status(400).send({message: " Email and Password is required"})
+    if(!titulo || !descripcion || !salario || !jornadas || !vacante || !direccion || !provincia){
+        return res.status(400).send({message: " Faltan campos a rellenar"})
     }
 
     try{
-        const employment = await employmentDao.addEmployment(req.body)
-        console.log(employment);
-
-        if(employment.length > 0){
-            return res.status(204).send({message: "employment already exits"})
-        }
-        const addEmployment = await employmentDao.addEmployment(req.body)
-        if(addEmployment){
-            return res.status(201).send({message: "employment added succesfully"})
+        const empolyment = await userDao.addUser(req.body)
+        if(empolyment){
+            return res.status(200).send({message: "Empleo añadido correctamente"})
         }
     }catch(error){
         res.status(500).send({message: error.message})
