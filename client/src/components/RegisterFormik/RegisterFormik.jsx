@@ -1,40 +1,53 @@
 import {useState} from "react";
 import { useFormik } from "formik";
 import { Grid, TextField, Typography, Button, Checkbox } from "@mui/material";
-
 import { initialValues } from "./utils/initialValues";
 import { RegisterFormikSchema } from "./RegisterFormikSchema";
+import PopUpVerde from "../../components/PopUp/PopUpVerde"
+import PopUpRojo from "../../components/PopUp/PopUpRojo"
 
-async function onSubmit(values, actions) {
-  console.log(values);
-  console.log(actions);
 
-    try{
-    const response = await fetch("http://localhost:3001/user/register",{
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: { "Content-Type": "application/json" },
-    })
-      const data = await response.json()
-      console.log(data)
-    }catch(error){
-      console.log(error)
-      //shuspula
-    }
-
-  actions.resetForm();
-  }
 
 
 const label = { inputProps: { "aria-label": "¿Eres empresario?" } };
-
 export default function RegisterFormik(){
   const [click, setClick] = useState(false);
-  
+
+  const [registerCorrect,setRegisterCorrect] = useState(false)
+  const [registerIncorrect,setRegisterIncorrect] = useState(false)
+
+  async function onSubmit(values, actions) {
+    console.log(values);
+    console.log(actions);
+
+      try{
+      const response = await fetch("http://localhost:3001/user/register",{
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: { "Content-Type": "application/json" },
+      })
+      const data = await response.json()
+      console.log(data)
+
+      if(response.status === 200){
+        setRegisterCorrect(true)}
+        else{
+          setRegisterIncorrect(true)
+        }
+
+    }catch(error){
+      console.log(error)
+    }
+
+    actions.resetForm();
+  }
+
+
+
+
   const handleCheckBox = () => {
     setClick(!click);
   };
-
   const {
     values,
     touched,
@@ -48,14 +61,12 @@ export default function RegisterFormik(){
     validationSchema: RegisterFormikSchema,
     onSubmit,
   });
-
   return (
     <form onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={12} mb={2}>
           <Typography variant="h3" > Registrate </Typography>
         </Grid>
-
         <Grid  mb={2} item xs={12}>
           <TextField
             label="nombre"
@@ -86,8 +97,7 @@ export default function RegisterFormik(){
             <p className="error">{errors.email}</p>
           )}
         </Grid>
-
-        <Grid  mb={2} item xs={12}>    
+        <Grid  mb={2} item xs={12}>
           <TextField
             label="contraseña"
             type="password"
@@ -102,7 +112,6 @@ export default function RegisterFormik(){
             <p className="error">{errors.password}</p>
           )}
         </Grid>
-
         <Grid  mb={2} item xs={12}>
           <TextField
             label="confirmar contraseña"
@@ -122,7 +131,6 @@ export default function RegisterFormik(){
             <p className="error">{errors.confirmPassword}</p>
           )}
         </Grid>
-
         <Grid  mb={2} item xs={12}>
           <TextField
             label="telefono"
@@ -138,7 +146,6 @@ export default function RegisterFormik(){
             <p className="error">{errors.telefono}</p>
           )}
         </Grid>
-
         <Grid  mb={2} item xs={12}>
           <TextField
             label="direccion"
@@ -153,7 +160,6 @@ export default function RegisterFormik(){
             }
           />
         </Grid>
-
           <Grid  mb={2} item xs={12}>
           <Checkbox
             color="danger"
@@ -163,7 +169,6 @@ export default function RegisterFormik(){
           />
           <Typography>¿Eres Empresario?</Typography>
         </Grid>
-
         {click && (
           <Grid mb={2} item xs={12}>
             <TextField
@@ -180,12 +185,21 @@ export default function RegisterFormik(){
             />
           </Grid>
         )}
-
         <Grid item xs={12}>
           <Button type="submit" variant="contained" disabled={isSubmitting}>
             Enviar
           </Button>
         </Grid>
+        {registerCorrect  && (
+          <Grid item xs={12}>
+            <PopUpVerde />
+          </Grid>
+        )}
+        {registerIncorrect  && (
+          <Grid item xs={12}>
+            <PopUpRojo />
+          </Grid>
+        )}
       </Grid>
     </form>
   );
