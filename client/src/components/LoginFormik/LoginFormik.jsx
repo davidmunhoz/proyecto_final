@@ -54,7 +54,7 @@ export default function LoginFormik() {
   return (
     <form onSubmit={handleSubmit}>
       <Grid container>
-        <Grid xs={12}>
+        <Grid item xs={12}>
           <Typography variant="h3">Accede a tu usuario</Typography>
         </Grid>
 
