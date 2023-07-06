@@ -1,10 +1,11 @@
 import { useFormik } from "formik";
 import { Grid, TextField, Typography, Button } from "@mui/material";
 import { initialValues } from "./utils/initialValues";
-import ComboBox from "../ComboBox/ComboBox";
+import SelectionJob from "../SelectionJob/SelectionJob";
 
 
 export default function Empleo(){
+
 
 
   async function onSubmit(values, actions) {
@@ -133,8 +134,8 @@ export default function Empleo(){
           />
         </Grid>
 
-        <Grid  mb={2} item xs={12}>
-            <ComboBox/>
+        <Grid  mb={2} item xs={12} justifyContent={"center"}>
+            <SelectionJob/>
         </Grid>
 
         <Grid item xs={12}>

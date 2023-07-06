@@ -22,7 +22,7 @@ const headerStyle = {
 
 export default function Header() {
   return (
-    <Box>
+    <Grid container>
     <AppBar position="static" style={headerStyle}>
       <Toolbar>
         <IconButton
@@ -39,19 +39,25 @@ export default function Header() {
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        <Link to="/login" relative="">
+        <Link to="/empleo" relative="" style={{color:"white"}}>
+        Empleo
+      </Link>
+        </Grid>
+
+        <Grid container justifyContent="flex-end">
+        <Link to="/login" relative="" style={{color:"white"}}>
         Iniciar Sesion
       </Link>
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        <Link to="/register" relative="">
+        <Link to="/register" relative="" style={{color:"white"}}>
         Registrate
     </Link>
         </Grid>
       </Toolbar>
     </AppBar>
  
-  </Box>
+  </Grid>
   );
 }

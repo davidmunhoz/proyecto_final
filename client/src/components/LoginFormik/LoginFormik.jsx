@@ -2,8 +2,8 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import { Grid, TextField, Typography, Button} from "@mui/material";
 import { initialValues } from "./utils/initialValues";
-import PopVerde from "../PopUp/PopUpVerde";
-import PopRojo from "../PopUp/PopUpRojo";
+import PopUpVerde from "../PopUp/PopUpVerde";
+import PopUpRojo from "../PopUp/PopUpRojo";
 
 
 
@@ -95,12 +95,12 @@ export default function LoginFormik() {
         </Grid>
         {tokenState  && (
           <Grid item xs={12}>
-            <PopVerde />
+            <PopUpVerde />
           </Grid>
         )}
         {errorState  && (
           <Grid item xs={12}>
-            <PopRojo />
+            <PopUpRojo />
           </Grid>
         )}
       </Grid>
