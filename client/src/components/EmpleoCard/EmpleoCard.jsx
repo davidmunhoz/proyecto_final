@@ -6,8 +6,8 @@ import DetallesEmpleo from "../DetallesEmpleo/DetallesEmpleo";
 
 export default function EmpleoCard({provincia}) {
   const [click, setClick] = useState(false);
-  const [empleo, setEmpleo] = useState(null);
-  console.log(empleo);
+  const [empleo, setEmpleo] = useState("");
+  console.log(empleo.titulo);
 
   function handleClick() {
     setClick(!click);
@@ -19,7 +19,7 @@ export default function EmpleoCard({provincia}) {
       try {
         const response = await fetch(`http://localhost:3001/employment/get/${provincia}`);
         const data = await response.json();
-        setEmpleo(data);
+        setEmpleo(data.employment[0]);
       } catch (error) {
         console.error("Error fetching empleoData:", error);
       }
