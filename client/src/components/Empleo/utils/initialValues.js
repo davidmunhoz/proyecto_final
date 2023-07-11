@@ -3,10 +3,10 @@ titulo : "",
 descripcion:"",
 salario:"",
 jornadas:"",
-vacantes:"",
+vacante:"",
 direccion:"",
+provincia:"",
 tipotrabajo:"",
 especialidad:""
-
 
 }
