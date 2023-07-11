@@ -143,11 +143,11 @@ export default function Empleo(){
 
         <Grid  mb={2} item xs={12}>
           <TextField
-            label="vacantes"
+            label="vacante"
             type="number"
             size="small"
-            name="vacantes"
-            value={values.vacantes}
+            name="vacante"
+            value={values.vacante}
             onChange={handleChange}
             onBlur={handleBlur}
           />
