@@ -4,20 +4,28 @@ import { Grid, TextField, Typography, Button, Autocomplete } from "@mui/material
 import { initialValues } from "./utils/initialValues";
 
 
+const provincias = [{label: 'Almería'},
+ {label: 'Cádiz'},
+  {label: 'Córdoba'},
+   {label: 'Granada'},
+    {label: 'Huelva'},
+     {label: 'Jaén'}, 
+     {label: 'Málaga'}, 
+     {label: 'Sevilla'}]
 
-const tipoRecoleccion = [
+const recoleccion = [
   { label: 'Fresa' },
   { label: 'Ajo' },
   { label: 'Oliva' },
   { label: 'Cebolla' },
 ];
 
-const tipoMaquinaria =[
+const maquinaria =[
   { label:'Tractorista'},
   {label:'Buggy'}
 ]
 
-const tipoTrabajo = [
+const tipotrabajo = [
   { label: 'Recolector' },
   { label: 'Maquinaria Pesada' },
   { label: 'Talador' }
@@ -26,17 +34,18 @@ const tipoTrabajo = [
 
 export default function Empleo(){
 
-  const [selection, setSelection] = useState(null);
+  const [selection, setSelection] = useState(false);
   
-  const handleComplete = (event,value) => {
+  const handleComplete = (e,value) => {
     console.log(selection)
-    setFieldValue("trabajo",value.label)
+    setFieldValue("tipotrabajo",`${value.label}`)
+    console.log(value)
     setSelection(value)
   };
   
-  const handleShow = (event,value) =>{
+  const handleShow = (e,value) =>{
     console.log(value)
-    setFieldValue("especialidad",value.label)
+    setFieldValue("especialidad", `${value.label}` || "especialidad", `${value.label}`);
   }
   
 
@@ -157,16 +166,20 @@ export default function Empleo(){
         </Grid>
 
         <Grid  mb={2} item xs={12}>
-          <TextField
-            label="provincia"
-            type="text"
-            size="small"
-            name="text"
-            value={values.provincia}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
-
+          <Autocomplete
+            id="provincia"
+            options={provincias}
+            getOptionLabel={(option) => option.label}
+            sx={{ width: 300 }}
+            defaultValue={`${provincias[0].label}`}
+            renderInput={(params=> <TextField {...params} label="Seleccione Provincia"  onChange={ handleChange } onBlur={ handleBlur }
+            size="small" type="text" variant="outlined" />)}
+                margin="normal"
+                onChange={(e, value) => {
+                  setFieldValue("provincia", `${value.label}`);
+                }}
+                />
+               
 
         </Grid>
 
@@ -174,13 +187,14 @@ export default function Empleo(){
         <Autocomplete
         disablePortal
         id="tipotrabajo"
-        options={tipoTrabajo}
+        options={tipotrabajo}
         getOptionLabel={(option) => option.label}
         sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Tipo de Trabajo" />}
+        defaultValue={`${tipotrabajo[0].label}`}
         onChange={handleComplete}
-        value={values.tipotrabajo}
-        onBlur={handleBlur}
+        renderInput={(params) => <TextField {...params} label="Tipo de Trabajo" size="small" type="text" variant="outlined" value={values.tipotrabajo}
+         onChange={handleChange} onBlur={handleBlur}/>}
+
       />
       </Grid>
       <Grid mb={2} item xs={12} alignItems={"center"}>
@@ -189,14 +203,15 @@ export default function Empleo(){
         
         <Autocomplete
         disablePortal
-        id="recolector"
-        options={tipoRecoleccion}
+        id="especialidad"
+        options={recoleccion}
         getOptionLabel={(option) => option.label}
         sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Tipo de Recolección" />}
+        defaultValue={`${recoleccion[0].label}`}
+        renderInput={(params => <TextField {...params} label="Tipo de Recolector" size="small" type="text" variant="outlined"  value={values.especialidad}
+        onChange={ handleChange } onBlur={ handleBlur }
+        />)}
         onChange={handleShow}
-        onBlur={handleBlur}
-        value={values.especialidad}
       />
 
       )}
@@ -205,14 +220,15 @@ export default function Empleo(){
         
         <Autocomplete
         disablePortal
-        id="maquinaria"
-        options={tipoMaquinaria}
+        id="especialidad"
+        options={maquinaria}
         getOptionLabel={(option) => option.label}
         sx={{ width: 300 }}
-        renderInput={(params) => <TextField {...params} label="Tipo de Maquinaria" />}
+        defaultValue={`${maquinaria[0].label}`}
+        renderInput={(params => <TextField {...params} label="Tipo de Trabajo" size="small" type="text" variant="outlined" value={values.especialidad}
+        onChange={ handleChange } onBlur={ handleBlur }
+        />)}
         onChange={handleShow}
-        onBlur={handleBlur}
-        value={values.especialidad}
       />
 
       )}

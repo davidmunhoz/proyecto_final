@@ -5,8 +5,8 @@ salario:"",
 jornadas:"",
 vacantes:"",
 direccion:"",
+provincia:"",
 tipotrabajo:"",
 especialidad:""
-
 
 }
