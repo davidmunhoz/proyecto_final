@@ -15,7 +15,10 @@ employmentQueries.addEmployment = async (employmentData) =>{
             salario: (employmentData.salario),
             vacante:(employmentData.vacante),
             jornadas:(employmentData.jornada),
-           direccion:(employmentData.direccion)
+           direccion:(employmentData.direccion),
+           tipotrabajo:(employmentData.tipotrabajo),
+           especialidad:(employmentData.especialidad),
+           provincia:(employmentData.provincia)
            
         } 
 
@@ -28,12 +31,12 @@ employmentQueries.addEmployment = async (employmentData) =>{
     }
 }
                                         
-employmentQueries.getEmployment = async(titulo) =>{
+employmentQueries.getEmployment = async(provincia) =>{
 let conn = null;
 
 try{
  conn = await db.createConnection();           
- return await db.query('SELECT * FROM empleo WHERE titulo= ?', titulo, 'select', conn) 
+ return await db.query('SELECT * FROM empleo WHERE provincia= ?', provincia, 'select', conn) 
 
 }catch(error){
     throw new Error (error.message)
@@ -55,7 +58,10 @@ employmentQueries.updateEmployment = async (employmentData) =>{
             salario: (employmentData.salario),
             vacante:(employmentData.vacante),
             jornada:(employmentData.jornada),
-           direccion:(employmentData.direccion)
+           direccion:(employmentData.direccion),
+           tipotrabajo:(employmentData.tipotrabajo),
+           especialidad:(employmentData.especialidad),
+           provincia:(employmentData.provincia)
            
         }
 

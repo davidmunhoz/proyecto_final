@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv =require("dotenv");
 const logger = require('morgan');
+const cors = require("cors");
 
 const userRouter = require("./routes/userRouter");
 const employmentRouter = require("./routes/employmentRouter")
@@ -9,6 +10,7 @@ const employmentRouter = require("./routes/employmentRouter")
 dotenv.config()
 const app = express();
 
+app.use(cors());
 app.use(logger('dev'))
 app.use(express.json())
 app.use("/user", userRouter)

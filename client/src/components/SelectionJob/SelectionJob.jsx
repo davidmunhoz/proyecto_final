@@ -2,7 +2,7 @@ import { useState } from 'react';
 import TextField from '@mui/material/TextField';
 import Autocomplete from '@mui/material/Autocomplete';
 
-export default function ComboBox() {
+export default function SelectionJob() {
   const [selection, setSelection] = useState(null);
   const [show, setShow] = useState(null);
 

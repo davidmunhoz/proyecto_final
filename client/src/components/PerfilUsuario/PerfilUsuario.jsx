@@ -36,6 +36,7 @@ export default function PerfilUsuario() {
         </Grid>
 <Grid item xs={12}>
     <Typography>Aqui va los empleos seleccionados</Typography>
+    
 </Grid>
       </Grid>
     </Grid>

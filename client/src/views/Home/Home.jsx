@@ -12,6 +12,7 @@ const [empleo,setEmpleo] = useState("")
             const response = await fetch(`localhost:3001/employment/${provincia}`);
             const data = await response.json()
             setEmpleo(data)
+            console.log(empleo)
         }
 
     if(provincia){
@@ -25,7 +26,7 @@ const [empleo,setEmpleo] = useState("")
 
     return(
         <Grid container>
-        <Grid container item xs={6} className="pad">
+        <Grid container item xs={6} className="pad"  alignItems={'center'}>
         {!provincia ? (<Typography>¿En que provincia deseas trabajar?</Typography>): 
         (<EmpleoCard/>)
         }
@@ -36,7 +37,3 @@ const [empleo,setEmpleo] = useState("")
         </Grid>
     )
 }
-
-
-
-

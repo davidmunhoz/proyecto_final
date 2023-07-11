@@ -18,10 +18,10 @@ async function onSubmit(values, actions){
     console.log(actions);
     await new Promise((resolve) => setTimeout(resolve, 1500));
     actions.resetForm();
-  };
+  }
 
   const {
-    handleSubmit,
+    handleSubmit,  
     values
   } = useFormik({
     initialValues,

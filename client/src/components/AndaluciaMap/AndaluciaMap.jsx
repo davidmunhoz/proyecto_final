@@ -1,6 +1,5 @@
+import useState from "react"
 import SvgIcon from "@mui/material/SvgIcon";
-import { useState } from "react";
-
 
 const idValues = {
   'huelva': 'huelvaValue',
@@ -12,23 +11,22 @@ const idValues = {
   'jaen' : 'jaenValue',
   'granada' : 'granadaValue'
 };
-  
-export default function AndaluciaMap(selectProvincia) {
 
 
+   
+export default function AndaluciaMap({selectProvincia}) {
 
 
 
   const handleClick = (id) =>{
     const values = idValues[id]
     console.log(`El valor para el ID ${id} es ${values}`)
-
 	selectProvincia(id)
-
-
+	
   }
 
-// console.log(isMouse)
+
+
 
   return (
 
