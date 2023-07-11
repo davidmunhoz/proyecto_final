@@ -5,16 +5,22 @@ import Autocomplete from '@mui/material/Autocomplete';
 export default function SelectionJob() {
   const [selection, setSelection] = useState(null);
   const [show, setShow] = useState(null);
+  const [trabajo, setTrabajo] = useState("")
+const [especialidad, setEspecialidad] = useState("")
 
   console.log(show)
   console.log(selection)
+  console.log(trabajo)
+  console.log(especialidad)
 
   const handleChange = (event, value) => {
     setSelection(value)
+    console.log(value)
   };
 
   const handleShow = (event,value) =>{
     setShow(value);
+    console.log(value)
   }
 
   const tipoRecoleccion = [
@@ -35,7 +41,8 @@ export default function SelectionJob() {
     { label: 'Talador' }
   ];
   
-  
+
+
 
   return (
     <div>
@@ -47,6 +54,7 @@ export default function SelectionJob() {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Tipo de Trabajo" />}
         onChange={handleChange}
+        value={trabajo}
       />
 
       {selection && selection.label === 'Recolector' && (
@@ -59,6 +67,7 @@ export default function SelectionJob() {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Tipo de Recolección" />}
         onChange={handleShow}
+        value={especialidad}
       />
 
         </div>
@@ -74,6 +83,7 @@ export default function SelectionJob() {
         sx={{ width: 300 }}
         renderInput={(params) => <TextField {...params} label="Tipo de Maquinaria" />}
         onChange={handleShow}
+        value={especialidad}
       />
 
         </div>

@@ -1,11 +1,44 @@
+import { useState } from "react";
 import { useFormik } from "formik";
-import { Grid, TextField, Typography, Button } from "@mui/material";
+import { Grid, TextField, Typography, Button, Autocomplete } from "@mui/material";
 import { initialValues } from "./utils/initialValues";
-import SelectionJob from "../SelectionJob/SelectionJob";
+
+
+
+const tipoRecoleccion = [
+  { label: 'Fresa' },
+  { label: 'Ajo' },
+  { label: 'Oliva' },
+  { label: 'Cebolla' },
+];
+
+const tipoMaquinaria =[
+  { label:'Tractorista'},
+  {label:'Buggy'}
+]
+
+const tipoTrabajo = [
+  { label: 'Recolector' },
+  { label: 'Maquinaria Pesada' },
+  { label: 'Talador' }
+];
 
 
 export default function Empleo(){
 
+  const [selection, setSelection] = useState(null);
+  
+  const handleComplete = (event,value) => {
+    console.log(selection)
+    setFieldValue("trabajo",value.label)
+    setSelection(value)
+  };
+  
+  const handleShow = (event,value) =>{
+    console.log(value)
+    setFieldValue("especialidad",value.label)
+  }
+  
 
 
   async function onSubmit(values, actions) {
@@ -36,6 +69,7 @@ export default function Empleo(){
     handleBlur,
     handleSubmit,
     isSubmitting,
+    setFieldValue
   } = useFormik({
     onSubmit,
     initialValues
@@ -132,14 +166,62 @@ export default function Empleo(){
             onChange={handleChange}
             onBlur={handleBlur}
           />
+
+
         </Grid>
 
-        <Grid  mb={2} item xs={12} justifyContent={"center"}>
-            <SelectionJob/>
-        </Grid>
+        <Grid mb={2} item xs={12} alignItems={"center"}>
+        <Autocomplete
+        disablePortal
+        id="tipotrabajo"
+        options={tipoTrabajo}
+        getOptionLabel={(option) => option.label}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Tipo de Trabajo" />}
+        onChange={handleComplete}
+        value={values.tipotrabajo}
+        onBlur={handleBlur}
+      />
+      </Grid>
+      <Grid mb={2} item xs={12} alignItems={"center"}>
+
+      {selection && selection.label === 'Recolector' && (
+        
+        <Autocomplete
+        disablePortal
+        id="recolector"
+        options={tipoRecoleccion}
+        getOptionLabel={(option) => option.label}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Tipo de Recolección" />}
+        onChange={handleShow}
+        onBlur={handleBlur}
+        value={values.especialidad}
+      />
+
+      )}
+
+      {selection && selection.label === 'Maquinaria Pesada' && (
+        
+        <Autocomplete
+        disablePortal
+        id="maquinaria"
+        options={tipoMaquinaria}
+        getOptionLabel={(option) => option.label}
+        sx={{ width: 300 }}
+        renderInput={(params) => <TextField {...params} label="Tipo de Maquinaria" />}
+        onChange={handleShow}
+        onBlur={handleBlur}
+        value={values.especialidad}
+      />
+
+      )}
+      </Grid>
+
 
         <Grid item xs={12}>
           <Button 
+          size="large"
           type="submit" 
           variant="contained" 
           disabled={isSubmitting}

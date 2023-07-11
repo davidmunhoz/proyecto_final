@@ -1,5 +1,5 @@
 import { Grid, Typography, Button, Paper } from "@mui/material";
-export default function DetallesCard() {
+export default function DetallesEmpleo() {
   return (
     <Paper elevation={2}>
     <Grid container>

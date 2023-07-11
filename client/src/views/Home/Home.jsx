@@ -19,16 +19,19 @@ const [empleo,setEmpleo] = useState("")
         fetchProvincia(provincia);
     }
 
-    },[provincia])
+    },[empleo, provincia])
 
 
 
 
     return(
         <Grid container>
-        <Grid container item xs={6} className="pad"  alignItems={'center'}>
-        {!provincia ? (<Typography>¿En que provincia deseas trabajar?</Typography>): 
-        (<EmpleoCard/>)
+        <Grid container item xs={6} alignItems={'center'}>
+        {!provincia ? (<Grid item xs={12}><Typography variant="h3">¿En que provincia deseas trabajar?</Typography>
+        <Typography variant="h5">Selecciona en el mapa la provincia en la que buscas trabajo</Typography></Grid>
+        ): 
+        (
+        <EmpleoCard/>)
         }
         </Grid>
         <Grid container item xs={6}>

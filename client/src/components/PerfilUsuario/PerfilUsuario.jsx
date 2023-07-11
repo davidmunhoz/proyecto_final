@@ -2,11 +2,13 @@ import { Grid, Typography } from "@mui/material";
 import mariachi from "../../assets/mariachi.jpg"
 
 export default function PerfilUsuario() {
+
+
   return (
     <Grid container>
       <Grid container item xs={12}>
         <Grid item xs={12} >
-          <img src={mariachi} alt="nimodo" height="40" />
+          <img src={mariachi} alt="nimodo" height="120" />
         </Grid>
         <Grid item xs={12}>
           <Typography variant="h3">Nombre</Typography>

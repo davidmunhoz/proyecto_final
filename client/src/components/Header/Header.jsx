@@ -6,9 +6,6 @@ import {Link} from "react-router-dom"
 import { Grid, Box} from '@mui/material';
 
 
-
-
-
 import logo from "../../assets/logo.jpg"
 
 const headerStyle = {
@@ -36,6 +33,12 @@ export default function Header() {
         <Grid p={2} container justifyContent="flex-start"  alignItems={'center'}>
         <Link to="" relative=''><Box component={'img'} sx={{width: '50px',mr:1}} src={logo}/></Link>
         Autoctono
+        </Grid>
+
+        <Grid container justifyContent="flex-end">
+        <Link to="/perfil" relative="" style={{color:"white"}}>
+        Perfil
+    </Link>
         </Grid>
 
         <Grid container justifyContent="flex-end">

@@ -55,7 +55,7 @@ export default function LoginFormik() {
     <form onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={12}>
-          <Typography variant="h3">Accede a tu usuario</Typography>
+          <Typography variant="h3">Accede a tu cuenta</Typography>
         </Grid>
 
         <Grid  mb={2} item xs={12}>
@@ -66,14 +66,14 @@ export default function LoginFormik() {
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            size="small"
+            size="medium"
 
           />
         </Grid>
 
         <Grid  mb={2} item xs={12}>
           <TextField
-          size="small"
+          size="medium"
             label="contraseña"
             type="password"
             name="password"
@@ -85,6 +85,7 @@ export default function LoginFormik() {
 
         <Grid item xs={12}>
           <Button
+            size="large"
             type="submit"
             variant="contained"
             disabled={isSubmitting}

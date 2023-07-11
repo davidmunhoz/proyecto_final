@@ -4,7 +4,9 @@ descripcion:"",
 salario:"",
 jornadas:"",
 vacantes:"",
-direccion:""
+direccion:"",
+tipotrabajo:"",
+especialidad:""
 
 
 }

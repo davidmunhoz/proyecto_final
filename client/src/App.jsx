@@ -5,6 +5,7 @@ import Login from "./views/Login/Login"
 import Register from "./views/Register/Register"
 import Header from './components/Header/Header';
 import Empleo from './components/Empleo/Empleo';
+import PerfilUsuario from './components/PerfilUsuario/PerfilUsuario';
 function App() {
   return (
     <BrowserRouter >
@@ -15,6 +16,7 @@ function App() {
          <Route path='/login' element={<Login/>}/>
          <Route path='/register' element={<Register/>}/>
          <Route path='/empleo' element={<Empleo/>}/>
+         <Route path='/perfil' element={<PerfilUsuario/>}/>
       </Routes>
     </BrowserRouter>
   );
