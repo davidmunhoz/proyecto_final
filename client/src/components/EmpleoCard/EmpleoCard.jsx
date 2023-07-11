@@ -1,30 +1,31 @@
 import { useState, useEffect } from "react";
 import { Grid, Typography, Button, Paper } from "@mui/material";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
-import DetallesCard from "../DetallesEmpleo/DetallesEmpleo";
 import aceituna from "../../assets/aceituna.jpg";
+import DetallesEmpleo from "../DetallesEmpleo/DetallesEmpleo";
 
-export default function HomeCard() {
+export default function EmpleoCard({provincia}) {
   const [click, setClick] = useState(false);
-  const [empleoData, setEmpleoData] = useState(null);
+  const [empleo, setEmpleo] = useState(null);
+  console.log(empleo);
 
   function handleClick() {
     setClick(!click);
   }
 
+ 
   useEffect(() => {
-    async function empleoFetch() {
+    async function empleoFetch(){
       try {
-        const response = await fetch("http://localhost:3001/employment/get");
+        const response = await fetch(`http://localhost:3001/employment/get/${provincia}`);
         const data = await response.json();
-        setEmpleoData(data);
+        setEmpleo(data);
       } catch (error) {
         console.error("Error fetching empleoData:", error);
       }
     }
-
     empleoFetch();
-  }, []);
+  }, [provincia]);
 
   return (
     <Paper elevation={2}>
@@ -35,18 +36,18 @@ export default function HomeCard() {
 
         <Grid container item xs={9}>
           <Grid item xs={12}>
-            <Typography variant="h6">{empleoData?.titulo}</Typography>
+            <Typography variant="h6">{empleo?.titulo}</Typography>
           </Grid>
 
           <Grid container item xs={12}>
             <Grid item xs={4}>
               <DensityMediumIcon />
-              <Typography variant="body3">{empleoData?.tipotrabajo}</Typography>
+              <Typography variant="body3">{empleo?.tipotrabajo}</Typography>
             </Grid>
 
             <Grid item xs={4}>
               <DensityMediumIcon />
-              <Typography variant="body3">{empleoData?.especialidad}</Typography>
+              <Typography variant="body3">{empleo?.especialidad}</Typography>
             </Grid>
 
             <Grid item xs={4}>
@@ -69,7 +70,7 @@ export default function HomeCard() {
         </Grid>
       </Grid>
 
-      {click && <DetallesCard />}
+      {click && <DetallesEmpleo empleo={empleo} />}
     </Paper>
   );
 }

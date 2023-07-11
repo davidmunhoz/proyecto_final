@@ -36,7 +36,7 @@ let conn = null;
 
 try{
  conn = await db.createConnection();           
- return await db.query('SELECT * FROM empleo WHERE provincia= ?', provincia, 'select', conn) 
+ return await db.query('SELECT * FROM empleo WHERE provincia= ?', [provincia], 'select', conn) 
 
 }catch(error){
     throw new Error (error.message)

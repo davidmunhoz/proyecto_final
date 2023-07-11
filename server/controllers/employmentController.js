@@ -31,6 +31,7 @@ employmentController.getEmployment = async (req,res) =>{
         if(employment.length === 0){
             return res.status(404).send({message: "Provincia no encontrada"})
         }
+        
        return res.send({employment})
 
        
