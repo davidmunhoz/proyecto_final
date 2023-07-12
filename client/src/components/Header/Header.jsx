@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import {Link} from "react-router-dom"
 import { Grid, Box} from '@mui/material';
 // import logo from "../../assets/logo.jpg"
-import logo2 from "../../assets/logo2.png"
+import logo3 from "../../assets/logo3.png"
 
 const headerStyle = {
   position: 'fixed',
@@ -30,7 +30,7 @@ export default function Header() {
         ></IconButton>
 
         <Grid p={2} container justifyContent="flex-start"  alignItems={'center'}>
-        <Link to="" relative=''><Box component={'img'} sx={{width: '200px',mr:1}} src={logo2}/></Link>
+        <Link to="" relative=''><Box component={'img'} sx={{width: '200px',mr:1}} src={logo3}/></Link>
         </Grid>
 
         <Grid container justifyContent="flex-end">

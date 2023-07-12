@@ -1,53 +1,42 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import { Grid, TextField, Typography, Button, Autocomplete } from "@mui/material";
+import { Grid, TextField, Typography, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 import { initialValues } from "./utils/initialValues";
 
 
-const provincias = [{label: 'Almería'},
- {label: 'Cádiz'},
-  {label: 'Córdoba'},
-   {label: 'Granada'},
-    {label: 'Huelva'},
-     {label: 'Jaén'}, 
-     {label: 'Málaga'}, 
-     {label: 'Sevilla'}]
+const provincias = [
+  {label:'Almería' , value:'almeria'},
+ {label:'Cádiz', value:'cadiz'},
+  {label:'Córdoba', value:'cordoba'},
+   {label:'Granada', value: 'granada'},
+    {label:'Huelva', value: 'huelva'},
+     {label:'Jaén', value: 'jaen'}, 
+     {label:'Málaga', value: 'malaga'}, 
+     {label:'Sevilla', value: 'sevilla'}]
 
 const recoleccion = [
-  { label: 'Fresa' },
-  { label: 'Ajo' },
-  { label: 'Oliva' },
-  { label: 'Cebolla' },
+  { label: 'Fresa', value:'fresa' },
+  { label: 'Ajo', value: 'ajo'},
+  { label: 'Oliva', value: 'oliva' },
+  { label: 'Cebolla', value:'cebolla'}
 ];
 
 const maquinaria =[
-  { label:'Tractorista'},
-  {label:'Buggy'}
+  { label:'Tractorista', value:'tractorista'},
+  {label:'Buggy' , value:'buggy'}
 ]
 
 const tipotrabajo = [
-  { label: 'Recolector' },
-  { label: 'Maquinaria Pesada' },
-  { label: 'Talador' }
+  { label: 'Recolector', value:'recolector' },
+  { label: 'Maquinaria Pesada', value:'maquinaria pesada' },
+  { label: 'Talador', value:'talador' }
 ];
 
 
 export default function Empleo(){
 
-  const [selection, setSelection] = useState(false);
-  
-  const handleComplete = (e,value) => {
-    console.log(selection)
-    setFieldValue("tipotrabajo",`${value.label}`)
-    console.log(value)
-    setSelection(value)
-  };
-  
-  const handleShow = (e,value) =>{
-    console.log(value)
-    setFieldValue("especialidad", `${value.label}` || "especialidad", `${value.label}`);
-  }
-  
+  const [selection, setSelection] = useState("");
+  console.log(selection)
 
 
   async function onSubmit(values, actions) {
@@ -90,7 +79,17 @@ export default function Empleo(){
       <Grid  mb={2} item xs={12}>
           <Typography variant="h3"> Publica un empleo </Typography>
         </Grid>
-
+        <Grid  mb={2} item xs={12} color={"darksalmon"}>
+            <TextField
+                label="empresario experimental!!"
+                type=""
+                name="empresario"
+                size="small"
+                value={values.empresario}
+                onChange={handleChange}
+                onBlur={handleBlur}
+            />
+        </Grid>
         <Grid  mb={2} item xs={12}>
             <TextField
                 label="titulo"
@@ -165,75 +164,82 @@ export default function Empleo(){
           />
         </Grid>
 
-        <Grid  mb={2} item xs={12}>
-          <Autocomplete
-            id="provincia"
-            options={provincias}
-            getOptionLabel={(option) => option.label}
-            sx={{ width: 300 }}
-            defaultValue={`${provincias[0].label}`}
-            renderInput={(params=> <TextField {...params} label="Seleccione Provincia"  onChange={ handleChange } onBlur={ handleBlur }
-            size="small" type="text" variant="outlined" />)}
-                margin="normal"
-                onChange={(e, value) => {
-                  setFieldValue("provincia", `${value.label}`);
-                }}
-                />
-               
+       <Grid  mb={2} item xs={12} >
+      <FormControl size="medium">
+        <InputLabel id="provincias">Provincias</InputLabel>
+        <Select
+          labelId="provincias"
+          id="provincias"
+          name="provincia"
+          value={values.provincia}
+          label="Seleccion una Provincia"
+          onChange={handleChange}
+          onBlur={handleBlur}
+        >
+        {provincias.map((provinciado , index) => (
+          <MenuItem key={index} value={provinciado.value}>{provinciado.label}</MenuItem>))}
+        </Select>
+      </FormControl>
+       </Grid>
 
-        </Grid>
+       <Grid mb={2} item xs={12}>
+  <FormControl size="big">
+    <InputLabel id="tipotrabajo">Tipo de Trabajo</InputLabel>
+    <Select
+      labelId="tipotrabajo"
+      id="tipotrabajo"
+      name="tipotrabajo"
+      value={values.tipotrabajo}
+      label="Selecciona el Trabajo ofertado"
+      onChange={(e) => {
+        setSelection(e.target.value);
+        setFieldValue("tipotrabajo", e.target.value );
+      }}
+      onBlur={handleBlur}
+    >
+      {tipotrabajo.map((trabajo, index) => (
+        <MenuItem key={index} value={trabajo.value}>{trabajo.label} </MenuItem>))}
+    </Select>
+  </FormControl>
+</Grid>
 
-        <Grid mb={2} item xs={12} alignItems={"center"}>
-        <Autocomplete
-        disablePortal
-        id="tipotrabajo"
-        options={tipotrabajo}
-        getOptionLabel={(option) => option.label}
-        sx={{ width: 300 }}
-        defaultValue={`${tipotrabajo[0].label}`}
-        onChange={handleComplete}
-        renderInput={(params) => <TextField {...params} label="Tipo de Trabajo" size="small" type="text" variant="outlined" value={values.tipotrabajo}
-         onChange={handleChange} onBlur={handleBlur}/>}
-
-      />
-      </Grid>
-      <Grid mb={2} item xs={12} alignItems={"center"}>
-
-      {selection && selection.label === 'Recolector' && (
-        
-        <Autocomplete
-        disablePortal
+<Grid mb={2} item xs={12}>
+  {selection && selection === "recolector" && (
+    <FormControl size="big">
+      <InputLabel id="especialidad">Tipo de Fruto</InputLabel>
+      <Select
+        labelId="especialidad"
         id="especialidad"
-        options={recoleccion}
-        getOptionLabel={(option) => option.label}
-        sx={{ width: 300 }}
-        defaultValue={`${recoleccion[0].label}`}
-        renderInput={(params => <TextField {...params} label="Tipo de Recolector" size="small" type="text" variant="outlined"  value={values.especialidad}
-        onChange={ handleChange } onBlur={ handleBlur }
-        />)}
-        onChange={handleShow}
-      />
+        name="especialidad"
+        value={values.especialidad}
+        label="Selecciona Fruto a recoger"
+        onChange={handleChange}
+        onBlur={handleBlur}
+      >
+        {recoleccion.map((recolectado, index) => (
+          <MenuItem key={index} value={recolectado.value}>{recolectado.label}</MenuItem>))}
+      </Select>
+    </FormControl>
+  )}
 
-      )}
-
-      {selection && selection.label === 'Maquinaria Pesada' && (
-        
-        <Autocomplete
-        disablePortal
+  {selection && selection === "maquinaria pesada" && (
+    <FormControl size="big">
+      <InputLabel id="especialidad">Tipo de Maquinaria</InputLabel>
+      <Select
+        labelId="especialidad"
         id="especialidad"
-        options={maquinaria}
-        getOptionLabel={(option) => option.label}
-        sx={{ width: 300 }}
-        defaultValue={`${maquinaria[0].label}`}
-        renderInput={(params => <TextField {...params} label="Tipo de Trabajo" size="small" type="text" variant="outlined" value={values.especialidad}
-        onChange={ handleChange } onBlur={ handleBlur }
-        />)}
-        onChange={handleShow}
-      />
-
-      )}
-      </Grid>
-
+        name="especialidad"
+        value={values.especialidad}
+        label="Selecciona el maquinista que buscas"
+        onChange={handleChange}
+        onBlur={handleBlur}
+      >
+        {maquinaria.map((maquinas, index) => (
+          <MenuItem key={index} value={maquinas.value}>{maquinas.label}</MenuItem>))}
+      </Select>
+    </FormControl>
+  )}
+</Grid>
 
         <Grid item xs={12}>
           <Button 

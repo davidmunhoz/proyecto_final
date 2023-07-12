@@ -27,6 +27,7 @@ db.createConnection = async () => {
 
 
   db.query = async (sqlQuery, params, type, conn) => {
+    console.log(sqlQuery)
     return new Promise((resolve, reject) => {
       try {
         conn.query(sqlQuery, params, async (err, result) => {
