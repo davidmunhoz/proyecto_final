@@ -39,7 +39,7 @@ export default function EmpleoCard({provincia}) {
             <Typography variant="h6">{empleo?.titulo}</Typography>
           </Grid>
 
-          <Grid container item xs={12}>
+          <Grid container item xs={12} p={2}>
             <Grid item xs={4}>
               <DensityMediumIcon />
               <Typography variant="body3">{empleo?.tipotrabajo}</Typography>
@@ -53,7 +53,7 @@ export default function EmpleoCard({provincia}) {
             <Grid item xs={4}>
               <Button
                 variant="contained"
-                size="small"
+                fullWidth
                 color="primary"
                 onClick={handleClick}
               >

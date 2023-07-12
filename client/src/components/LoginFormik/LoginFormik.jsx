@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import { Grid, TextField, Typography, Button} from "@mui/material";
+import { Grid, TextField, Typography, Button, Paper} from "@mui/material";
 import { initialValues } from "./utils/initialValues";
 import PopUpVerde from "../PopUp/PopUpVerde";
 import PopUpRojo from "../PopUp/PopUpRojo";
@@ -53,6 +53,7 @@ export default function LoginFormik() {
 
   return (
     <form onSubmit={handleSubmit}>
+    <Paper elevation={8} variant="outlined" square>
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="h3">Accede a tu cuenta</Typography>
@@ -105,6 +106,7 @@ export default function LoginFormik() {
           </Grid>
         )}
       </Grid>
+      </Paper>
     </form>
   
   );

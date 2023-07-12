@@ -4,7 +4,8 @@ import { Grid, Typography, Button, Paper } from "@mui/material";
 export default function DetallesEmpleo({empleo}) {
   return (
     <Paper elevation={2}>
-    <Grid container>
+    <Grid container >
+    
       <Grid container item xs={6}>
         <Grid item xs={12}>
           <Typography>
@@ -23,16 +24,17 @@ export default function DetallesEmpleo({empleo}) {
         </Grid>
         <Grid item xs={12}>
           <Typography>
-            {empleo?.vancate}
+            {empleo?.vacante}
           </Typography>
         </Grid>
       </Grid>
-      <Grid container item xs={6}>
+
+      <Grid container item xs={6} p={2}>
         <Grid item xs={12}>
           <Typography>{empleo?.direccion}</Typography>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained">Suscribirse</Button>
+          <Button fullWidth variant="contained">Suscribirse</Button>
         </Grid>
       </Grid>
     </Grid>

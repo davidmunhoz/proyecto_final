@@ -14,15 +14,16 @@ employmentQueries.addEmployment = async (employmentData) =>{
             descripcion:(employmentData.descripcion),
             salario: (employmentData.salario),
             vacante:(employmentData.vacante),
+            empresario:(employmentData.empresario),
             jornadas:(employmentData.jornada),
            direccion:(employmentData.direccion),
            tipotrabajo:(employmentData.tipotrabajo),
            especialidad:(employmentData.especialidad),
            provincia:(employmentData.provincia)
            
-        } 
+        }
 
-        return await db.query('INSERT INTO empleo SET =?', employmentDataObj, 'insert', conn)
+        return await db.query('INSERT INTO empleo SET =? ', employmentDataObj, 'insert', conn)
 
     }catch(error){
         throw new Error (error.message)
