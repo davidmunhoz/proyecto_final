@@ -57,4 +57,27 @@ userController.userLogin = async (req,res) =>{
     }
 }
 
+
+userController.userGet = async ( req , res) =>{
+    const { email} = req.params;
+
+    if(!email){
+        return res.status(400).send({message: "Email is necessary"})
+    }
+
+    try{
+       const token = req.headers.authorization;
+       const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
+       const userId = decodedToken.id;
+
+       console.log(decodedToken)
+       console.log(userId)
+       return userId
+
+    }catch(error){
+       return res.status(404).send({error: error.message})
+    }
+
+}
+
 module.exports = userController;

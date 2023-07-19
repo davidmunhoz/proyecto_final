@@ -1,64 +1,46 @@
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
-// import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import {Link} from "react-router-dom"
-import { Grid, Box} from '@mui/material';
-// import logo from "../../assets/logo.jpg"
-import logo3 from "../../assets/logo3.png"
+import AppBar from "@mui/material/AppBar";
+import Toolbar from "@mui/material/Toolbar";
+import { Link } from "react-router-dom";
+import { Grid, Box } from "@mui/material";
 
-const headerStyle = {
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  right: 0,
-  zIndex: 9999,
-  backgroundColor: 'green', // Agregamos el estilo para el color de fondo
-};
+import logo3 from "../../assets/logo3.png";
 
 export default function Header() {
   return (
-    <Grid container>
-    <AppBar position="static" style={headerStyle}>
-      <Toolbar>
-        <IconButton
-          size="large"
-          edge="start"
-          color="inherit"
-          aria-label="menu"
-          sx={{ mr: 2 }}
-        ></IconButton>
-
-        <Grid p={2} container justifyContent="flex-start"  alignItems={'center'}>
-        <Link to="" relative=''><Box component={'img'} sx={{width: '200px',mr:1}} src={logo3}/></Link>
+    <AppBar sx={{color:"primary"}}>
+      <Toolbar
+        sx={{ maxWidth: "1200px", margin: "0 auto", width: "100%", px: 2 }}
+      >
+        <Grid p={2} container justifyContent="flex-start" alignItems={"center"}>
+          <Link to="/">
+            <Box component={"img"} sx={{ width: "180px", mr: 1 }} src={logo3} />
+          </Link>
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        <Link to="/perfil" relative="" style={{color:"white"}}>
-        Perfil
-    </Link>
+          <Link to="/perfil" style={{ color: "white" }}>
+            Perfil
+          </Link>
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        <Link to="/empleo" relative="" style={{color:"white"}}>
-        Empleo
-      </Link>
+          <Link to="/empleo" style={{ color: "white" }}>
+            Empleo
+          </Link>
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        <Link to="/login" relative="" style={{color:"white"}}>
-        Iniciar Sesion
-      </Link>
+          <Link to="/login" style={{ color: "white" }}>
+            Iniciar Sesion
+          </Link>
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        <Link to="/register" relative="" style={{color:"white"}}>
-        Registrate
-    </Link>
+          <Link to="/register" style={{ color: "white" }}>
+            Registrate
+          </Link>
         </Grid>
       </Toolbar>
     </AppBar>
- 
-  </Grid>
   );
 }

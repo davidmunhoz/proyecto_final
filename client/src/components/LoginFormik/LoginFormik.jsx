@@ -7,18 +7,23 @@ import PopUpRojo from "../PopUp/PopUpRojo";
 
 
 
-export default function LoginFormik() {
-  async function onSubmit(values, actions) {
+export default function LoginFormik({tokenado}) {
+  async function onSubmit(values, actions, tokenState) {
     console.log(values);
     console.log(actions);
   
     fetchLogin(values);
 
     actions.resetForm();
+    tokenado(tokenState)
   }
+
+  
   const [tokenState,setTokenState] = useState("")
   const [errorState,setErrorState] = useState(false)
   
+
+
   async function fetchLogin(values){
     
     try{
