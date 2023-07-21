@@ -5,11 +5,13 @@ const userDao = require("../services/dao/userDao");
 
 const userController = {}
 
+const role = {0:"empresario", 1:"empleado"}
+
 userController.addUser = async (req,res) =>{
     const {nombre, email,password} = req.body;
 
     if(!nombre || !email || !password){
-        return res.status(400).send({message: " Email and Password is required"})
+        return res.status(400).send({message: " Email y Password son necesarios"})
     }
 
     try{
@@ -17,16 +19,23 @@ userController.addUser = async (req,res) =>{
         console.log(user);
 
         if(user.length > 0){
-            return res.status(204).send({message: "User already exits"})
+            return res.status(204).send({message: "Usuario existente"})
         }
         const addUser = await userDao.addUser(req.body)
-        if(addUser){
-            return res.status(201).send({message: "User added succesfully"})
+
+        if(addUser && addUser.cif){
+            return res.status(201).send({message: "Usuario Empresario añadido"})
+
+        }else if(addUser && addUser.cif === null){
+            return res.status(201).send({message: "Usuario Trabajador añadido"})
         }
+
     }catch(error){
         res.status(500).send({message: error.message})
     }
 }
+
+
 
 userController.userLogin = async (req,res) =>{
     const { email,password } = req.body

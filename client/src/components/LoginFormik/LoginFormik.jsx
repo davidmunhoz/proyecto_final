@@ -18,8 +18,8 @@ export default function LoginFormik({tokenado}) {
     tokenado(tokenState)
   }
 
-  
-  const [tokenState,setTokenState] = useState("")
+
+  const [tokenValue,setTokenValue] = useState("")
   const [errorState,setErrorState] = useState(false)
   
 
@@ -35,9 +35,8 @@ export default function LoginFormik({tokenado}) {
       const data = await response.json()
       console.log(data)
       if(response.status === 200){
-        const token = data.token
-        setTokenState(token)
-        console.log(token)
+        setTokenValue(data.token)
+        console.log(data.token)
       }else{
           setErrorState(true)
         }
@@ -100,7 +99,7 @@ export default function LoginFormik({tokenado}) {
             Enviar
           </Button>
         </Grid>
-        {tokenState  && (
+        {tokenValue  && (
           <Grid item xs={12}>
             <PopUpVerde />
           </Grid>
