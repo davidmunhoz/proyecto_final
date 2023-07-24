@@ -36,7 +36,7 @@ export default function Footer() {
         </Grid>
         <Grid container item xs={3}>
           <ul>
-            <FacebookIcon  />
+            <FacebookIcon />
             <TwitterIcon />
             <LinkedInIcon />
             <GoogleIcon />

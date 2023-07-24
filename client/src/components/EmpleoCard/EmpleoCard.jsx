@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
 import { Grid, Typography, Button, Paper } from "@mui/material";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
-import aceituna from "../../assets/aceituna.jpg";
 import DetallesEmpleo from "../DetallesEmpleo/DetallesEmpleo";
+
+import aceituna from '../../assets/aceituna.jpg'
+
 
 export default function EmpleoCard({provincia}) {
   const [click, setClick] = useState(false);
   const [empleo, setEmpleo] = useState("");
-  console.log(empleo.titulo);
+
+  
+
 
   function handleClick() {
     setClick(!click);
@@ -20,6 +24,7 @@ export default function EmpleoCard({provincia}) {
         const response = await fetch(`http://localhost:3001/employment/get/${provincia}`);
         const data = await response.json();
         setEmpleo(data.employment[0]);
+
       } catch (error) {
         console.error("Error fetching empleoData:", error);
       }
@@ -31,7 +36,7 @@ export default function EmpleoCard({provincia}) {
     <Paper elevation={2}>
       <Grid container>
         <Grid container item xs={3}>
-          <img src={aceituna} height={95} alt="Aceituna" />
+          <img src={aceituna} height={95} alt="imagen" />
         </Grid>
 
         <Grid container item xs={9}>

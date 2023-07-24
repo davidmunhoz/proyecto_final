@@ -17,7 +17,7 @@ export default function PerfilEmpresario(){
             console.error("Error fetching empleoData:", error);
           }}
             perfilEmpresarioFetch();
-        },)
+        })
 
     return(
         <Box
