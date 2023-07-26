@@ -1,6 +1,6 @@
 import useEffect from "react";
 import { Box, Grid, Typography } from "@mui/material";
-import empresario from "../../assets/empresario.jpg";
+import empresario from "../../../public/assets/empresario.png";
 
 
 
