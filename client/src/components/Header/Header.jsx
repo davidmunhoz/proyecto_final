@@ -3,7 +3,7 @@ import Toolbar from "@mui/material/Toolbar";
 import { Link } from "react-router-dom";
 import { Grid, Box } from "@mui/material";
 
-import logo3 from "../../assets/logo3.png";
+import logo3 from "../../../public/assets/logo3.png";
 
 export default function Header() {
   return (

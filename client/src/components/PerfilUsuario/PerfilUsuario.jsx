@@ -1,5 +1,5 @@
 import { Grid, Typography } from "@mui/material";
-import mariachi from "../../assets/mariachi.jpg"
+import mariachi from '../../../public/assets/mariachi.jpg'
 
 export default function PerfilUsuario() {
 

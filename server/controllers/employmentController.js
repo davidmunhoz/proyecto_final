@@ -10,10 +10,11 @@ employmentController.addEmployment = async (req,res) =>{
     }
 
     try{
-        const empolyment = await employmentDao.addEmployment(req.body)
-        if(empolyment){
+        const employmet = await employmentDao.addEmployment(req.body)
+        if(employment){
             return res.status(200).send({message: "Empleo añadido correctamente"})
         }
+        
     }catch(error){
         res.status(500).send({message: error.message})
     }
