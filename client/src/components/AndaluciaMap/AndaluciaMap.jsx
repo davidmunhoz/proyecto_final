@@ -19,9 +19,8 @@ export default function AndaluciaMap({selectProvincia}) {
 
   const handleClick = (id) =>{
     const values = idValues[id]
-    console.log(`El valor para el ID ${id} es ${values}`)
-	selectProvincia(id)
-	
+	console.log(values)
+	selectProvincia(id)	
   }
 
 

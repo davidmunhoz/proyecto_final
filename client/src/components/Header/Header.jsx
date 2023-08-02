@@ -1,11 +1,15 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import { Link } from "react-router-dom";
-import { Grid, Box } from "@mui/material";
+import { Grid, Box, Typography } from "@mui/material";
+import LoginFormik from "../LoginFormik/LoginFormik";
+
 
 import logo3 from "../../../public/assets/logo3.png";
 
-export default function Header() {
+export default function Header({ tokenValue }) {
+
+  console.log(tokenValue)
   return (
     <AppBar sx={{color:"primary"}}>
       <Toolbar
@@ -30,9 +34,11 @@ export default function Header() {
         </Grid>
 
         <Grid container justifyContent="flex-end">
-          <Link to="/login" style={{ color: "white" }}>
+        {tokenValue ?(  <Typography>Logeado</Typography>       ):
+          (<Link to="/login" style={{ color: "white" }}>
             Iniciar Sesion
-          </Link>
+          </Link>)
+          }
         </Grid>
 
         <Grid container justifyContent="flex-end">

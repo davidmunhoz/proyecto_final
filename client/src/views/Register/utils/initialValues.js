@@ -1,4 +1,4 @@
- export const initialValues ={
+export const initialValues ={
     nombre:"",
     email:"",
     password:"",
