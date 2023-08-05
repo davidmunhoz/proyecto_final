@@ -10,7 +10,7 @@ import PopUpRojo from "../../components/PopUp/PopUpRojo"
 
 const label = { inputProps: { "aria-label": "¿Eres empresario?" } };
 
-export default function Register(){
+export default function RegisterEmpresario(){
   const [click, setClick] = useState(false);
 
   const [registerCorrect,setRegisterCorrect] = useState(false)
