@@ -1,15 +1,27 @@
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import {useState} from 'react'
 import { Link } from "react-router-dom";
-import { Grid, Box, Typography } from "@mui/material";
-import LoginFormik from "../LoginFormik/LoginFormik";
-
-
+import { Grid, Box, Button, IconButton, Menu, MenuItem } from "@mui/material";
+import { useAuthContext } from "../contexts/AuthContext";
+import AccountCircle from '@mui/icons-material/AccountCircle';
 import logo3 from "../../../public/assets/logo3.png";
 
-export default function Header({ tokenValue }) {
+export default function Header() {
 
-  console.log(tokenValue)
+const {user,logout} = useAuthContext()
+
+const [anchorEl, setAnchorEl] = useState(null);
+
+const handleClose = () => {
+  setAnchorEl(null);
+};
+
+const handleMenu = (event) => {
+  setAnchorEl(event.currentTarget);
+};
+
+
   return (
     <AppBar sx={{color:"primary"}}>
       <Toolbar
@@ -34,18 +46,50 @@ export default function Header({ tokenValue }) {
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        {tokenValue ?(  <Typography>Logeado</Typography>       ):
+        {user ? (""):
+          (<Link to="/register" style={{ color: "white" }}>
+            Registrate
+          </Link>)
+        }
+        </Grid>
+
+        <Grid container justifyContent="flex-end">
+        {user ?(            <div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}><Link to="/perfil">Perfil</Link></MenuItem>
+                <MenuItem onClick={handleClose}><Button onClick={logout}>Logout</Button></MenuItem>
+              </Menu>
+            </div>):
           (<Link to="/login" style={{ color: "white" }}>
-            Iniciar Sesion
+            Iniciar sesión
           </Link>)
           }
         </Grid>
 
-        <Grid container justifyContent="flex-end">
-          <Link to="/register" style={{ color: "white" }}>
-            Registrate
-          </Link>
-        </Grid>
       </Toolbar>
     </AppBar>
   );

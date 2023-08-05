@@ -1,51 +1,25 @@
-import { useState } from "react";
 import { useFormik } from "formik";
 import { Grid, TextField, Typography, Button, Paper} from "@mui/material";
 import { initialValues } from "./utils/initialValues";
 import PopUpVerde from "../../components/PopUp/PopUpVerde";
 import PopUpRojo from "../../components/PopUp/PopUpRojo";
+import { useAuthContext } from "../../components/contexts/AuthContext";
+
+
+export default function Login() {
+
+const { user,fetchLogin,errorMessage,logout} = useAuthContext()
 
 
 
-export default function Login({ tokenado }) {
   async function onSubmit(values, actions) {
-    console.log(values);
-    console.log(actions);
-  
+ 
     fetchLogin(values);
 
     actions.resetForm();
   }
 
 
-  const [tokenValue,setTokenValue] = useState(false)
-  const [errorState,setErrorState] = useState(false)
-  
-  if (tokenValue !== false ){
-    tokenado(tokenValue)
-  }
-
-console.log(tokenado)
-
-  async function fetchLogin(values){
-    
-    try{
-    const response = await fetch("http://localhost:3001/user/login",{
-      method: "POST",
-      body: JSON.stringify(values),
-      headers: { "Content-Type": "application/json" },
-    })
-      const data = await response.json()
-      console.log(data)
-      if(response.status === 200){
-        setTokenValue(data.token)
-      }else{
-          setErrorState(true)
-        }
-    }catch(error){
-      console.log(error)
-    }}
-  
   const {
     values,
     handleChange,
@@ -101,12 +75,12 @@ console.log(tokenado)
             Enviar
           </Button>
         </Grid>
-        {tokenValue  && (
+        {user  && (
           <Grid item xs={12}>
             <PopUpVerde />
           </Grid>
         )}
-        {errorState  && (
+        {errorMessage  && (
           <Grid item xs={12}>
             <PopUpRojo />
           </Grid>
