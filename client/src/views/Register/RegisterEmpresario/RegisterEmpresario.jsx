@@ -1,14 +1,11 @@
 import {useState} from "react";
 import { useFormik } from "formik";
-import { Grid, TextField, Typography, Button, Checkbox } from "@mui/material";
+import { Grid, TextField, Typography, Button } from "@mui/material";
 import { initialValues } from "./utils/initialValues";
 import { RegisterFormSchema } from "./RegisterFormSchema";
-import PopUpVerde from "../../components/PopUp/PopUpVerde"
-import PopUpRojo from "../../components/PopUp/PopUpRojo"
+import PopUpVerde from "../../../components/PopUp/PopUpVerde"
+import PopUpRojo from "../../../components/PopUp/PopUpRojo"
 
-
-
-const label = { inputProps: { "aria-label": "¿Eres empresario?" } };
 
 export default function RegisterEmpresario(){
   const [click, setClick] = useState(false);
@@ -21,7 +18,7 @@ export default function RegisterEmpresario(){
     console.log(actions);
 
       try{
-      const response = await fetch("http://localhost:3001/user/register",{
+      const response = await fetch("http://localhost:3001/user/registerEmpresario",{
         method: "POST",
         body: JSON.stringify(values),
         headers: { "Content-Type": "application/json" },
@@ -160,16 +157,6 @@ export default function RegisterEmpresario(){
             }
           />
         </Grid>
-          <Grid  mb={2} item xs={12}>
-          <Checkbox
-            color="danger"
-            {...label}
-            checked={click}
-            onChange={handleCheckBox}
-          />
-          <Typography>¿Eres Empresario?</Typography>
-        </Grid>
-        {click && (
           <Grid mb={2} item xs={12}>
             <TextField
             type="text"
@@ -181,10 +168,25 @@ export default function RegisterEmpresario(){
               size="small"
               className={
               errors.direccion && touched.direccion ? "input-error" : ""
-            }
+              }
             />
           </Grid>
-        )}
+
+          <Grid mb={2} item xs={12}>
+            <TextField
+            type="text"
+            name="descripcion"
+              value={values.descripcion}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              label="descripcion de la empresa"
+              size="small"
+              className={
+              errors.direccion && touched.direccion ? "input-error" : ""
+              }
+            />
+          </Grid>
+
         <Grid item xs={12}>
           <Button type="submit" variant="contained" disabled={isSubmitting}>
             Enviar
