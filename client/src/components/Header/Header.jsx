@@ -9,7 +9,7 @@ import logo3 from "../../../public/assets/logo3.png";
 
 export default function Header() {
 
-const {user,logout} = useAuthContext()
+const {userTrabajador, userEmpresario, logout} = useAuthContext()
 
 const [anchorEl, setAnchorEl] = useState(null);
 
@@ -46,7 +46,7 @@ const handleMenu = (event) => {
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        {user ? (""):
+        {userTrabajador || userEmpresario ? (""):
           (<Link to="/register" style={{ color: "white" }}>
             Registrate
           </Link>)
@@ -54,7 +54,7 @@ const handleMenu = (event) => {
         </Grid>
 
         <Grid container justifyContent="flex-end">
-        {user ?(            <div>
+        {userTrabajador ?(<div>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -80,11 +80,41 @@ const handleMenu = (event) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}><Link to="/perfil">Perfil</Link></MenuItem>
+                <MenuItem onClick={handleClose}><Link to="/perfil">Perfil Trabajador</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Button onClick={logout}>Logout</Button></MenuItem>
               </Menu>
-            </div>):
-          (<Link to="/login" style={{ color: "white" }}>
+            </div>)
+            : userEmpresario ? (<div>
+              <IconButton
+                size="large"
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={Boolean(anchorEl)}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}><Link to="/perfil">Perfil Empresario</Link></MenuItem>
+                <MenuItem onClick={handleClose}><Button onClick={logout}>Logout</Button></MenuItem>
+              </Menu>
+            </div>) 
+          : (<Link to="/login" style={{ color: "white" }}>
             Iniciar sesión
           </Link>)
           }
