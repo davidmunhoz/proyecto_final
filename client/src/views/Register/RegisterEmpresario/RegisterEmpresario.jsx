@@ -167,7 +167,7 @@ export default function RegisterEmpresario(){
               label="Introduce tu C.I.F"
               size="small"
               className={
-              errors.direccion && touched.direccion ? "input-error" : ""
+              errors.cif && touched.cif ? "input-error" : ""
               }
             />
           </Grid>
@@ -182,7 +182,7 @@ export default function RegisterEmpresario(){
               label="descripcion de la empresa"
               size="small"
               className={
-              errors.direccion && touched.direccion ? "input-error" : ""
+              errors.descripcion && touched.descripcion ? "input-error" : ""
               }
             />
           </Grid>

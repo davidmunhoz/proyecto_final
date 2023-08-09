@@ -4,12 +4,14 @@ import {useNavigate} from "react-router-dom"
 const AuthContext = createContext({
   fetchLogin: () => {},
   logout: () => {},
-  user: null,
+  userEmpresario: null,
+  userTrabajador: null,
   errorMessage: "",
 });
 
 export default function AuthContextProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [userTrabajador, setUserTrabajador] = useState(null);
+  const [userEmpresario, setUserEmpresario] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
   const navigate = useNavigate()
@@ -18,7 +20,7 @@ export default function AuthContextProvider({ children }) {
 
   async function fetchLogin(values){
     try{
-   const response = await fetch("http://localhost:3001/user/login",{
+   const response = await fetch("http://localhost:3001/user/loginTrabajador",{
      method: "POST",
      body: JSON.stringify(values),
      headers: { "Content-Type": "application/json" },
@@ -26,23 +28,47 @@ export default function AuthContextProvider({ children }) {
      const data = await response.json()
      console.log(data)
      if(response.status === 200){
-      setUser(data)
+      setUserTrabajador(data)
       navigate("/")
      }else{
          setErrorMessage(true)
        }
    }catch(error){
      console.log(error)
-   }}
+   }
+  
+   try{
+    const response = await fetch("http://localhost:3001/user/loginEmpresario",{
+      method: "POST",
+      body: JSON.stringify(values),
+      headers: { "Content-Type": "application/json" },
+    })
+      const data = await response.json()
+      console.log(data)
+      if(response.status === 200){
+       setUserEmpresario(data)
+       navigate("/")
+      }else{
+          setErrorMessage(true)
+        }
+    }catch(error){
+      console.log(error)
+    }
+  
+  }
+
+
 
 
   function logout() {
-    setUser(null);
+    setUserTrabajador(null);
+    setUserEmpresario(null);
     navigate("/")
   }
 
   const value = {
-    user,
+    userTrabajador,
+    userEmpresario,
     errorMessage,
     fetchLogin,
     logout,

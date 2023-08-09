@@ -1,15 +1,11 @@
 import {useState} from "react";
 import { useFormik } from "formik";
-import { Grid, TextField, Typography, Button, Checkbox } from "@mui/material";
+import { Grid, TextField, Typography, Button, Checkbox, FormGroup, FormControlLabel } from "@mui/material";
 import { initialValues } from "./utils/initialValues";
 import { RegisterFormSchema } from "./RegisterFormSchema";
 import PopUpVerde from "../../../components/PopUp/PopUpVerde"
 import PopUpRojo from "../../../components/PopUp/PopUpRojo"
 
-
-
-const label1 = { inputProps: { "aria-label": "Carnet de Conducir" } };
-const label2 = {inputProps: { "aria-label" : "Vehiculo Propio"}}
 
 export default function RegisterTrabajador(){
   const [clickCarnet, setClickCarnet] = useState(false);
@@ -19,6 +15,10 @@ export default function RegisterTrabajador(){
   const [registerIncorrect,setRegisterIncorrect] = useState(false)
 
   async function onSubmit(values, actions) {
+
+    
+    values.vehiculo = clickVehiculo;
+
     console.log(values);
     console.log(actions);
 
@@ -41,7 +41,7 @@ export default function RegisterTrabajador(){
       console.log(error)
     }
 
-    actions.resetForm();
+    // actions.resetForm();
   }
 
 
@@ -50,17 +50,17 @@ export default function RegisterTrabajador(){
   const handleCheckCarnet = () => {
     if(clickCarnet === false){
         setClickCarnet(true)
-    }else{
-        setClickCarnet(false)
-    }
+    }else{setClickCarnet(false)}
+
+    values.carnet = clickCarnet;
   };
 
   const handleCheckVehiculo = () => {
     if(clickVehiculo === false){
-        setClickVehiculo(true)
-    }else{
-        setClickVehiculo(false)
-    }
+      setClickVehiculo(true)
+    }else{setClickVehiculo(false)}
+
+    values.vehiculo = clickVehiculo;
   };
 
   console.log(clickCarnet)
@@ -212,23 +212,10 @@ export default function RegisterTrabajador(){
 </Grid>
 
 <Grid  mb={2} item xs={12}>
-  <Checkbox
-    color="danger"
-    {...label1}
-    checked={clickCarnet}
-    onChange={handleCheckCarnet}
-  />
-  <Typography>Carnet de Conducir</Typography>
-</Grid>
-
-<Grid  mb={2} item xs={12}>
-  <Checkbox
-    color="danger"
-    {...label2}
-    checked={clickVehiculo}
-    onChange={handleCheckVehiculo}
-  />
-  <Typography>Vehiculo Propio</Typography>
+<FormGroup>
+      <FormControlLabel control={<Checkbox checked={clickCarnet} color="danger"  onChange={handleCheckCarnet}  />} label="Carnet de Conducir" />
+      <FormControlLabel control={<Checkbox checked={clickVehiculo} color="danger"  onChange={handleCheckVehiculo} />} label="Vehiculo Propio" />
+      </FormGroup>
 </Grid>
 
 <Grid item xs={12}>
