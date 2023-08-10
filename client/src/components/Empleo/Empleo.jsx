@@ -34,9 +34,11 @@ const tipotrabajo = [
 
 
 export default function Empleo(){
+  const [provincia, setProvincia] = useState("");
+  const [tipoTrabajo, setTipoTrabajo] = useState("");
+  const [especialidad, setEspecialidad] = useState("");
+  
 
-  const [selection, setSelection] = useState("");
-  console.log(selection)
 
 
   async function onSubmit(values, actions) {
@@ -66,8 +68,7 @@ export default function Empleo(){
     handleChange,
     handleBlur,
     handleSubmit,
-    isSubmitting,
-    setFieldValue
+    isSubmitting
   } = useFormik({
     onSubmit,
     initialValues
@@ -78,17 +79,6 @@ export default function Empleo(){
       <Grid container sx={{justifyContent: 'flex-end'}} >
       <Grid  mb={2} item xs={12}>
           <Typography variant="h3"> Publica un empleo </Typography>
-        </Grid>
-        <Grid  mb={2} item xs={12} color={"darksalmon"}>
-            <TextField
-                label="empresario experimental!!"
-                type=""
-                name="empresario"
-                size="small"
-                value={values.empresario}
-                onChange={handleChange}
-                onBlur={handleBlur}
-            />
         </Grid>
         <Grid  mb={2} item xs={12}>
             <TextField
@@ -171,9 +161,12 @@ export default function Empleo(){
           labelId="provincias"
           id="provincias"
           name="provincia"
-          value={values.provincia}
+          value={provincia}
           label="Seleccion una Provincia"
-          onChange={handleChange}
+          onChange={(e) => {
+        setProvincia(e.target.value);
+        values.provincia = provincia
+      }}
           onBlur={handleBlur}
         >
         {provincias.map((provinciado , index) => (
@@ -189,11 +182,11 @@ export default function Empleo(){
       labelId="tipotrabajo"
       id="tipotrabajo"
       name="tipotrabajo"
-      value={values.tipotrabajo}
+      value={tipoTrabajo}
       label="Selecciona el Trabajo ofertado"
       onChange={(e) => {
-        setSelection(e.target.value);
-        setFieldValue("tipotrabajo", e.target.value );
+        setTipoTrabajo(e.target.value);
+        values.tipotrabajo = tipoTrabajo
       }}
       onBlur={handleBlur}
     >
@@ -204,16 +197,20 @@ export default function Empleo(){
 </Grid>
 
 <Grid mb={2} item xs={12}>
-  {selection && selection === "recolector" && (
+  {tipoTrabajo && tipoTrabajo === "recolector" && (
     <FormControl size="big">
       <InputLabel id="especialidad">Tipo de Fruto</InputLabel>
       <Select
         labelId="especialidad"
         id="especialidad"
         name="especialidad"
-        value={values.especialidad}
+        value={especialidad}
         label="Selecciona Fruto a recoger"
-        onChange={handleChange}
+        onChange={(e) => {
+        setEspecialidad(e.target.value);
+        values.especialidad = especialidad
+        // setFieldValue("tipotrabajo", e.target.value );
+      }}
         onBlur={handleBlur}
       >
         {recoleccion.map((recolectado, index) => (
@@ -222,16 +219,20 @@ export default function Empleo(){
     </FormControl>
   )}
 
-  {selection && selection === "maquinaria pesada" && (
+  {tipoTrabajo && tipoTrabajo === "maquinaria pesada" && (
     <FormControl size="big">
       <InputLabel id="especialidad">Tipo de Maquinaria</InputLabel>
       <Select
         labelId="especialidad"
         id="especialidad"
         name="especialidad"
-        value={values.especialidad}
+        value={especialidad}
         label="Selecciona el maquinista que buscas"
-        onChange={handleChange}
+        onChange={(e) => {
+        setEspecialidad(e.target.value);
+        values.especialidad = especialidad
+        // setFieldValue("tipotrabajo", e.target.value );
+      }}
         onBlur={handleBlur}
       >
         {maquinaria.map((maquinas, index) => (

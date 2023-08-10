@@ -7,7 +7,7 @@ export const initialValues ={
     direccion:"",
     habilidades:"",
     experiencia:"",
-    carnet:"",
-    vehiculo:"",
+    carnet:0,
+    coche:0,
     imagen:null
  };

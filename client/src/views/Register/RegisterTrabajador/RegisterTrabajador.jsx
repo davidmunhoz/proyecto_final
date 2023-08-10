@@ -1,70 +1,79 @@
-import {useState} from "react";
+import { useState } from "react";
 import { useFormik } from "formik";
-import { Grid, TextField, Typography, Button, Checkbox, FormGroup, FormControlLabel } from "@mui/material";
+import {
+  Grid,
+  TextField,
+  Typography,
+  Button,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+} from "@mui/material";
 import { initialValues } from "./utils/initialValues";
 import { RegisterFormSchema } from "./RegisterFormSchema";
-import PopUpVerde from "../../../components/PopUp/PopUpVerde"
-import PopUpRojo from "../../../components/PopUp/PopUpRojo"
+import PopUpVerde from "../../../components/PopUp/PopUpVerde";
+import PopUpRojo from "../../../components/PopUp/PopUpRojo";
 
-
-export default function RegisterTrabajador(){
+export default function RegisterTrabajador() {
   const [clickCarnet, setClickCarnet] = useState(false);
-  const [clickVehiculo, setClickVehiculo] = useState(false);
+  const [clickCoche, setClickCoche] = useState(false);
 
-  const [registerCorrect,setRegisterCorrect] = useState(false)
-  const [registerIncorrect,setRegisterIncorrect] = useState(false)
+  const [registerCorrect, setRegisterCorrect] = useState(false);
+  const [registerIncorrect, setRegisterIncorrect] = useState(false);
 
   async function onSubmit(values, actions) {
-
-    
-    values.vehiculo = clickVehiculo;
 
     console.log(values);
     console.log(actions);
 
-      try{
-      const response = await fetch("http://localhost:3001/user/registerTrabajador",{
-        method: "POST",
-        body: JSON.stringify(values),
-        headers: { "Content-Type": "application/json" },
-      })
-      const data = await response.json()
-      console.log(data)
-
-      if(response.status === 200){
-        setRegisterCorrect(true)}
-        else{
-          setRegisterIncorrect(true)
+    try {
+      const response = await fetch(
+        "http://localhost:3001/user/registerTrabajador",
+        {
+          method: "POST",
+          body: JSON.stringify(values),
+          headers: { "Content-Type": "application/json" },
         }
+      );
+      const data = await response.json();
+      console.log(data);
 
-    }catch(error){
-      console.log(error)
+      if (response.status === 200) {
+        setRegisterCorrect(true);
+      } else {
+        setRegisterIncorrect(true);
+      }
+    } catch (error) {
+      console.log(error);
     }
 
     // actions.resetForm();
   }
 
-
-
-
   const handleCheckCarnet = () => {
-    if(clickCarnet === false){
-        setClickCarnet(true)
-    }else{setClickCarnet(false)}
-
-    values.carnet = clickCarnet;
+    if (clickCarnet === false) {
+      setClickCarnet(true);
+      values.carnet = 1;
+    } else {
+      setClickCarnet(false);
+      values.carnet = 0;
+    }
   };
 
-  const handleCheckVehiculo = () => {
-    if(clickVehiculo === false){
-      setClickVehiculo(true)
-    }else{setClickVehiculo(false)}
+  const handleCheckCoche = () => {
+    if (clickCoche === false) {
+      setClickCoche(true);
+      values.coche = 1;
+    } else {
+      setClickCoche(false);
+      values.coche = 0;
+    }
 
-    values.vehiculo = clickVehiculo;
+  
   };
 
-  console.log(clickCarnet)
-  console.log(clickVehiculo)
+  console.log(clickCarnet);
+  console.log(clickCoche);
 
   const {
     values,
@@ -84,9 +93,9 @@ export default function RegisterTrabajador(){
     <form onSubmit={handleSubmit}>
       <Grid container>
         <Grid item xs={12} mb={2}>
-          <Typography variant="h3" > Registrate </Typography>
+          <Typography variant="h3"> Registrate </Typography>
         </Grid>
-        <Grid  mb={2} item xs={12}>
+        <Grid mb={2} item xs={12}>
           <TextField
             label="nombre"
             type="text"
@@ -101,7 +110,7 @@ export default function RegisterTrabajador(){
             <p className="error">{errors.nombre}</p>
           )}
         </Grid>
-        <Grid  mb={2} item xs={12}>
+        <Grid mb={2} item xs={12}>
           <TextField
             label="email"
             type="email"
@@ -116,7 +125,7 @@ export default function RegisterTrabajador(){
             <p className="error">{errors.email}</p>
           )}
         </Grid>
-        <Grid  mb={2} item xs={12}>
+        <Grid mb={2} item xs={12}>
           <TextField
             label="contraseña"
             type="password"
@@ -131,7 +140,7 @@ export default function RegisterTrabajador(){
             <p className="error">{errors.password}</p>
           )}
         </Grid>
-        <Grid  mb={2} item xs={12}>
+        <Grid mb={2} item xs={12}>
           <TextField
             label="confirmar contraseña"
             type="password"
@@ -150,7 +159,7 @@ export default function RegisterTrabajador(){
             <p className="error">{errors.confirmPassword}</p>
           )}
         </Grid>
-        <Grid  mb={2} item xs={12}>
+        <Grid mb={2} item xs={12}>
           <TextField
             label="telefono"
             type="number"
@@ -165,79 +174,95 @@ export default function RegisterTrabajador(){
             <p className="error">{errors.telefono}</p>
           )}
         </Grid>
-    
-<Grid  mb={2} item xs={12}>
-  <TextField
-    label="direccion"
-    type="text"
-    name="direccion"
-    value={values.direccion}
-    onChange={handleChange}
-    onBlur={handleBlur}
-    size="small"
-    className={
-      errors.direccion && touched.direccion ? "input-error" : ""
-    }
-  />
-</Grid>
 
-<Grid  mb={2} item xs={12}>
-  <TextField
-    label="habilidades"
-    type="text"
-    name="habilidades"
-    value={values.habilidades}
-    onChange={handleChange}
-    onBlur={handleBlur}
-    size="small"
-    className={
-      errors.direccion && touched.direccion ? "input-error" : ""
-    }
-  />
-</Grid>
+        <Grid mb={2} item xs={12}>
+          <TextField
+            label="direccion"
+            type="text"
+            name="direccion"
+            value={values.direccion}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            size="small"
+            className={
+              errors.direccion && touched.direccion ? "input-error" : ""
+            }
+          />
+        </Grid>
 
-<Grid  mb={2} item xs={12}>
-  <TextField
-    label="experiencia"
-    type="text"
-    name="experiencia"
-    value={values.experiencia}
-    onChange={handleChange}
-    onBlur={handleBlur}
-    size="small"
-    className={
-      errors.direccion && touched.direccion ? "input-error" : ""
-    }
-  />
-</Grid>
+        <Grid mb={2} item xs={12}>
+          <TextField
+            label="habilidades"
+            type="text"
+            name="habilidades"
+            value={values.habilidades}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            size="small"
+            className={
+              errors.direccion && touched.direccion ? "input-error" : ""
+            }
+          />
+        </Grid>
 
-<Grid  mb={2} item xs={12}>
-<FormGroup>
-      <FormControlLabel control={<Checkbox checked={clickCarnet} color="danger"  onChange={handleCheckCarnet}  />} label="Carnet de Conducir" />
-      <FormControlLabel control={<Checkbox checked={clickVehiculo} color="danger"  onChange={handleCheckVehiculo} />} label="Vehiculo Propio" />
-      </FormGroup>
-</Grid>
+        <Grid mb={2} item xs={12}>
+          <TextField
+            label="experiencia"
+            type="text"
+            name="experiencia"
+            value={values.experiencia}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            size="small"
+            className={
+              errors.direccion && touched.direccion ? "input-error" : ""
+            }
+          />
+        </Grid>
 
-<Grid item xs={12}>
-  <Button type="submit" variant="contained" disabled={isSubmitting}>
-    Enviar
-  </Button>
-</Grid>
+        <Grid mb={2} item xs={12}>
+          <FormGroup>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={clickCarnet}
+                  color="danger"
+                  onChange={handleCheckCarnet}
+                />
+              }
+              label="Carnet de Conducir"
+            />
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={clickCoche}
+                  color="danger"
+                  onChange={handleCheckCoche}
+                />
+              }
+              label="Vehiculo Propio"
+            />
+          </FormGroup>
+        </Grid>
 
-{registerCorrect && (
-  <Grid item xs={12}>
-    <PopUpVerde />
-  </Grid>
-)}
+        <Grid item xs={12}>
+          <Button type="submit" variant="contained" disabled={isSubmitting}>
+            Enviar
+          </Button>
+        </Grid>
 
-{registerIncorrect && (
-  <Grid item xs={12}>
-    <PopUpRojo />
-  </Grid>
-)}
+        {registerCorrect && (
+          <Grid item xs={12}>
+            <PopUpVerde />
+          </Grid>
+        )}
 
-</Grid>
-</form>
-);
-
+        {registerIncorrect && (
+          <Grid item xs={12}>
+            <PopUpRojo />
+          </Grid>
+        )}
+      </Grid>
+    </form>
+  );
 }

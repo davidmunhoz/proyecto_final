@@ -16,8 +16,6 @@ export default function AuthContextProvider({ children }) {
 
   const navigate = useNavigate()
 
-  //Aqui el useFetch --> const {response,error} = useFetch(url,options)
-
   async function fetchLogin(values){
     try{
    const response = await fetch("http://localhost:3001/user/loginTrabajador",{
