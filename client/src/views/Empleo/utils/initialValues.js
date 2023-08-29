@@ -1,9 +1,11 @@
+
 export const initialValues = {
+
     titulo : "",
     descripcion:"",
     salario:"",
     jornadas:"",
-    empresario:"",
+    empresario:``,
     vacante:"",
     direccion:"",
     provincia:"",

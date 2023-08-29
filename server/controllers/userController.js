@@ -78,7 +78,7 @@ userController.userLoginEmpresario = async (req,res) =>{
 
         const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn:'1h'})
         console.log(token)
-        return res.status(200).send({token})
+        return res.status(200).send({token,user})
 
     }catch(error){
         res.status(500).send({message: error.message})
@@ -105,10 +105,10 @@ userController.userLoginTrabajador = async (req,res) =>{
     if (userData.password !== userPassword) {
       return res.status(401).send({ message: "Contraseña incorrecta" });
     }
-
+    
         const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn:'1h'})
         console.log(token)
-        return res.status(200).send({token})
+        return res.status(200).send({token,user})
 
     }catch(error){
         res.status(500).send({message: error.message})

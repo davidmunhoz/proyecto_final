@@ -5,12 +5,12 @@ const employmentController = {}
 employmentController.addEmployment = async (req,res) =>{
     const {titulo,descripcion,salario,jornadas,vacante,direccion,tipotrabajo,especialidad,provincia} = req.body;
 
-    if(!titulo || !descripcion || !salario || !jornadas || !vacante || !direccion || !provincia){
+    if(!titulo|| !descripcion || !salario || !jornadas || !vacante || !direccion || !provincia || !tipotrabajo || !especialidad){
         return res.status(400).send({message: " Faltan campos a rellenar"})
     }
 
     try{
-        const employmet = await employmentDao.addEmployment(req.body)
+        const employment = await employmentDao.addEmployment(req.body)
         if(employment){
             return res.status(200).send({message: "Empleo añadido correctamente"})
         }

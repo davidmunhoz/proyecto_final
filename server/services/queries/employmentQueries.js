@@ -23,7 +23,7 @@ employmentQueries.addEmployment = async (employmentData) =>{
            
         }
 
-        return await db.query('INSERT INTO empleo SET =? ', employmentDataObj, 'insert', conn)
+        return await db.query('INSERT INTO empleo SET ?', employmentDataObj, 'insert', conn)
 
     }catch(error){
         throw new Error (error.message)

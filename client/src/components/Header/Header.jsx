@@ -34,18 +34,6 @@ const handleMenu = (event) => {
         </Grid>
 
         <Grid container justifyContent="flex-end">
-          <Link to="/perfil" style={{ color: "white" }}>
-            Perfil
-          </Link>
-        </Grid>
-
-        <Grid container justifyContent="flex-end">
-          <Link to="/empleo" style={{ color: "white" }}>
-            Empleo
-          </Link>
-        </Grid>
-
-        <Grid container justifyContent="flex-end">
         {userTrabajador || userEmpresario ? (""):
           (<Link to="/register" style={{ color: "white" }}>
             Registrate
@@ -80,7 +68,7 @@ const handleMenu = (event) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}><Link to="/perfil">Perfil Trabajador</Link></MenuItem>
+                <MenuItem onClick={handleClose}><Link to="/perfil1">Perfil Trabajador</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Button onClick={logout}>Logout</Button></MenuItem>
               </Menu>
             </div>)
@@ -110,7 +98,8 @@ const handleMenu = (event) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}><Link to="/perfil">Perfil Empresario</Link></MenuItem>
+                <MenuItem onClick={handleClose}><Link to="/perfil2">Perfil Empresario</Link></MenuItem>
+                <MenuItem onClick={handleClose}><Link to="/empleo">Publicar Empleo</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Button onClick={logout}>Logout</Button></MenuItem>
               </Menu>
             </div>) 
