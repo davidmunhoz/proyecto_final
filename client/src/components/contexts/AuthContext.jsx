@@ -43,6 +43,7 @@ export default function AuthContextProvider({ children }) {
     })
       const data = await response.json()
       console.log(data)
+      console.log(data.user[0].id)
       if(response.status === 200){
        setUserEmpresario(data)
        navigate("/")
@@ -54,8 +55,6 @@ export default function AuthContextProvider({ children }) {
     }
   
   }
-
-
 
 
   function logout() {

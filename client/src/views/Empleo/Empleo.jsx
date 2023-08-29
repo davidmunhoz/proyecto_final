@@ -1,8 +1,7 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import { Grid, TextField, Typography, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
-import { initialValues } from "./utils/initialValues";
-
+import { useAuthContext } from "../../components/contexts/AuthContext";
 
 const provincias = [
   {label:'Almería' , value:'almeria'},
@@ -35,13 +34,16 @@ const tipotrabajo = [
 
 export default function Empleo(){
 
-  const [selection, setSelection] = useState("");
-  console.log(selection)
+  const [provincia, setProvincia] = useState("");
+  const [tipoTrabajo, setTipoTrabajo] = useState("");
+  const [especialidad, setEspecialidad] = useState("");
+  const{userEmpresario} = useAuthContext()
+  const idEmpresario = userEmpresario.user[0].id
 
-
-  async function onSubmit(values, actions) {
+  async function onSubmit(values) {
     console.log(values);
-    console.log(actions);
+
+    
 
       try{
         const response = await fetch("http://localhost:3001/employment/add",{
@@ -55,8 +57,9 @@ export default function Empleo(){
       console.log(error)
     }
 
-    actions.resetForm();
   }
+
+ 
 
 
   const {
@@ -64,11 +67,21 @@ export default function Empleo(){
     handleChange,
     handleBlur,
     handleSubmit,
-    isSubmitting,
-    setFieldValue
+    isSubmitting
   } = useFormik({
     onSubmit,
-    initialValues
+    initialValues : {
+      titulo : "",
+      descripcion:"",
+      salario:"",
+      jornadas:"",
+      empresario:`${idEmpresario}`,
+      vacante:"",
+      direccion:"",
+      provincia:"",
+      tipotrabajo:"",
+      especialidad:""
+    }
   });
 
   return (
@@ -76,17 +89,6 @@ export default function Empleo(){
       <Grid container sx={{justifyContent: 'flex-end'}} >
       <Grid  mb={2} item xs={12}>
           <Typography variant="h3"> Publica un empleo </Typography>
-        </Grid>
-        <Grid  mb={2} item xs={12} color={"darksalmon"}>
-            <TextField
-                label="empresario experimental!!"
-                type=""
-                name="empresario"
-                size="small"
-                value={values.empresario}
-                onChange={handleChange}
-                onBlur={handleBlur}
-            />
         </Grid>
         <Grid  mb={2} item xs={12}>
             <TextField
@@ -171,7 +173,11 @@ export default function Empleo(){
           name="provincia"
           value={values.provincia}
           label="Seleccion una Provincia"
-          onChange={handleChange}
+          onChange={(e) => {
+        setProvincia(e.target.value);
+        values.provincia = provincia
+        console.log(provincia)
+      }}
           onBlur={handleBlur}
         >
         {provincias.map((provinciado , index) => (
@@ -190,8 +196,8 @@ export default function Empleo(){
       value={values.tipotrabajo}
       label="Selecciona el Trabajo ofertado"
       onChange={(e) => {
-        setSelection(e.target.value);
-        setFieldValue("tipotrabajo", e.target.value );
+        setTipoTrabajo(e.target.value);
+        values.tipotrabajo = tipoTrabajo
       }}
       onBlur={handleBlur}
     >
@@ -202,7 +208,7 @@ export default function Empleo(){
 </Grid>
 
 <Grid mb={2} item xs={12}>
-  {selection && selection === "recolector" && (
+  {tipoTrabajo && tipoTrabajo === "recolector" && (
     <FormControl size="big">
       <InputLabel id="especialidad">Tipo de Fruto</InputLabel>
       <Select
@@ -211,7 +217,11 @@ export default function Empleo(){
         name="especialidad"
         value={values.especialidad}
         label="Selecciona Fruto a recoger"
-        onChange={handleChange}
+        onChange={(e) => {
+        setEspecialidad(e.target.value);
+        values.especialidad = especialidad
+        // setFieldValue("tipotrabajo", e.target.value );
+      }}
         onBlur={handleBlur}
       >
         {recoleccion.map((recolectado, index) => (
@@ -220,7 +230,7 @@ export default function Empleo(){
     </FormControl>
   )}
 
-  {selection && selection === "maquinaria pesada" && (
+  {tipoTrabajo && tipoTrabajo === "maquinaria pesada" && (
     <FormControl size="big">
       <InputLabel id="especialidad">Tipo de Maquinaria</InputLabel>
       <Select
@@ -229,7 +239,11 @@ export default function Empleo(){
         name="especialidad"
         value={values.especialidad}
         label="Selecciona el maquinista que buscas"
-        onChange={handleChange}
+        onChange={(e) => {
+        setEspecialidad(e.target.value);
+        values.especialidad = especialidad
+        // setFieldValue("tipotrabajo", e.target.value );
+      }}
         onBlur={handleBlur}
       >
         {maquinaria.map((maquinas, index) => (
