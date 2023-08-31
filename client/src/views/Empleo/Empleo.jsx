@@ -39,10 +39,11 @@ export default function Empleo(){
   const [especialidad, setEspecialidad] = useState("");
   const{userEmpresario} = useAuthContext()
   const idEmpresario = userEmpresario.user[0].id
-
+  let date = new Date()
+  
   async function onSubmit(values) {
     console.log(values);
-
+    
     
 
       try{
@@ -76,6 +77,7 @@ export default function Empleo(){
       salario:"",
       jornadas:"",
       empresario:`${idEmpresario}`,
+      fecha:`${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
       vacante:"",
       direccion:"",
       provincia:"",

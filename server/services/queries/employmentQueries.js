@@ -15,6 +15,7 @@ employmentQueries.addEmployment = async (employmentData) =>{
             salario: (employmentData.salario),
             vacante:(employmentData.vacante),
             empresario:(employmentData.empresario),
+            fecha:(employmentData.fecha),
             jornadas:(employmentData.jornada),
            direccion:(employmentData.direccion),
            tipotrabajo:(employmentData.tipotrabajo),
