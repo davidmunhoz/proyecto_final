@@ -3,9 +3,9 @@ const employmentDao = require("../services/dao/employmentDao");
 const employmentController = {}
 
 employmentController.addEmployment = async (req,res) =>{
-    const {titulo,descripcion,salario,jornadas,vacante,direccion,tipotrabajo,especialidad,provincia} = req.body;
+    const {titulo,descripcion,salario,jornadas,vacante,direccion,tipotrabajo,especialidad,provincia,fecha} = req.body;
 
-    if(!titulo|| !descripcion || !salario || !jornadas || !vacante || !direccion || !provincia || !tipotrabajo || !especialidad){
+    if(!titulo|| !descripcion || !salario || !jornadas || !vacante || !direccion || !provincia || !tipotrabajo || !especialidad || !fecha){
         return res.status(400).send({message: " Faltan campos a rellenar"})
     }
 

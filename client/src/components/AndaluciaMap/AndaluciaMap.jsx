@@ -1,3 +1,4 @@
+import { Grid } from "@mui/material";
 import SvgIcon from "@mui/material/SvgIcon";
 
 const idValues = {
@@ -15,18 +16,14 @@ const idValues = {
    
 export default function AndaluciaMap({selectProvincia}) {
 
-
-
   const handleClick = (id) =>{
     const values = idValues[id]
 	console.log(values)
 	selectProvincia(id)	
   }
 
-
-
-
   return (
+<Grid container>
 
     <SvgIcon sx={{width:"530px", height:"750px",} } viewBox="0 0 595.3 841.9" >
 <g id="huelva" onClick={() =>handleClick('huelva')} className="huelva" >
@@ -93,7 +90,7 @@ export default function AndaluciaMap({selectProvincia}) {
 		386.8,440 385.5,442.8 382.3,442.8 383.9,450.9 379.7,454.6 380.8,459.3 378.2,461.6 375,462.7 375,466.6 368.5,466.6 364.3,466.6 
 		357.8,470.2 345.8,466.3 341.7,468.2 	"/>
 </g>
-    
     </SvgIcon>
+	</Grid>
   );
 }
