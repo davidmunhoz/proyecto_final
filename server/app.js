@@ -5,6 +5,7 @@ const cors = require("cors");
 
 const userRouter = require("./routes/userRouter");
 const employmentRouter = require("./routes/employmentRouter")
+const applicationRouter = require("./routes/applicationRouter")
 
 
 dotenv.config()
@@ -17,6 +18,7 @@ app.use("/user", userRouter)
 app.use("/register",userRouter)
 app.use("/path", userRouter)
 app.use("/employment", employmentRouter)
+app.use("/application", applicationRouter)
 
 
 module.exports = app;

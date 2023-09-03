@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import Header from "../components/Header/Header";
-import Footer from "../components/Footer/Footer";
+// import Footer from "../components/Footer/Footer";
 import { Container } from "@mui/material";
 
 export default function IndexLayout() {
@@ -19,7 +19,7 @@ export default function IndexLayout() {
         <Outlet />
       </Container>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }

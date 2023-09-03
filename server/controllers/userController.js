@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const md5 = require('md5')
 
 const userDao = require("../services/dao/userDao");
+const employmentDao = require("../services/dao/employmentDao");
+const applicationDao = require("../services/dao/applicationDao");
 
 const userController = {}
 
@@ -57,7 +59,10 @@ userController.addUserTrabajador = async (req,res) =>{
 
 
 userController.userLoginEmpresario = async (req,res) =>{
+    let empleado;
     const { email,password } = req.body
+    const { trabajador, empresario} = req.body
+    const { empleo } = req.body
 
     if(!email || !password){
         return res.status(400).send({message: "Email and Password is necessary"})
@@ -65,6 +70,13 @@ userController.userLoginEmpresario = async (req,res) =>{
 
     try{
         const user = await userDao.loginUserEmpresario(email)
+        const application = await applicationDao.getApplication(trabajador,empresario)
+        const employment = await employmentDao.getEmployment(empleo)
+
+        if(trabajador === user.id && empresario === application.empresario ){
+            empleado = employment
+        }
+
         if(user.length === 0){
             return res.status(404).send({message: "Usuario no encontrado"})
         }
@@ -78,7 +90,8 @@ userController.userLoginEmpresario = async (req,res) =>{
 
         const token = jwt.sign({id: user.id}, process.env.JWT_SECRET, {expiresIn:'1h'})
         console.log(token)
-        return res.status(200).send({token,user})
+        console.log(empleado)
+        return res.status(200).send({token,user,empleado})
 
     }catch(error){
         res.status(500).send({message: error.message})
@@ -95,6 +108,7 @@ userController.userLoginTrabajador = async (req,res) =>{
 
     try{
         const user = await userDao.loginUserTrabajador(email)
+        
         if(user.length === 0){
             return res.status(404).send({message: "Usuario no encontrado"})
         }
@@ -116,26 +130,5 @@ userController.userLoginTrabajador = async (req,res) =>{
 }
 
 
-userController.userGet = async ( req , res) =>{
-    const { email} = req.params;
-
-    if(!email){
-        return res.status(400).send({message: "Email is necessary"})
-    }
-
-    try{
-       const token = req.headers.authorization;
-       const decodedToken = jwt.verify(token, process.env.JWT_SECRET);
-       const userId = decodedToken.id;
-
-       console.log(decodedToken)
-       console.log(userId)
-       return userId
-
-    }catch(error){
-       return res.status(404).send({error: error.message})
-    }
-
-}
 
 module.exports = userController;

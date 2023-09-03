@@ -13,6 +13,7 @@ export default function AuthContextProvider({ children }) {
   const [userTrabajador, setUserTrabajador] = useState(null);
   const [userEmpresario, setUserEmpresario] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
+  const [solicitud, setSolicitud] = useState(null);
 
   const navigate = useNavigate()
 
@@ -66,6 +67,7 @@ export default function AuthContextProvider({ children }) {
   const value = {
     userTrabajador,
     userEmpresario,
+    solicitud,
     errorMessage,
     fetchLogin,
     logout,
