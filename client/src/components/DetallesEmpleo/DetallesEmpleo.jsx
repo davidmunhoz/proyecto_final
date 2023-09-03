@@ -1,15 +1,46 @@
 import { Grid, Typography, Button, Paper } from "@mui/material";
+import { useAuthContext } from "../../components/contexts/AuthContext";
+import {useState,useEffect} from "react";
+
+export default function DetallesEmpleo({ empleo, empleo2 }) {
+
+const [solicitud, setSolicitud] = useState("")
+  const { userTrabajador} = useAuthContext()
+  console.log(solicitud);
+  console.log(userTrabajador)
+
+const  formValues = {
+  id: `${1}`,
+  trabajador : `${userTrabajador.user[0].id}`,
+  empleo : `${empleo?.id || empleo2?.id}`,
+  empresario : `${empleo?.empresario || empleo2?.empresario}`
+}
+console.log(formValues)
+
+  async function handleClick() {
+
+    console.log(formValues)
+
+    
+    try{
+      const response = await fetch("http://localhost:3001/application/add",{
+        method: "POST",
+        body: JSON.stringify(formValues),
+    })
+    const data = await response.json()
+    if(response.status === 200){
+      console.log(data)
+      setSolicitud(data)
+    }else{
+      console.log("error")
+    }
+  }catch(error){
+    console.log(error)
+  }}
 
 
-export default function DetallesEmpleo({ empleo, empleo2 },{selectSuscrito}) {
 
-
-  function handleClick() {
-    selectSuscrito(true)
-  }
-
-  return (
-
+  return(
     <Paper elevation={2}>
       <Grid container>
         <Grid container item xs={6}>
@@ -41,13 +72,20 @@ export default function DetallesEmpleo({ empleo, empleo2 },{selectSuscrito}) {
               {empleo?.direccion || empleo2?.direccion}
             </Typography>
           </Grid>
-          <Grid item xs={12}>
-            <Button fullWidth variant="contained" onClick={handleClick}>
+          {userTrabajador && (
+            <Grid item xs={12}>
+            <Button fullWidth variant="contained" onClick={handleClick} >
               Suscribirse
             </Button>
           </Grid>
+          )}
+
         </Grid>
       </Grid>
+      {solicitud &&(
+      <Typography variant="h4">SOLICITUD REALIZADA!</Typography>
+    )}
     </Paper>
+
   );
 }

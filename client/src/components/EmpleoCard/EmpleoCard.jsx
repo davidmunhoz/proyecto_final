@@ -2,25 +2,22 @@ import { useState, useEffect } from "react";
 import { Grid, Typography, Button, Paper} from "@mui/material";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
 import DetallesEmpleo from "../DetallesEmpleo/DetallesEmpleo";
+import { useAuthContext } from "../../components/contexts/AuthContext";
 
-
-export default function EmpleoCard({provincia},{selectSuscrito},{suscritoHome}) {
-
-suscritoHome(selectSuscrito)
+export default function EmpleoCard({provincia}) {
 
   const [click, setClick] = useState(false);
   const [click2, setClick2] = useState(false); 
-
   const [empleo, setEmpleo] = useState("");
   const [empleo2, setEmpleo2] = useState("");
-
   const [imagen, setImagen] = useState("")
   const [imagen2, setImagen2] = useState("")
+
+  const { userTrabajador } = useAuthContext();
 
   function handleClick() {
     setClick(!click);
   }
-
   function handleClick2() {
     setClick2(!click2);
   }
@@ -30,7 +27,6 @@ suscritoHome(selectSuscrito)
       try {
         const response = await fetch(`http://localhost:3001/employment/get/${provincia}`);
         const data = await response.json();
-
 
         setEmpleo(data.employment[0]);
         setEmpleo2(data.employment[1]);
@@ -75,8 +71,7 @@ suscritoHome(selectSuscrito)
               <DensityMediumIcon />
               <Typography variant="body3">{empleo?.especialidad}</Typography>
             </Grid>
-
-            <Grid item xs={4}>
+{userTrabajador && (    <Grid item xs={4}>
               <Button
                 variant="contained"
                 fullWidth
@@ -85,7 +80,8 @@ suscritoHome(selectSuscrito)
               >
                 {click ? "Ocultar" : "Ver"}
               </Button>
-            </Grid>
+            </Grid>)}
+        
             
           <Grid container item xs={12}>
             <Grid item xs={12}>
@@ -126,7 +122,7 @@ suscritoHome(selectSuscrito)
               <Typography variant="body3">{empleo2?.especialidad}</Typography>
             </Grid>
 
-            <Grid item xs={4}>
+            {userTrabajador && (    <Grid item xs={4}>
               <Button
                 variant="contained"
                 fullWidth
@@ -135,7 +131,7 @@ suscritoHome(selectSuscrito)
               >
                 {click2 ? "Ocultar" : "Ver"}
               </Button>
-            </Grid>
+            </Grid>)}
             
           <Grid container item xs={12}>
             <Grid item xs={12}>

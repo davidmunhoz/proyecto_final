@@ -85,19 +85,5 @@ userQueries.getUserbyEmailTrabajador = async(email) =>{
     }
     }
 
-userQueries.getUser = async(email) =>{
-    let conn = null;
     
-    try{
-     conn = await db.createConnection();           
-     return await db.query('SELECT * FROM empleo WHERE email= ?', [email], 'select', conn) 
-    
-    }catch(error){
-        throw new Error (error.message)
-    }finally{
-        conn && conn.end()
-    }
-    }
-
-
 module.exports = userQueries;
