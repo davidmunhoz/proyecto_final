@@ -1,3 +1,4 @@
+import { useEffect,useState } from "react";
 import { Grid, Typography } from "@mui/material";
 import { useAuthContext } from "../../components/contexts/AuthContext";
 // import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
@@ -7,10 +8,44 @@ import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
 import HorizontalDivider from "../../components/Divider/HorizontalDivider";
 import VerticalDivider from "../../components/Divider/VerticalDivider";
 
+
 export default function PerfilTrabajador(){
+  const [solicitud, setSolicitud] = useState("");
+  console.log(solicitud)
+  const [empleo, setEmpleo] = useState("");
+
     const { userTrabajador } = useAuthContext()
     const trabajador = userTrabajador.user[0]
 console.log(trabajador)
+
+useEffect(() => {
+  async function fetchSolicitud() {
+    try {
+      const response = await fetch(`http://localhost:3001/employment/getid/${trabajador.id}`);
+      const data = await response.json();
+      setSolicitud(data);
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  fetchSolicitud();
+}, [trabajador]);
+
+
+useEffect(() => {
+  async function fetchEmpleo() {
+    try {
+      const response = await fetch(`http://localhost:3001/empleo/get/${solicitud.empleo}`);
+      const data = await response.json();
+      console.log(data)
+      setEmpleo(data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  fetchEmpleo()
+})
 
 
     return(
@@ -45,8 +80,8 @@ console.log(trabajador)
               <HorizontalDivider/>
 
               <Grid item xs={12}>
-                <Typography variant="body1"> {empleo?.titulo }</Typography>
-                <Typography variant="body1"> {empleo2?.titulo }</Typography>
+                <Typography variant="body1"> {empleo[0]?.titulo}</Typography>
+                <Typography variant="body1"> {empleo[1]?.titulo}</Typography>
               </Grid>
             </Grid>
 
