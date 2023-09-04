@@ -33,7 +33,7 @@ employmentQueries.addEmployment = async (employmentData) =>{
     }
 }
                                         
-employmentQueries.getEmployment = async(provincia) =>{
+employmentQueries.getEmploymentProvincia = async(provincia) =>{
 let conn = null;
 
 try{
@@ -46,6 +46,20 @@ try{
     conn && conn.end()
 }
 }
+
+employmentQueries.getEmploymentID = async(id) =>{
+    let conn = null;
+    
+    try{
+     conn = await db.createConnection();           
+     return await db.query('SELECT * FROM empleo where id= ?', [id], 'select', conn) 
+    
+    }catch(error){
+        throw new Error (error.message)
+    }finally{
+        conn && conn.end()
+    }
+    }
 
 
 employmentQueries.updateEmployment = async (employmentData) =>{

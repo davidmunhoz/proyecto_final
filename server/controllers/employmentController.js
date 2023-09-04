@@ -20,26 +20,37 @@ employmentController.addEmployment = async (req,res) =>{
     }
 }
 
-employmentController.getEmployment = async (req,res) =>{
+employmentController.getEmploymentProvincia = async (req, res) => {
     const { provincia } = req.params;
-
-    if(!provincia){
-        return res.status(400).send({message: "Provincia necesaria"})
+  
+    try {
+        const employment = await employmentDao.getEmploymentProvincia(provincia);
+  
+      if (employment.length === 0) {
+        return res.status(404).send({ message: "Empleos no encontrados" });
+      }
+  
+      return res.send({ employment });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
     }
-
-    try{
-        const employment = await employmentDao.getEmployment(provincia)
-        if(employment.length === 0){
-            return res.status(404).send({message: "Provincia no encontrada"})
-        }
-        
-       return res.send({employment})
-
-       
-    }catch(error){
-        res.status(500).send({message: error.message})
+  };
+  
+  employmentController.getEmploymentID = async (req, res) => {
+  
+    const { id } = req.params;
+    try {
+       const employment = await employmentDao.getEmploymentID(id);
+  
+      if (employment.length === 0) {
+        return res.status(404).send({ message: "Empleos no encontrados" });
+      }
+  
+      return res.send({ employment });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
     }
-}
+  };
 
 //employmentController.updateEmployment = async (req, res)  =>{ }
 

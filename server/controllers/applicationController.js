@@ -20,15 +20,12 @@ applicationController.addApplication = async (req, res) => {
 }
 
 applicationController.getApplication = async (req, res) => {
-    const { empleo, trabajador } = req.params;
-
-    if (!empleo || !trabajador) {
-        return res.status(400).send({ message: "Datos necesarios" })
-    }
+    const { trabajador } = req.params;
 
     try {
-        const application = await applicationDao.getApplication(empleo);
-        if (Array.isArray(application) && application.length === 0) {
+        const application = await applicationDao.getApplication(trabajador);
+
+        if (application.length === 0) {
             return res.status(404).send({ message: "Solicitud no encontrada" });
         }
 
@@ -37,5 +34,7 @@ applicationController.getApplication = async (req, res) => {
         res.status(500).send({ message: error.message });
     }
 }
+
+  
 
 module.exports = applicationController;

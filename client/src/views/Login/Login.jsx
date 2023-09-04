@@ -13,7 +13,8 @@ const { user,fetchLogin,errorMessage,logout} = useAuthContext()
 
 
   async function onSubmit(values, actions) {
- 
+
+    console.log(values)
     fetchLogin(values);
 
     actions.resetForm();

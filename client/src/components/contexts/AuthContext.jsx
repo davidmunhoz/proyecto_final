@@ -13,7 +13,6 @@ export default function AuthContextProvider({ children }) {
   const [userTrabajador, setUserTrabajador] = useState(null);
   const [userEmpresario, setUserEmpresario] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [solicitud, setSolicitud] = useState(null);
 
   const navigate = useNavigate()
 
@@ -25,8 +24,8 @@ export default function AuthContextProvider({ children }) {
      headers: { "Content-Type": "application/json" },
    })
      const data = await response.json()
-     console.log(data)
      if(response.status === 200){
+      console.log(data)
       setUserTrabajador(data)
       navigate("/")
      }else{
@@ -44,7 +43,6 @@ export default function AuthContextProvider({ children }) {
     })
       const data = await response.json()
       console.log(data)
-      console.log(data.user[0].id)
       if(response.status === 200){
        setUserEmpresario(data)
        navigate("/")
@@ -67,7 +65,6 @@ export default function AuthContextProvider({ children }) {
   const value = {
     userTrabajador,
     userEmpresario,
-    solicitud,
     errorMessage,
     fetchLogin,
     logout,
