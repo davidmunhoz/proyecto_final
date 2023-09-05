@@ -1,8 +1,8 @@
 import { Grid, Typography, Button, Paper } from "@mui/material";
-import { useAuthContext } from "../../components/contexts/AuthContext";
-import {useState,useEffect} from "react";
+import { useAuthContext } from "../../contexts/AuthContext";
+import {useState} from "react";
 
-export default function DetallesEmpleo({ empleo, empleo2 }) {
+export default function DetallesCard({ empleo, empleo2 }) {
 
 const [solicitud, setSolicitud] = useState("")
   const { userTrabajador} = useAuthContext()

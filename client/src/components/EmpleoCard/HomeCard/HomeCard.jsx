@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Grid, Typography, Button, Paper} from "@mui/material";
 import DensityMediumIcon from "@mui/icons-material/DensityMedium";
-import DetallesEmpleo from "../DetallesEmpleo/DetallesEmpleo";
-import { useAuthContext } from "../../components/contexts/AuthContext";
+import { useAuthContext } from "../../contexts/AuthContext";
+import DetallesCard from "../DetallesCard/DetallesCard";
 
-export default function EmpleoCard({provincia}) {
+export default function HomeCard({provincia}) {
 
   const [click, setClick] = useState(false);
   const [click2, setClick2] = useState(false); 
@@ -89,7 +89,7 @@ export default function EmpleoCard({provincia}) {
             </Grid>
 
             <Grid item xs={12}>
-            {click && <DetallesEmpleo empleo={empleo} />}
+            {click && <DetallesCard empleo={empleo} />}
             </Grid>
             
           </Grid>
@@ -139,7 +139,7 @@ export default function EmpleoCard({provincia}) {
             </Grid>
 
             <Grid item xs={12}>
-            {click2 && <DetallesEmpleo empleo={empleo2}/>}
+            {click2 && <DetallesCard empleo={empleo2}/>}
             </Grid>
             
           </Grid>
