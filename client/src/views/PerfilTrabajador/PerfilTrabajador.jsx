@@ -19,7 +19,7 @@ export default function PerfilTrabajador() {
   useEffect(() => {
     async function fetchSolicitud() {
       try {
-        const response = await fetch(`http://localhost:3001/application/get/${trabajador.id}`);
+        const response = await fetch(`http://localhost:3001/application/getTrabajador/${trabajador.id}`);
         const data = await response.json();
         setSolicitud(data.application[0]);
         setSolicitud2(data.application[1]);

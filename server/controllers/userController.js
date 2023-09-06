@@ -127,13 +127,28 @@ userController.userLoginTrabajador = async (req,res) =>{
 
             return res.status(200).send({token,user})
             
-
-
-
     }catch(error){
         res.status(500).send({message: error.message})
     }
 }
+
+ 
+userController.getTrabajador = async (req, res) => {
+  
+    const { id } = req.params;
+    try {
+       const trabajador = await userDao.getTrabajador(id);
+  
+      if (trabajador.length === 0) {
+        return res.status(404).send({ message: "Trabajador no encontrado" });
+      }
+  
+      return res.send({ trabajador });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  };
+
 
 
 

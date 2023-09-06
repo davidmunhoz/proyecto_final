@@ -1,10 +1,36 @@
-import { Grid, Typography } from "@mui/material";
+import { Grid, Typography, Paper, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import imagen from "../../../../public/assets/mariachi.jpg"
 
-export default function Solicitudes(){
+export default function Solicitudes({trabajador}){
+    const navigate = useNavigate();
+
     return(
+        <Paper elevation={3}>
         <Grid container>
-        <Typography>Aqui van las solicitudes</Typography>
-
+        <Grid container item xs ={3}>
+            <img src={imagen} width="100px"></img>
         </Grid>
+
+        <Grid  container item xs ={9}>
+        <Grid item xs={8}> 
+        <Typography variant="h5">{trabajador?.nombre}</Typography>
+        </Grid>
+
+        <Grid item xs={4}> 
+        <Button  variant="contained" onClick={()=> {navigate("/perfilview", {state:{trabajador:trabajador}})}} >Ver Perfil</Button>
+        </Grid>
+
+        <Grid item xs={12}> 
+            <Typography variant="body2">{trabajador?.direccion}</Typography>
+        </Grid>
+
+        <Grid item xs={12}>
+        <Typography variant="body2">{trabajador?.telefono}</Typography>
+        </Grid>
+       
+        </Grid>
+        </Grid>
+        </Paper>
     )
 }

@@ -34,7 +34,6 @@ const { user,fetchLogin,errorMessage,logout} = useAuthContext()
 
   return (
     <form onSubmit={handleSubmit}>
-    <Paper elevation={8} variant="outlined" square>
       <Grid container>
         <Grid item xs={12}>
           <Typography variant="h3">Accede a tu cuenta</Typography>
@@ -87,7 +86,6 @@ const { user,fetchLogin,errorMessage,logout} = useAuthContext()
           </Grid>
         )}
       </Grid>
-      </Paper>
     </form>
   
   );
