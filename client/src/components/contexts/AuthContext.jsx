@@ -14,6 +14,7 @@ export default function AuthContextProvider({ children }) {
   const [userEmpresario, setUserEmpresario] = useState(null);
   const [errorMessage, setErrorMessage] = useState(null);
 
+  console.log(userEmpresario)
   const navigate = useNavigate()
 
   async function fetchLogin(values){

@@ -3,7 +3,8 @@ const applicationQueries = require("../queries/applicationQueries")
 const applicationDao = {}
 
 applicationDao.addApplication = async(applicationData) => await applicationQueries.addApplication(applicationData);
-applicationDao.getApplication = async(applicationData) => await applicationQueries.getApplication(applicationData);
+applicationDao.getApplicationTrabajador = async(applicationData) => await applicationQueries.getApplicationTrabajador(applicationData);
+applicationDao.getApplicationEmpresario = async(applicationData) => await applicationQueries.getApplicationEmpresario(applicationData);
 
 
 module.exports = applicationDao;

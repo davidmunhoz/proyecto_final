@@ -19,11 +19,27 @@ applicationController.addApplication = async (req, res) => {
     }
 }
 
-applicationController.getApplication = async (req, res) => {
+applicationController.getApplicationTrabajador = async (req, res) => {
     const { trabajador } = req.params;
 
     try {
-        const application = await applicationDao.getApplication(trabajador);
+        const application = await applicationDao.getApplicationTrabajador(trabajador);
+
+        if (application.length === 0) {
+            return res.status(404).send({ message: "Solicitud no encontrada" });
+        }
+
+        return res.send({ application });
+    } catch (error) {
+        res.status(500).send({ message: error.message });
+    }
+}
+
+applicationController.getApplicationEmpresario = async (req, res) => {
+    const { empresario } = req.params;
+
+    try {
+        const application = await applicationDao.getApplicationEmpresario(empresario);
 
         if (application.length === 0) {
             return res.status(404).send({ message: "Solicitud no encontrada" });

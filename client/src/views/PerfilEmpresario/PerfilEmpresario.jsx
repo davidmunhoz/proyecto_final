@@ -1,5 +1,5 @@
 import { Button, Grid,Typography} from "@mui/material";
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import { useAuthContext } from "../../components/contexts/AuthContext";
 import HorizontalDivider from "../../components/Divider/HorizontalDivider";
 import imagenEmpresario from "../../../public/assets/empresario.png"
@@ -9,21 +9,68 @@ import Solicitudes from './Solicitudes/Solicitudes';
 
 
 export default function PerfilEmpresario(){
-    const [empleos, setEmpleos] = useState("")
-    const [solicitudes, setSolicitudes] = useState("")
+    const [empleoButton, setEmpleoButton] = useState("")
+    const [solicitudButton, setSolicitudButton] = useState("")
+    const [solicitud, setSolicitud] = useState("");
+    const [trabajador, setTrabajador] = useState("");
+    const [empleo, setEmpleo] = useState("");
+    const [empleo2, setEmpleo2] = useState("");
+
 
     function handleEmpleo(){
-        setEmpleos(true)
-        setSolicitudes("")
+        setEmpleoButton(true)
+        setSolicitudButton("")
     }
     function handleSolicitud(){
-        setSolicitudes(true)
-        setEmpleos("")
+        setSolicitudButton(true)
+        setEmpleoButton("")
     }
 
     const { userEmpresario } = useAuthContext()
     const empresario = userEmpresario.user[0]
-console.log(empresario);
+    const empresarioID = empresario.id
+    const trabajadorID = solicitud.trabajador
+  
+    useEffect(() => {
+      async function fetchEmpleo() {
+        try {
+          const response = await fetch(`http://localhost:3001/employment/getEmpresario/${empresarioID}`);
+          const data = await response.json();
+          console.log(data)
+          setEmpleo(data.employment[0]);
+          setEmpleo2(data.employment[1]);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      fetchEmpleo();
+
+      async function fetchSolicitud() {
+        try {
+          const response = await fetch(`http://localhost:3001/application/getEmpresario/${empresarioID}`);
+          const data = await response.json();
+          console.log(data)
+          setSolicitud(data.application[0]);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      fetchSolicitud();
+
+
+      async function fetchTrabajador() {
+        try {
+          const response = await fetch(`http://localhost:3001/user/get/${trabajadorID}`);
+          console.log(response)
+          const data = await response.json();
+          console.log(data)
+          setTrabajador(data.trabajador[0]);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      fetchTrabajador();
+    }, [empresarioID,trabajadorID]);
 
 
     return(
@@ -56,8 +103,8 @@ console.log(empresario);
           <Typography variant="body2">{empresario?.descripcion}</Typography>
         </Grid>
         <Grid item xs={6}>
-        {empleos && (<Empleos/>)}
-        {solicitudes && (<Solicitudes/>)}
+        {empleoButton && (<Empleos empleo={empleo} empleo2={empleo2} />)}
+        {solicitudButton && (<Solicitudes trabajador={trabajador}/>)}
         </Grid>
       </Grid>
     </Grid>

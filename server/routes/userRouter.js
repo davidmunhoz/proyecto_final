@@ -10,6 +10,7 @@ userRouter.post("/loginEmpresario", userController.userLoginEmpresario)
 userRouter.post("/registerTrabajador", userController.addUserTrabajador)
 userRouter.post("/loginTrabajador", userController.userLoginTrabajador)
 
+userRouter.get("/get/:id", userController.getTrabajador)
 
 
 

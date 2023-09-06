@@ -25,12 +25,12 @@ applicationQueries.addApplication = async (employmentData) =>{
     }
 }
                                         
-applicationQueries.getApplication = async(empleo,) =>{
+applicationQueries.getApplicationTrabajador = async(trabajador) =>{
 let conn = null;
 
 try{
  conn = await db.createConnection();           
- return await db.query('SELECT * FROM solicitud WHERE empleo= ?', [empleo], 'select', conn) 
+ return await db.query('SELECT * FROM solicitud WHERE trabajador= ?', [trabajador], 'select', conn) 
 
 }catch(error){
     throw new Error (error.message)
@@ -38,5 +38,19 @@ try{
     conn && conn.end()
 }
 }
+
+applicationQueries.getApplicationEmpresario = async(empresario) =>{
+    let conn = null;
+    
+    try{
+     conn = await db.createConnection();           
+     return await db.query('SELECT * FROM solicitud WHERE empresario= ?', [empresario], 'select', conn) 
+    
+    }catch(error){
+        throw new Error (error.message)
+    }finally{
+        conn && conn.end()
+    }
+    }
 
 module.exports = applicationQueries;
