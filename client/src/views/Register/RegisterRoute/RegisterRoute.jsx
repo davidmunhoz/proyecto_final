@@ -1,24 +1,31 @@
 import { Grid, Typography, Button } from "@mui/material";
-import {Link} from 'react-router-dom'
+import { useNavigate } from "react-router-dom";
 
-export default function RegisterRoute(){
-    return(
-        <Grid container>
-            <Grid container item xs={12} alignContent={"center"}>
-            <Grid item xs={12}>
-            <Typography variant="h3"> Como quieres registrarte?</Typography>
-            </Grid>
+export default function RegisterRoute() {
+    const navigate = useNavigate();
 
-            <Grid item xs={6}>
-           <Button variant="contained" color="secondary" size="big"> <Link to="/register1" color="white">Empresario</Link></Button>
-            </Grid>
-            
-            <Grid item xs={6}>
-            <Button variant="containded" color="secondary" size="big" > <Link to="/register2" color="white"> Trabajador</Link> </Button>
-                </Grid>
-            </Grid>
+  return (
+    <Grid container>
+   
+   <Grid container justifyContent="center" alignItems="center" style={{ height: "10vh" }}>
+        <Typography variant="h2">¿Como quieres registrarte?</Typography>
+      </Grid>
 
-
+      <Grid container item xs={12} padding={"150px"}>
+        <Grid item xs={6} padding={"20px"}>
+        <Button variant="contained" color="secondary" size="large" fullWidth 
+        onClick={()=>{navigate("/register1")}}>
+        Empresario
+        </Button>
         </Grid>
-    )
+
+        <Grid item xs={6} padding={"20px"}>
+        <Button variant="contained" color="secondary" size="large" fullWidth 
+        onClick={()=>{navigate("/register2")}}>
+        Trabajador
+        </Button>
+        </Grid>
+      </Grid>
+    </Grid>
+  );
 }

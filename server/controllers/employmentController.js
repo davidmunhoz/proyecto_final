@@ -74,16 +74,17 @@ employmentController.getEmploymentProvincia = async (req, res) => {
 
 employmentController.deleteEmployment = async (req, res) =>{ 
 
-
     const  { id } = req.params;
-    const employment = await employment.findById(id);
-    // Si no encuentra el guid (retorna -1 si no existe) respondemos con un 404 (not found)
-    if (id === -1) return res.status(404).send('La cuenta no existe');
-    // Eliminamos el índice de ese usuario del array
-    await employment.deleteOne();
-    // Enviamos simplemente una respuesta
-    res.send('Empleo eliminado');
 
+    try{    const employment = await employmentDao.deleteEmployment(id);
+      // Si no encuentra el guid (retorna -1 si no existe) respondemos con un 404 (not found)
+      if (id === -1) return res.status(404).send('La cuenta no existe');
+      // Eliminamos el índice de ese usuario del array
+      // Enviamos simplemente una respuesta
+      res.send('Empleo eliminado');
+    }catch(error){
+      res.status(500).send({ message: error.message });
+    }
 
 }
 

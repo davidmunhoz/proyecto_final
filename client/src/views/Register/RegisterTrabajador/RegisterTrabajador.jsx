@@ -1,18 +1,11 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import {
-  Grid,
-  TextField,
-  Typography,
-  Button,
-  Checkbox,
-  FormGroup,
-  FormControlLabel,
-} from "@mui/material";
+import {Grid, TextField, Typography, Button, Checkbox, FormGroup, FormControlLabel} from "@mui/material";
 import { initialValues } from "./utils/initialValues";
 import { RegisterFormSchema } from "./RegisterFormSchema";
 import PopUpVerde from "../../../components/PopUp/PopUpVerde";
 import PopUpRojo from "../../../components/PopUp/PopUpRojo";
+import jornaleroImagen from "../../../../public/imageRegister/jornalero1.jpg";
 
 export default function RegisterTrabajador() {
   const [clickCarnet, setClickCarnet] = useState(false);
@@ -92,9 +85,10 @@ export default function RegisterTrabajador() {
   return (
     <form onSubmit={handleSubmit}>
       <Grid container>
-        <Grid item xs={12} mb={2}>
-          <Typography variant="h3"> Registrate </Typography>
-        </Grid>
+      <Grid container item xs={6}>
+      <Grid item xs={12}>
+      <Typography variant="h2">Registrate como jornalero</Typography>
+      </Grid>
         <Grid mb={2} item xs={12}>
           <TextField
             label="nombre"
@@ -192,21 +186,6 @@ export default function RegisterTrabajador() {
 
         <Grid mb={2} item xs={12}>
           <TextField
-            label="habilidades"
-            type="text"
-            name="habilidades"
-            value={values.habilidades}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            size="small"
-            className={
-              errors.direccion && touched.direccion ? "input-error" : ""
-            }
-          />
-        </Grid>
-
-        <Grid mb={2} item xs={12}>
-          <TextField
             label="experiencia"
             type="text"
             name="experiencia"
@@ -247,7 +226,7 @@ export default function RegisterTrabajador() {
 
         <Grid item xs={12}>
           <Button type="submit" variant="contained" disabled={isSubmitting}>
-            Enviar
+            Crear cuenta
           </Button>
         </Grid>
 
@@ -262,6 +241,10 @@ export default function RegisterTrabajador() {
             <PopUpRojo />
           </Grid>
         )}
+        </Grid>
+        <Grid container item xs={6}>
+        <img src={jornaleroImagen}/>
+        </Grid>
       </Grid>
     </form>
   );

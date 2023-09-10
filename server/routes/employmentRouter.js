@@ -11,7 +11,7 @@ employmentRouter.get(`/getid/:id`, employmentController.getEmploymentID)
 employmentRouter.get(`/getEmpresario/:empresario`, employmentController.getEmploymentEmpresario)
 
 //employmentRouter.patch("/", employmentController.updateEmployment)
-employmentRouter.delete("/", employmentController.deleteEmployment)
+employmentRouter.delete("/delete/:id", employmentController.deleteEmployment)
 
 
 module.exports = employmentRouter

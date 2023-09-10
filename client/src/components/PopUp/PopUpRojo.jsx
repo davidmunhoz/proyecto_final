@@ -14,7 +14,7 @@ export default function CustomizedSnackbars() {
     <Stack spacing={2} sx={{ width: "45%" }}>
       <Snackbar open={open} autoHideDuration={4000} onClose={handleClose}>
         <Alert onClose={handleClose} severity="error" sx={{ width: "100%" }}>
-          Login incorrecto
+          Usuario incorrecto
         </Alert>
       </Snackbar>
     </Stack>

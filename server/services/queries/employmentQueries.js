@@ -75,6 +75,19 @@ employmentQueries.getEmploymentID = async(id) =>{
         }
         }
 
+        employmentQueries.deleteEmployment = async(id) =>{
+            let conn = null;
+            
+            try{
+             conn = await db.createConnection();           
+             return await db.query('DELETE FROM empleo where id= ?', [id], 'delete', conn) 
+            
+            }catch(error){
+                throw new Error (error.message)
+            }finally{
+                conn && conn.end()
+            }
+            }
 
 employmentQueries.updateEmployment = async (employmentData) =>{
     let conn = null;

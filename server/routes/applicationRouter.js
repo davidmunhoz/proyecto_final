@@ -7,4 +7,6 @@ applicationRouter.post("/add", applicationController.addApplication);
 applicationRouter.get("/getTrabajador/:trabajador", applicationController.getApplicationTrabajador);
 applicationRouter.get("/getEmpresario/:empresario", applicationController.getApplicationEmpresario);
 
+applicationRouter.delete("/delete/:empleo", applicationController.deletebyEmpleo);
+
 module.exports = applicationRouter;
