@@ -35,11 +35,12 @@ const { user,fetchLogin,errorMessage,logout} = useAuthContext()
   return (
     <form onSubmit={handleSubmit}>
       <Grid container>
-        <Grid item xs={12}>
-          <Typography variant="h3">Accede a tu cuenta</Typography>
-        </Grid>
+      <Grid container justifyContent="center" alignItems="center" style={{ height: "10vh" }}>
+        <Typography variant="h2">Accede a tu cuenta</Typography>
+      </Grid>
 
-        <Grid  mb={2} item xs={12}>
+<Grid container item xs={12}>
+        <Grid  mb={2} item xs={12} >
           <TextField
             label="email"
             type="email"
@@ -47,7 +48,7 @@ const { user,fetchLogin,errorMessage,logout} = useAuthContext()
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            size="medium"
+           fullWidth
 
           />
         </Grid>
@@ -61,6 +62,7 @@ const { user,fetchLogin,errorMessage,logout} = useAuthContext()
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
+            fullWidth
           />
         </Grid>
 
@@ -75,17 +77,21 @@ const { user,fetchLogin,errorMessage,logout} = useAuthContext()
             Enviar
           </Button>
         </Grid>
+
+        <Grid item xs={12}>
         {user  && (
-          <Grid item xs={12}>
             <PopUpVerde />
-          </Grid>
         )}
         {errorMessage  && (
-          <Grid item xs={12}>
             <PopUpRojo />
-          </Grid>
         )}
       </Grid>
+
+        </Grid>
+        </Grid>
+
+
+      
     </form>
   
   );

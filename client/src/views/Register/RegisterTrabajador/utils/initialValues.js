@@ -5,7 +5,6 @@ export const initialValues ={
     confirmPassword:"",
     telefono:"",
     direccion:"",
-    habilidades:"",
     experiencia:"",
     carnet:0,
     coche:0,

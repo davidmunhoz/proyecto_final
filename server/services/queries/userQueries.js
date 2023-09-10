@@ -41,7 +41,6 @@ userQueries.addUserTrabajador = async (userData) =>{
             password: md5(userData.password),
             telefono:(userData.telefono),
             direccion:(userData.direccion),
-            habilidades:(userData.habilidades),
             imagen:(userData.imagen),
             experiencia:(userData.experiencia),
             carnet:(userData.carnet),

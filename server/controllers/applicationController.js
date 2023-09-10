@@ -10,9 +10,14 @@ applicationController.addApplication = async (req, res) => {
     }
 
     try {
-        const application = await applicationDao.addApplication(req.body);
-        if (application) {
-            return res.status(200).send({ message: "Solicitud Añadida" })
+        const existingApplication = await applicationDao.findApplication(trabajador, empleo, empresario);
+        if(existingApplication){
+            return res.status(400).send({ message: "Solicitud ya existente" })
+        }else{
+            const application = await applicationDao.addApplication(req.body);
+            if (application) {
+                return res.status(200).send({ message: "Solicitud Añadida" })
+            }
         }
     } catch (error) {
         res.status(500).send({ message: error.message })
@@ -52,5 +57,21 @@ applicationController.getApplicationEmpresario = async (req, res) => {
 }
 
   
+applicationController.deletebyEmpleo = async (req, res) =>{ 
+
+    const  { empleo } = req.params;
+
+    try{    const employment = await applicationDao.deletebyEmpleo(empleo);
+      // Si no encuentra el guid (retorna -1 si no existe) respondemos con un 404 (not found)
+      if (id === -1) return res.status(404).send('La solicitud no existe');
+      // Eliminamos el índice de ese usuario del array
+      // Enviamos simplemente una respuesta
+      res.send('Empleo eliminado');
+    }catch(error){
+      res.status(500).send({ message: error.message });
+    }
+
+}
+
 
 module.exports = applicationController;

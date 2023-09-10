@@ -10,34 +10,34 @@ const [solicitud, setSolicitud] = useState("")
   console.log(userTrabajador)
 
 const  formValues = {
-  id: `${1}`,
   trabajador : `${userTrabajador.user[0].id}`,
   empleo : `${empleo?.id || empleo2?.id}`,
   empresario : `${empleo?.empresario || empleo2?.empresario}`
 }
 console.log(formValues)
 
-  async function handleClick() {
-
+   function handleClick() {
     console.log(formValues)
 
-    
-    try{
-      const response = await fetch("http://localhost:3001/application/add",{
-        method: "POST",
-        body: JSON.stringify(formValues),
-    })
-    const data = await response.json()
-    if(response.status === 200){
-      console.log(data)
-      setSolicitud(data)
-    }else{
-      console.log("error")
+    async function addSolicitud(){
+      try{
+        const response = await fetch("http://localhost:3001/application/add",{
+          method: "POST",
+          body: JSON.stringify(formValues),
+      })
+      const data = await response.json()
+      if(response.status === 200){
+        console.log(data)
+        setSolicitud(data)
+      }else{
+        console.log("error")
+      }
+    }catch(error){
+      console.log(error)
+    }}
+    addSolicitud()
     }
-  }catch(error){
-    console.log(error)
-  }}
-
+    
 
 
   return(

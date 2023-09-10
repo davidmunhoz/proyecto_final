@@ -2,8 +2,6 @@ const jwt = require('jsonwebtoken');
 const md5 = require('md5')
 
 const userDao = require("../services/dao/userDao");
-const employmentDao = require("../services/dao/employmentDao");
-const applicationDao = require("../services/dao/applicationDao");
 
 const userController = {}
 

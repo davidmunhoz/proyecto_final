@@ -16,6 +16,8 @@ export default function PerfilEmpresario(){
     const [empleo, setEmpleo] = useState("");
     const [empleo2, setEmpleo2] = useState("");
 
+    const [solicitudes, setSolicitudes] = useState("")
+
 
     function handleEmpleo(){
         setEmpleoButton(true)
@@ -50,6 +52,7 @@ export default function PerfilEmpresario(){
           const response = await fetch(`http://localhost:3001/application/getEmpresario/${empresarioID}`);
           const data = await response.json();
           console.log(data)
+          setSolicitudes(data.application);
           setSolicitud(data.application[0]);
         } catch (error) {
           console.error(error);
@@ -103,7 +106,7 @@ export default function PerfilEmpresario(){
           <Typography variant="body2">{empresario?.descripcion}</Typography>
         </Grid>
         <Grid item xs={6}>
-        {empleoButton && (<Empleos empleo={empleo} empleo2={empleo2} />)}
+        {empleoButton && (<Empleos empleo={empleo} empleo2={empleo2} solicitudes={solicitudes} />)}
         {solicitudButton && (<Solicitudes trabajador={trabajador}/>)}
         </Grid>
       </Grid>

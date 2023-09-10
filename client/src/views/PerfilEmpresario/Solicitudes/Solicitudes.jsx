@@ -1,6 +1,8 @@
 import { Grid, Typography, Paper, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import imagen from "../../../../public/assets/mariachi.jpg"
+import Phone from '@mui/icons-material/PhoneAndroid';
+import Location from '@mui/icons-material/LocationOn';
 
 export default function Solicitudes({trabajador}){
     const navigate = useNavigate();
@@ -12,7 +14,7 @@ export default function Solicitudes({trabajador}){
             <img src={imagen} width="100px"></img>
         </Grid>
 
-        <Grid  container item xs ={9}>
+        <Grid  container item xs ={9} >
         <Grid item xs={8}> 
         <Typography variant="h5">{trabajador?.nombre}</Typography>
         </Grid>
@@ -22,11 +24,11 @@ export default function Solicitudes({trabajador}){
         </Grid>
 
         <Grid item xs={12}> 
-            <Typography variant="body2">{trabajador?.direccion}</Typography>
+            <Typography variant="body2"><Location/>{trabajador?.direccion}</Typography>
         </Grid>
 
         <Grid item xs={12}>
-        <Typography variant="body2">{trabajador?.telefono}</Typography>
+        <Typography variant="body2"><Phone/>{trabajador?.telefono}</Typography>
         </Grid>
        
         </Grid>

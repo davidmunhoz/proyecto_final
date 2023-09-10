@@ -1,4 +1,3 @@
-import { useEffect,useState } from "react";
 import { Grid, Typography } from "@mui/material";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
@@ -11,15 +10,6 @@ export default function TrabajadorView() {
   const location = useLocation();
   const trabajador = location.state.trabajador;
 
-  // useEffect(() => {
-  //   async function fetchTrabajador() {
-  //     const response = await fetch(`http://localhost:3001/user/${trabajador}`);
-  //     const data = await response.json();
-  //     console.log(data)
-  //     setTrabajador(data);
-  // }
-  //   fetchTrabajador();
-  // },[])
 
   return (
     <Grid container>

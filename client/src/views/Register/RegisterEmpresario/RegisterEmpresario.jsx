@@ -5,10 +5,9 @@ import { initialValues } from "./utils/initialValues";
 import { RegisterFormSchema } from "./RegisterFormSchema";
 import PopUpVerde from "../../../components/PopUp/PopUpVerde"
 import PopUpRojo from "../../../components/PopUp/PopUpRojo"
-
+import empresarioImagen from "../../../../public/imageRegister/tractor-empresario.jpg"
 
 export default function RegisterEmpresario(){
-  const [click, setClick] = useState(false);
 
   const [registerCorrect,setRegisterCorrect] = useState(false)
   const [registerIncorrect,setRegisterIncorrect] = useState(false)
@@ -40,11 +39,6 @@ export default function RegisterEmpresario(){
   }
 
 
-
-
-  const handleCheckBox = () => {
-    setClick(!click);
-  };
   const {
     values,
     touched,
@@ -61,9 +55,10 @@ export default function RegisterEmpresario(){
   return (
     <form onSubmit={handleSubmit}>
       <Grid container>
-        <Grid item xs={12} mb={2}>
-          <Typography variant="h3" > Registrate </Typography>
-        </Grid>
+      <Grid container item xs={6}>
+      <Grid item xs={12}>
+      <Typography variant="h2">Registrate como empresario</Typography>
+      </Grid>
         <Grid  mb={2} item xs={12}>
           <TextField
             label="nombre"
@@ -72,7 +67,7 @@ export default function RegisterEmpresario(){
             value={values.nombre}
             onChange={handleChange}
             onBlur={handleBlur}
-            size="small"
+            size="medium"
             className={errors.nombre && touched.nombre ? "input-error" : ""}
           />
           {errors.nombre && touched.nombre && (
@@ -87,7 +82,7 @@ export default function RegisterEmpresario(){
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
-            size="small"
+            size="medium"
             className={errors.email && touched.email ? "input-error" : ""}
           />
           {errors.email && touched.email && (
@@ -102,7 +97,7 @@ export default function RegisterEmpresario(){
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
-            size="small"
+            size="medium"
             className={errors.password && touched.password ? "input-error" : ""}
           />
           {errors.password && touched.password && (
@@ -117,7 +112,7 @@ export default function RegisterEmpresario(){
             value={values.confirmPassword}
             onChange={handleChange}
             onBlur={handleBlur}
-            size="small"
+            size="medium"
             className={
               errors.confirmPassword && touched.confirmPassword
                 ? "input-error"
@@ -136,7 +131,7 @@ export default function RegisterEmpresario(){
             value={values.telefono}
             onChange={handleChange}
             onBlur={handleBlur}
-            size="small"
+            size="medium"
             className={errors.telefono && touched.telefono ? "input-error" : ""}
           />
           {errors.telefono && touched.telofono && (
@@ -151,7 +146,7 @@ export default function RegisterEmpresario(){
             value={values.direccion}
             onChange={handleChange}
             onBlur={handleBlur}
-            size="small"
+            size="medium"
             className={
               errors.direccion && touched.direccion ? "input-error" : ""
             }
@@ -165,7 +160,7 @@ export default function RegisterEmpresario(){
               onChange={handleChange}
               onBlur={handleBlur}
               label="Introduce tu C.I.F"
-              size="small"
+              size="medium"
               className={
               errors.cif && touched.cif ? "input-error" : ""
               }
@@ -174,13 +169,14 @@ export default function RegisterEmpresario(){
 
           <Grid mb={2} item xs={12}>
             <TextField
+            fullWidth
             type="text"
             name="descripcion"
               value={values.descripcion}
               onChange={handleChange}
               onBlur={handleBlur}
               label="descripcion de la empresa"
-              size="small"
+              size="medium"
               className={
               errors.descripcion && touched.descripcion ? "input-error" : ""
               }
@@ -188,8 +184,8 @@ export default function RegisterEmpresario(){
           </Grid>
 
         <Grid item xs={12}>
-          <Button type="submit" variant="contained" disabled={isSubmitting}>
-            Enviar
+          <Button type="submit" variant="contained" disabled={isSubmitting} fullWidth>
+            Crear cuenta
           </Button>
         </Grid>
         {registerCorrect  && (
@@ -202,6 +198,11 @@ export default function RegisterEmpresario(){
             <PopUpRojo />
           </Grid>
         )}
+        </Grid> 
+
+        <Grid container item xs={6} >
+          <img src={empresarioImagen}/>
+        </Grid>
       </Grid>
     </form>
   );
