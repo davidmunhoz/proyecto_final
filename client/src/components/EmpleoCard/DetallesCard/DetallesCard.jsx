@@ -1,8 +1,8 @@
-import { Grid, Typography, Button, Paper } from "@mui/material";
+import { Grid, Typography, Button,} from "@mui/material";
 import { useAuthContext } from "../../contexts/AuthContext";
 import {useState} from "react";
 
-export default function DetallesCard({ empleo, empleo2 }) {
+export default function DetallesCard({ empleo, empleo2, empleo3 }) {
 
 const [solicitud, setSolicitud] = useState("")
   const { userTrabajador} = useAuthContext()
@@ -11,8 +11,8 @@ const [solicitud, setSolicitud] = useState("")
 
 const  formValues = {
   trabajador : `${userTrabajador.user[0].id}`,
-  empleo : `${empleo?.id || empleo2?.id}`,
-  empresario : `${empleo?.empresario || empleo2?.empresario}`
+  empleo : `${empleo?.id || empleo2?.id || empleo3?.id}`,
+  empresario : `${empleo?.empresario || empleo2?.empresario || empleo3?.empresario}`,
 }
 console.log(formValues)
 
@@ -41,27 +41,26 @@ console.log(formValues)
 
 
   return(
-    <Paper elevation={2}>
       <Grid container>
         <Grid container item xs={6}>
           <Grid item xs={12}>
             <Typography>
-              {empleo?.descripcion || empleo2?.descripcion}
+              {empleo?.descripcion || empleo2?.descripcion || empleo3?.descripcion}
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              {empleo?.jornadas || empleo2?.jornadas}
+              {empleo?.jornadas || empleo2?.jornadas || empleo3?.jornadas}
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              {empleo?.salario || empleo2?.salario}
+              {empleo?.salario || empleo2?.salario || empleo3?.salario}
             </Typography>
           </Grid>
           <Grid item xs={12}>
             <Typography>
-              {empleo?.vacante || empleo2?.vacante}
+              {empleo?.vacante || empleo2?.vacante || empleo3?.vacante}
             </Typography>
           </Grid>
         </Grid>
@@ -69,7 +68,7 @@ console.log(formValues)
         <Grid container item xs={6} p={2}>
           <Grid item xs={12}>
             <Typography>
-              {empleo?.direccion || empleo2?.direccion}
+              {empleo?.direccion || empleo2?.direccion || empleo3?.direccion}
             </Typography>
           </Grid>
           {userTrabajador && (
@@ -81,11 +80,11 @@ console.log(formValues)
           )}
 
         </Grid>
-      </Grid>
-      {solicitud &&(
+        {solicitud &&(
       <Typography variant="h4">SOLICITUD REALIZADA!</Typography>
     )}
-    </Paper>
+      </Grid>
+
 
   );
 }

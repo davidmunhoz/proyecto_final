@@ -1,4 +1,4 @@
-import { Button, Grid,Typography} from "@mui/material";
+import { Tabs, Tab, Grid,Typography} from "@mui/material";
 import {useState,useEffect} from "react";
 import { useAuthContext } from "../../components/contexts/AuthContext";
 import HorizontalDivider from "../../components/Divider/HorizontalDivider";
@@ -9,30 +9,27 @@ import Solicitudes from './Solicitudes/Solicitudes';
 
 
 export default function PerfilEmpresario(){
-    const [empleoButton, setEmpleoButton] = useState("")
-    const [solicitudButton, setSolicitudButton] = useState("")
+
     const [solicitud, setSolicitud] = useState("");
     const [trabajador, setTrabajador] = useState("");
     const [empleo, setEmpleo] = useState("");
     const [empleo2, setEmpleo2] = useState("");
 
     const [solicitudes, setSolicitudes] = useState("")
-
-
-    function handleEmpleo(){
-        setEmpleoButton(true)
-        setSolicitudButton("")
-    }
-    function handleSolicitud(){
-        setSolicitudButton(true)
-        setEmpleoButton("")
-    }
-
+    console.log(solicitud)
+    console.log(solicitudes)
     const { userEmpresario } = useAuthContext()
     const empresario = userEmpresario.user[0]
     const empresarioID = empresario.id
     const trabajadorID = solicitud.trabajador
-  
+    
+    const [tabValue, setTabValue] = useState(0);
+
+    const handleTabChange = (event, newValue) => {
+      setTabValue(newValue);
+    };
+
+console.log(trabajador)
     useEffect(() => {
       async function fetchEmpleo() {
         try {
@@ -67,7 +64,7 @@ export default function PerfilEmpresario(){
           console.log(response)
           const data = await response.json();
           console.log(data)
-          setTrabajador(data.trabajador[0]);
+          setTrabajador(data.trabajador);
         } catch (error) {
           console.error(error);
         }
@@ -89,27 +86,25 @@ export default function PerfilEmpresario(){
         <Grid item xs={6}>
           <Typography variant="h5">{empresario?.nombre}</Typography>
           <br/><br/>
-          <LocationOnIcon/>
-          <Typography variant="h5">{empresario?.direccion}</Typography>
+          <Typography variant="h5"><LocationOnIcon/>{empresario?.direccion}</Typography>
         </Grid>
 
         <Grid item xs={12}>
-        <Grid>   <Button onClick={handleEmpleo} variant="contained">Empleos</Button> </Grid>
-        <Grid>   <Button onClick={handleSolicitud} variant="contained">Solicitud</Button> </Grid>
+        <Tabs value={tabValue} onChange={handleTabChange}>
+          <Tab label="Empleos" value={0} />
+          <Tab label="Solicitudes" value={1} />
+        </Tabs>
         </Grid>
-        <HorizontalDivider/>
-        </Grid>
-
+<HorizontalDivider/>
         <Grid container item xs={12}>
         <Grid item xs={6}>
-          <Typography variant="body2">{empresario?.cif}</Typography>
-          <Typography variant="body2">{empresario?.descripcion}</Typography>
-        </Grid>
-        <Grid item xs={6}>
-        {empleoButton && (<Empleos empleo={empleo} empleo2={empleo2} solicitudes={solicitudes} />)}
-        {solicitudButton && (<Solicitudes trabajador={trabajador}/>)}
+        {tabValue === 0 && (<Empleos empleo={empleo} empleo2={empleo2} solicitudes={solicitudes} />)}
+        {tabValue === 1 && trabajador.map((trabajadores, index) => (
+  <Solicitudes key={index} trabajadores={trabajadores} />
+))}
         </Grid>
       </Grid>
+    </Grid>
     </Grid>
         
     )

@@ -24,7 +24,7 @@ export default function AndaluciaMap({selectProvincia}) {
 
   return (
 <Grid container>
-
+<Grid item xs={12}>
     <SvgIcon sx={{width:"530px", height:"750px",} } viewBox="0 0 595.3 841.9" >
 <g id="huelva" onClick={() =>handleClick('huelva')} className="huelva" >
 	<polygon className="st0" points="192.7,371.9 198.4,377.1 205.5,380 208.1,382.3 208.1,391.2 203.9,389.4 200.4,392.8 197.9,391.5 
@@ -91,6 +91,7 @@ export default function AndaluciaMap({selectProvincia}) {
 		357.8,470.2 345.8,466.3 341.7,468.2 	"/>
 </g>
     </SvgIcon>
+	</Grid>
 	</Grid>
   );
 }

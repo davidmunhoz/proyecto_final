@@ -5,7 +5,6 @@ import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import HorizontalDivider from "../../components/Divider/HorizontalDivider";
 import PerfilCard from "../../components/EmpleoCard/PerfilCard/PerfilCard";
-import VerticalDivider from './../../components/Divider/VerticalDivider';
 import imagenMuleta from "../../../public/assets/mariachi.jpg"
 
 export default function PerfilTrabajador() {
@@ -102,7 +101,7 @@ export default function PerfilTrabajador() {
       <Grid container item xs={12}>
         <Grid item xs={6}>
           <Grid item xs={12}>
-            <PerfilCard empleo={empleo} />
+            <PerfilCard empleo={empleo} empleo2={empleo2} />
           </Grid>
         </Grid>
         {/* Agregar el otro PerfilCard aquí si es necesario */}

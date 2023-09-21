@@ -8,7 +8,7 @@ import { useLocation } from 'react-router-dom';
 
 export default function TrabajadorView() {
   const location = useLocation();
-  const trabajador = location.state.trabajador;
+  const trabajador = location.state.trabajadores;
 
 
   return (

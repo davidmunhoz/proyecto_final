@@ -76,10 +76,15 @@ export default function Empleo(){
 
   return (
     <form onSubmit={handleSubmit}>
-      <Grid container sx={{justifyContent: 'flex-end'}} >
-      <Grid  mb={2} item xs={12}>
+      <Grid container>
+
+      <Grid container item xs={6}>
+      <Grid  item xs={12}>
           <Typography variant="h3"> Publica un empleo </Typography>
         </Grid>
+        </Grid>
+
+        <Grid container item xs={6}>
         <Grid  mb={2} item xs={12}>
             <TextField
                 label="titulo"
@@ -252,7 +257,8 @@ export default function Empleo(){
             Enviar
           </Button>
         </Grid>
-
+        </Grid>
+       
       </Grid>
     </form>
   );
