@@ -4,9 +4,9 @@ import imagen from "../../../../public/assets/mariachi.jpg"
 import Phone from '@mui/icons-material/PhoneAndroid';
 import Location from '@mui/icons-material/LocationOn';
 
-export default function Solicitudes({trabajador}){
+export default function Solicitudes({trabajadores}){
     const navigate = useNavigate();
-
+    console.log(trabajadores)
     return(
         <Paper elevation={3}>
         <Grid container>
@@ -16,19 +16,19 @@ export default function Solicitudes({trabajador}){
 
         <Grid  container item xs ={9} >
         <Grid item xs={8}> 
-        <Typography variant="h5">{trabajador?.nombre}</Typography>
+        <Typography variant="h5">{trabajadores?.nombre}</Typography>
         </Grid>
 
         <Grid item xs={4}> 
-        <Button  variant="contained" onClick={()=> {navigate("/perfilview", {state:{trabajador:trabajador}})}} >Ver Perfil</Button>
+        <Button  variant="contained" onClick={()=> {navigate("/perfilview", {state:{trabajadores:trabajadores}})}} >Ver Perfil</Button>
         </Grid>
 
         <Grid item xs={12}> 
-            <Typography variant="body2"><Location/>{trabajador?.direccion}</Typography>
+            <Typography variant="body2"><Location/>{trabajadores?.direccion}</Typography>
         </Grid>
 
         <Grid item xs={12}>
-        <Typography variant="body2"><Phone/>{trabajador?.telefono}</Typography>
+        <Typography variant="body2"><Phone/>{trabajadores?.telefono}</Typography>
         </Grid>
        
         </Grid>

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { useFormik } from "formik";
-import { Grid, TextField, Typography, Button, FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { Grid, TextField, Typography, Button, FormControl, InputLabel, Select, MenuItem, InputAdornment } from "@mui/material";
 import { useAuthContext } from "../../components/contexts/AuthContext";
+import EmpleoCard from "./EmpleoCard/EmpleoCard";
 
 const provincias = [
   {label:'Almería' , value:'almeria'},
@@ -25,42 +27,67 @@ const maquinaria =[
   {label:'Buggy' , value:'buggy'}
 ]
 
+const otros = [
+  { label:'Talador', value:'talador'},
+  { label:'Tecnico de Riego', value:'riego'},
+  { label:'Ingeniero agrícola', value:'ingeniero agricola'},
+
+]
 const tipotrabajo = [
   { label: 'Recolector', value:'recolector' },
   { label: 'Maquinaria Pesada', value:'maquinaria pesada' },
-  { label: 'Talador', value:'talador' }
+  { label: 'Otros', value:'otros' }
 ];
 
 
-export default function Empleo(){
 
-  const [provincia, setProvincia] = useState("");
-  const [tipoTrabajo, setTipoTrabajo] = useState("");
-  const [especialidad, setEspecialidad] = useState("");
+export default function Empleo(){
+  const navigate = useNavigate();
+
+  const [autoData,setAutoData] = useState({
+      titulo : "",
+      descripcion:"",
+      salario:"",
+      jornadas:"",
+      vacante:"",
+      direccion:"",
+      provincia:"",
+      tipotrabajo:"",
+      especialidad:""
+  });
+console.log(autoData)
+
+  function handleOnchange(){
+    setAutoData(values)
+  }
+
+  const [tipoTrabajo, setTipoTrabajo] = useState("")
   const{userEmpresario} = useAuthContext()
   const idEmpresario = userEmpresario.user[0].id
   let date = new Date()
   
-  async function onSubmit(values) {
+  async function onSubmit() {
     console.log(values);
     
-    
-
       try{
         const response = await fetch("http://localhost:3001/employment/add",{
           method: "POST",
-          body: JSON.stringify(values),
+          body: JSON.stringify(autoData),
           headers: { "Content-Type": "application/json" }
       })
       const data = await response.json()
       console.log(data)
+      if(response.ok){
+        alert("Empleo añadido exitosamente")
+        navigate("/perfil2")
+      }
     }catch(error){
       console.log(error)
     }
 
   }
 
- 
+
 
 
   const {
@@ -87,14 +114,31 @@ export default function Empleo(){
   });
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid container sx={{justifyContent: 'flex-end'}} >
-      <Grid  mb={2} item xs={12}>
-          <Typography variant="h3"> Publica un empleo </Typography>
+    <form onSubmit={handleSubmit} onChange={handleOnchange}>
+      <Grid container >
+
+      <Grid container item xs={6} style={{color:"white", backgroundColor:"#5C8D3A"}} p={2}>
+          <Typography variant="h3" p={1} > Rellena el Formulario de tu empleo</Typography>
+
+        <Grid item xs={12}>
+        <Typography variant="h5">Vista previa</Typography>
+        <br/>
+        <EmpleoCard autoData={autoData}/>
         </Grid>
-        <Grid  mb={2} item xs={12}>
-            <TextField
-                label="titulo"
+      </Grid>
+
+
+
+
+      <Grid container item xs={6}>
+      <Grid item xs={12}>
+      <Grid xs={12} p={2}>
+        <Typography variant="h4" p={1}><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>1.</span> Describe tu empleo </Typography>
+        </Grid>
+
+        <Grid xs={12} p={1}>
+        <Typography>Título</Typography>
+        <TextField
                 type="text"
                 name="titulo"
                 size="small"
@@ -103,10 +147,10 @@ export default function Empleo(){
                 onBlur={handleBlur}
             />
         </Grid>
-
-        <Grid  mb={2} item xs={12}>
+           
+        <Grid xs={12} p={1}>
+        <Typography>Descripción</Typography>
           <TextField
-            label="descripcion"
             type="text"
             name="descripcion"
             size="small"
@@ -118,21 +162,24 @@ export default function Empleo(){
 
      
 
-            <Grid  mb={2} item xs={12}>
+            <Grid  xs={12} p={1}>
+            <Typography>Salario</Typography>
           <TextField
-            label="salario"
             type="number"
             size="small"
             name="salario"
+            InputProps={{
+            endAdornment: <InputAdornment position="end">€</InputAdornment>,
+          }}
             value={values.salario}
             onChange={handleChange}
             onBlur={handleBlur}
           />
         </Grid>
 
-        <Grid  mb={2} item xs={12}>
+        <Grid xs={12} p={1}>
+        <Typography>Jornadas Aproximadas</Typography>
           <TextField
-            label="jornadas"
             type="number"
             size="small"
             name="jornadas"
@@ -142,9 +189,9 @@ export default function Empleo(){
           />
         </Grid>
 
-        <Grid  mb={2} item xs={12}>
+        <Grid xs={12} p={1}>
+        <Typography>Jornaleros necesarios</Typography>
           <TextField
-            label="vacante"
             type="number"
             size="small"
             name="vacante"
@@ -153,33 +200,22 @@ export default function Empleo(){
             onBlur={handleBlur}
           />
         </Grid>
-
-        <Grid  mb={2} item xs={12}>
-          <TextField
-            label="direccion"
-            type="text"
-            size="small"
-            name="direccion"
-            value={values.direccion}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
         </Grid>
 
-       <Grid  mb={2} item xs={12} >
-      <FormControl size="medium">
-        <InputLabel id="provincias">Provincias</InputLabel>
+        <Grid item xs={12} p={2}>
+        <Grid xs={12} p={1} >
+          <Typography variant="h4"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>2.</span> Localización del Empleo</Typography>
+        </Grid> 
+        <Grid xs={12} p={1} >
+        <Typography>Introduce la Provincia</Typography>
+      <FormControl size="big">
         <Select
-          labelId="provincias"
           id="provincias"
           name="provincia"
           value={values.provincia}
-          label="Seleccion una Provincia"
-          onChange={(e) => {
-        setProvincia(e.target.value);
-        values.provincia = provincia
-        console.log(provincia)
-      }}
+          onChange={(event)=>{
+            handleChange(event)
+          }}
           onBlur={handleBlur}
         >
         {provincias.map((provinciado , index) => (
@@ -188,18 +224,37 @@ export default function Empleo(){
       </FormControl>
        </Grid>
 
-       <Grid mb={2} item xs={12}>
+        <Grid xs={12} p={1}>
+        <Typography>Introduce la Dirección</Typography>
+          <TextField
+            type="text"
+            size="small"
+            name="direccion"
+            value={values.direccion}
+            onChange={handleChange}
+            onBlur={handleBlur}
+          />
+        </Grid>
+        </Grid>
+       
+
+        <Grid item xs={12} p={2}>
+        <Grid xs={12} p={1}>
+          <Typography variant="h4"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>3.</span> Tipo de Empleo</Typography>
+        </Grid>
+       <Grid xs={12} p={1}>
+       <Typography>Selecciona el tipo de trabajo</Typography>
   <FormControl size="big">
-    <InputLabel id="tipotrabajo">Tipo de Trabajo</InputLabel>
     <Select
       labelId="tipotrabajo"
       id="tipotrabajo"
       name="tipotrabajo"
       value={values.tipotrabajo}
-      label="Selecciona el Trabajo ofertado"
-      onChange={(e) => {
-        setTipoTrabajo(e.target.value);
-        values.tipotrabajo = tipoTrabajo
+      onChange={(event) => {
+        handleChange(event)
+        setTipoTrabajo(event.target.value)
+        console.log(event.target.value)
+        console.log(tipoTrabajo)
       }}
       onBlur={handleBlur}
     >
@@ -209,20 +264,18 @@ export default function Empleo(){
   </FormControl>
 </Grid>
 
-<Grid mb={2} item xs={12}>
-  {tipoTrabajo && tipoTrabajo === "recolector" && (
+{tipoTrabajo === "recolector" && (
+<Grid xs={12} p={1}>
+<Typography>Selecciona el tipo de fruto</Typography>
+  
     <FormControl size="big">
-      <InputLabel id="especialidad">Tipo de Fruto</InputLabel>
       <Select
         labelId="especialidad"
         id="especialidad"
         name="especialidad"
         value={values.especialidad}
-        label="Selecciona Fruto a recoger"
-        onChange={(e) => {
-        setEspecialidad(e.target.value);
-        values.especialidad = especialidad
-        // setFieldValue("tipotrabajo", e.target.value );
+        onChange={(event) => {
+          handleChange(event)
       }}
         onBlur={handleBlur}
       >
@@ -230,21 +283,20 @@ export default function Empleo(){
           <MenuItem key={index} value={recolectado.value}>{recolectado.label}</MenuItem>))}
       </Select>
     </FormControl>
+  </Grid>
   )}
 
-  {tipoTrabajo && tipoTrabajo === "maquinaria pesada" && (
+  {tipoTrabajo === "maquinaria pesada" && (
+  <Grid xs={12} p={1}>
+  <Typography>Selecciona el tipo de maquinaria</Typography>
     <FormControl size="big">
-      <InputLabel id="especialidad">Tipo de Maquinaria</InputLabel>
       <Select
         labelId="especialidad"
         id="especialidad"
         name="especialidad"
         value={values.especialidad}
-        label="Selecciona el maquinista que buscas"
-        onChange={(e) => {
-        setEspecialidad(e.target.value);
-        values.especialidad = especialidad
-        // setFieldValue("tipotrabajo", e.target.value );
+        onChange={(event) => {
+          handleChange(event)
       }}
         onBlur={handleBlur}
       >
@@ -252,10 +304,34 @@ export default function Empleo(){
           <MenuItem key={index} value={maquinas.value}>{maquinas.label}</MenuItem>))}
       </Select>
     </FormControl>
+  </Grid>
+  )}
+
+  {tipoTrabajo === "otros" && (
+  <Grid xs={12} p={1}>
+  <Typography>Otros empleos</Typography>
+    <FormControl size="big">
+      <Select
+        labelId="especialidad"
+        id="especialidad"
+        name="especialidad"
+        value={values.especialidad}
+        onChange={(event) => {
+          handleChange(event)
+      }}
+        onBlur={handleBlur}
+      >
+        {otros.map((otros, index) => (
+          <MenuItem key={index} value={otros.value}>{otros.label}</MenuItem>))}
+      </Select>
+    </FormControl>
+    </Grid>
   )}
 </Grid>
 
-        <Grid item xs={12}>
+
+
+        <Grid item xs={12} p={1}>
           <Button 
           size="large"
           type="submit" 
@@ -265,6 +341,8 @@ export default function Empleo(){
             Enviar
           </Button>
         </Grid>
+      </Grid>
+        
 
       </Grid>
     </form>

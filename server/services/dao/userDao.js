@@ -9,6 +9,7 @@ userDao.addUserTrabajador = async(userData) => await userQueries.addUserTrabajad
 userDao.loginUserTrabajador =async(email) => await userQueries.getUserbyEmailTrabajador(email);
 
 userDao.getTrabajador = async(id) => await userQueries.getTrabajador(id);
+userDao.getEmpresario = async(id) => await userQueries.getEmpresario(id);
 
 
 module.exports = userDao;

@@ -11,6 +11,7 @@ userRouter.post("/registerTrabajador", userController.addUserTrabajador)
 userRouter.post("/loginTrabajador", userController.userLoginTrabajador)
 
 userRouter.get("/get/:id", userController.getTrabajador)
+userRouter.get("/getEmpresario/:id", userController.getEmpresario)
 
 
 

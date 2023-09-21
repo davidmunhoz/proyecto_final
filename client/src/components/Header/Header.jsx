@@ -2,9 +2,9 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import {useState} from 'react'
 import { Link } from "react-router-dom";
-import { Grid, Box, Button, IconButton, Menu, MenuItem } from "@mui/material";
+import { Grid, Box, Button, IconButton, Menu, MenuItem, Typography, } from "@mui/material";
 import { useAuthContext } from "../contexts/AuthContext";
-import AccountCircle from '@mui/icons-material/AccountCircle';
+import PersonIcon from '@mui/icons-material/Person';
 import logo3 from "../../../public/assets/logo3.png";
 
 export default function Header() {
@@ -41,6 +41,7 @@ const handleMenu = (event) => {
         }
         </Grid>
 
+
         <Grid container justifyContent="flex-end">
         {userTrabajador ?(<div>
               <IconButton
@@ -51,8 +52,10 @@ const handleMenu = (event) => {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+             
+                <PersonIcon /><hr/><Typography variant="body2" sx={{color:"white"}}>Hola!,{userTrabajador.user[0].nombre}</Typography>
               </IconButton>
+             
               <Menu
                 id="menu-appbar"
                 anchorEl={anchorEl}
@@ -71,8 +74,9 @@ const handleMenu = (event) => {
                 <MenuItem onClick={handleClose}><Link to="/perfil1">Perfil Trabajador</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Button onClick={logout}>Logout</Button></MenuItem>
               </Menu>
-            </div>)
-            : userEmpresario ? (<div>
+            </div>    
+            ) 
+            : userEmpresario ? (<Grid>
               <IconButton
                 size="large"
                 aria-label="account of current user"
@@ -81,7 +85,7 @@ const handleMenu = (event) => {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <AccountCircle />
+                <PersonIcon />  <Typography variant="body2" sx={{color:"white"}}>Bienvenido!, {userEmpresario.user[0].nombre}</Typography>
               </IconButton>
               <Menu
                 id="menu-appbar"
@@ -102,7 +106,7 @@ const handleMenu = (event) => {
                 <MenuItem onClick={handleClose}><Link to="/empleo">Publicar Empleo</Link></MenuItem>
                 <MenuItem onClick={handleClose}><Button onClick={logout}>Logout</Button></MenuItem>
               </Menu>
-            </div>) 
+            </Grid>) 
           : (<Link to="/login" style={{ color: "white" }}>
             Iniciar sesión
           </Link>)

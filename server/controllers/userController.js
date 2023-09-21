@@ -147,6 +147,22 @@ userController.getTrabajador = async (req, res) => {
     }
   };
 
+  
+  userController.getEmpresario = async (req, res) => {
+  
+    const { id } = req.params;
+    try {
+       const empresario = await userDao.getEmpresario(id);
+  
+      if (empresario.length === 0) {
+        return res.status(404).send({ message: "empresario no encontrado" });
+      }
+  
+      return res.send({ empresario });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  };
 
 
 
