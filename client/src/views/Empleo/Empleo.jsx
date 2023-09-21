@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { Grid, TextField, Typography, Button, FormControl, InputLabel, Select, MenuItem, InputAdornment } from "@mui/material";
+import { Grid, TextField, Typography, Button, FormControl, Select, MenuItem, InputAdornment } from "@mui/material";
 import { useAuthContext } from "../../components/contexts/AuthContext";
 import EmpleoCard from "./EmpleoCard/EmpleoCard";
+import autoctono from "../../../public/assets/logo3.png"
 
 const provincias = [
   {label:'Almería' , value:'almeria'},
@@ -118,19 +119,24 @@ console.log(autoData)
       <Grid container >
 
       <Grid container item xs={6} style={{color:"white", backgroundColor:"#5C8D3A"}} p={2}>
-          <Typography variant="h3" p={1} > Rellena el Formulario de tu empleo</Typography>
+
+      <Grid item xs={12}>
+      <img src={autoctono} alt="logo" width={360} height={60}/>
+      </Grid>
+
+      <Grid item xs={12}>
+      <Typography variant="h3" p={1} > Rellena el Formulario de tu empleo</Typography>
+      </Grid>
 
         <Grid item xs={12}>
-        <Typography variant="h5">Vista previa</Typography>
+        <Typography variant="h6">Vista previa</Typography>
         <br/>
         <EmpleoCard autoData={autoData}/>
         </Grid>
       </Grid>
 
 
-
-
-      <Grid container item xs={6}>
+      <Grid container item xs={6} style={{ overflow: 'auto', maxHeight: 'calc(100vh - 64px)' }}>
       <Grid item xs={12}>
       <Grid xs={12} p={2}>
         <Typography variant="h4" p={1}><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>1.</span> Describe tu empleo </Typography>
@@ -254,7 +260,6 @@ console.log(autoData)
         handleChange(event)
         setTipoTrabajo(event.target.value)
         console.log(event.target.value)
-        console.log(tipoTrabajo)
       }}
       onBlur={handleBlur}
     >
@@ -329,8 +334,6 @@ console.log(autoData)
   )}
 </Grid>
 
-
-
         <Grid item xs={12} p={1}>
           <Button 
           size="large"
@@ -343,7 +346,6 @@ console.log(autoData)
         </Grid>
       </Grid>
         
-
       </Grid>
     </form>
   );

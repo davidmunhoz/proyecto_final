@@ -1,9 +1,13 @@
 import { Grid, Typography, Paper} from "@mui/material";
 import Location from '@mui/icons-material/LocationOn';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
+import { useAuthContext } from "../../../components/contexts/AuthContext";
 
 export default function EmpleoCard({autoData}){
   
+  const {userEmpresario} = useAuthContext()
+  const empresarioName = userEmpresario.user[0].nombre
+
   const imagen = `../../../public/especialidad/${autoData?.especialidad}.jpg`
   const defaultImage = "../../../../public/especialidad/oliva.jpg"
 
@@ -21,8 +25,8 @@ export default function EmpleoCard({autoData}){
    </Grid>
  
           <Grid item xs={6}>
-            <Typography variant="h6">{autoData?.titulo}</Typography>
-            <Typography variant="body3"><AgricultureIcon/> {autoData?.tipotrabajo}</Typography>
+          <Typography variant="h6">{autoData?.titulo}</Typography>
+          
           </Grid>
 
           <Grid container item xs={12} p={2}>
