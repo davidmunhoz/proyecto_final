@@ -6,6 +6,7 @@ import { RegisterFormSchema } from "./RegisterFormSchema";
 import PopUpVerde from "../../../components/PopUp/PopUpVerde";
 import PopUpRojo from "../../../components/PopUp/PopUpRojo";
 import jornaleroImagen from "../../../../public/imageRegister/jornalero1.jpg";
+import carouselTrabajador from './utils/carouselTrabajador';
 
 export default function RegisterTrabajador() {
   const [clickCarnet, setClickCarnet] = useState(false);
@@ -86,8 +87,13 @@ export default function RegisterTrabajador() {
     <form onSubmit={handleSubmit}>
       <Grid container>
       <Grid container item xs={6}>
+        <carouselTrabajador/>
+        </Grid>
+
+
+      <Grid container item xs={6}>
       <Grid item xs={12}>
-      <Typography variant="h2">Registrate como jornalero</Typography>
+      <Typography variant="h2">Rellena el formulario de Empleo</Typography>
       </Grid>
         <Grid mb={2} item xs={12}>
           <TextField
@@ -241,9 +247,6 @@ export default function RegisterTrabajador() {
             <PopUpRojo />
           </Grid>
         )}
-        </Grid>
-        <Grid container item xs={6}>
-        <img src={jornaleroImagen}/>
         </Grid>
       </Grid>
     </form>
