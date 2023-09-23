@@ -18,7 +18,6 @@ export default function IndexLayout() {
       >
         <Outlet />
       </Container>
-
       {/* <Footer /> */}
     </>
   );

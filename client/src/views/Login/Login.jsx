@@ -1,15 +1,15 @@
 import { useFormik } from "formik";
-import { Grid, TextField, Typography, Button, Paper} from "@mui/material";
+import { Grid, TextField, Typography, Button,} from "@mui/material";
 import { initialValues } from "./utils/initialValues";
-import PopUpVerde from "../../components/PopUp/PopUpVerde";
-import PopUpRojo from "../../components/PopUp/PopUpRojo";
+import PopUpLogin from "../../components/PopUp/PopUpLogin";
 import { useAuthContext } from "../../components/contexts/AuthContext";
+import imageLogin from "../../../public/assets/imagenLogin2.jpg"
+import { Link } from "react-router-dom";
 
 
 export default function Login() {
 
-const { user,fetchLogin,errorMessage,logout} = useAuthContext()
-
+const {fetchLogin,errorMessage,} = useAuthContext()
 
 
   async function onSubmit(values, actions) {
@@ -33,16 +33,19 @@ const { user,fetchLogin,errorMessage,logout} = useAuthContext()
   });
 
   return (
-    <form onSubmit={handleSubmit}>
+    
       <Grid container>
-      <Grid container justifyContent="center" alignItems="center" style={{ height: "10vh" }}>
-        <Typography variant="h2">Accede a tu cuenta</Typography>
-      </Grid>
 
-<Grid container item xs={12}>
-        <Grid  mb={2} item xs={12} >
+<Grid item xs={6}>
+<form onSubmit={handleSubmit}>
+
+<Grid container xs={10} sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+<Typography variant="h3">¡Hola de Nuevo!</Typography>
+</Grid>
+
+<Grid container xs={10} sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+<Typography variant="h6">Email</Typography>
           <TextField
-            label="email"
             type="email"
             name="email"
             value={values.email}
@@ -51,12 +54,12 @@ const { user,fetchLogin,errorMessage,logout} = useAuthContext()
            fullWidth
 
           />
-        </Grid>
+</Grid>
 
-        <Grid  mb={2} item xs={12}>
-          <TextField
+<Grid container xs={10} sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+<Typography variant="h6">Contraseña</Typography>
+<TextField
           size="medium"
-            label="contraseña"
             type="password"
             name="password"
             value={values.password}
@@ -64,35 +67,47 @@ const { user,fetchLogin,errorMessage,logout} = useAuthContext()
             onBlur={handleBlur}
             fullWidth
           />
-        </Grid>
+</Grid>
 
-        <Grid item xs={12}>
-          <Button
+<Grid container xs={10} sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+<Button
             size="large"
             type="submit"
             variant="contained"
+            fullWidth
             disabled={isSubmitting}
             
           >
             Enviar
           </Button>
-        </Grid>
+</Grid>
 
-        <Grid item xs={12}>
-        {user  && (
-            <PopUpVerde />
+<Grid container sx={{display:"flex", flexDirection:"column", p:"32px 16px 16px 64px"}}>
+<Grid item xs={10}>
+<Typography variant="h6">¿Aún no tienes cuenta?<Link  to={"/register"} style={{color:"green", paddingLeft:1}} >Regístrate</Link></Typography>
+        </Grid>
+</Grid>
+
+
+<Grid container xs={10}>
+{errorMessage  && (
+            <PopUpLogin />
         )}
-        {errorMessage  && (
-            <PopUpRojo />
-        )}
-      </Grid>
+</Grid>
+ </form>
+</Grid>
 
-        </Grid>
-        </Grid>
+<Grid item xs={6}>
+  <Grid container xs={12}>
+  <img src={imageLogin} alt="imagen" width="100%" height="662px" />
+  </Grid>
+</Grid>
 
 
-      
-    </form>
+     
+
+        </Grid>    
   
+   
   );
 }

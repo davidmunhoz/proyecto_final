@@ -13,14 +13,14 @@ export default function RegisterRoute() {
 
       <Grid container item xs={12} padding={"150px"}>
         <Grid item xs={6} padding={"20px"}>
-        <Button variant="contained" color="primary" size="large" fullWidth 
+        <Button sx={{p:2}} variant="contained" color="primary" size="large" fullWidth 
         onClick={()=>{navigate("/register1")}}>
         Empresario
         </Button>
         </Grid>
 
         <Grid item xs={6} padding={"20px"}>
-        <Button variant="contained" color="primary" size="large" fullWidth 
+        <Button sx={{p:2}} variant="contained" color="primary" size="large" fullWidth 
         onClick={()=>{navigate("/register2")}}>
         Trabajador
         </Button>

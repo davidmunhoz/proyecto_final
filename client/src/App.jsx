@@ -29,6 +29,7 @@ function App() {
             <Route path="register2" element={<RegisterTrabajador/>} />
           </Route>
           <Route path="empleo" element={<Empleo />} />
+
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>

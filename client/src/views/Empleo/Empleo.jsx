@@ -36,7 +36,7 @@ const otros = [
 ]
 const tipotrabajo = [
   { label: 'Recolector', value:'recolector' },
-  { label: 'Maquinaria Pesada', value:'maquinaria pesada' },
+  { label: 'Maquinaria', value:'maquinaria' },
   { label: 'Otros', value:'otros' }
 ];
 
@@ -52,10 +52,11 @@ export default function Empleo(){
       jornadas:"",
       vacante:"",
       direccion:"",
-      provincia:"",
-      tipotrabajo:"",
-      especialidad:""
+      provincia:``,
+      tipotrabajo:``,
+      especialidad:``
   });
+  
 console.log(autoData)
 
   function handleOnchange(){
@@ -63,6 +64,9 @@ console.log(autoData)
   }
 
   const [tipoTrabajo, setTipoTrabajo] = useState("")
+  // const [especialidad, setEspecialidad] = useState("")
+  // const [provincia, setProvincia] = useState("")
+
   const{userEmpresario} = useAuthContext()
   const idEmpresario = userEmpresario.user[0].id
   let date = new Date()
@@ -136,7 +140,7 @@ console.log(autoData)
       </Grid>
 
 
-      <Grid container item xs={6} style={{ overflow: 'auto', maxHeight: 'calc(100vh - 64px)' }}>
+      <Grid container item xs={6} style={{ overflow: 'auto', maxHeight: 'calc(100vh - 64px)' }} p={2}>
       <Grid item xs={12}>
       <Grid xs={12} p={2}>
         <Typography variant="h4" p={1}><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>1.</span> Describe tu empleo </Typography>
@@ -219,9 +223,9 @@ console.log(autoData)
           id="provincias"
           name="provincia"
           value={values.provincia}
-          onChange={(event)=>{
-            handleChange(event)
-          }}
+          onChange={
+            handleChange      
+          }
           onBlur={handleBlur}
         >
         {provincias.map((provinciado , index) => (
@@ -291,7 +295,7 @@ console.log(autoData)
   </Grid>
   )}
 
-  {tipoTrabajo === "maquinaria pesada" && (
+  {tipoTrabajo === "maquinaria" && (
   <Grid xs={12} p={1}>
   <Typography>Selecciona el tipo de maquinaria</Typography>
     <FormControl size="big">

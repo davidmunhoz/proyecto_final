@@ -1,5 +1,5 @@
 import {useState} from "react"
-import { Grid, Typography, Box } from "@mui/material"
+import { Grid, Typography,} from "@mui/material"
 import AndaluciaMap from "../../components/AndaluciaMap/AndaluciaMap"
 import HomeCard from "../../components/EmpleoCard/HomeCard/HomeCard"
 
@@ -13,21 +13,23 @@ const [provincia,setProvincia] = useState(null)
          <span style={{ textDecoration: 'underline' }}> agrícola</span> </Typography>
     </Box> */}
 
-        <Grid container item xs={6} p={2}>
+        <Grid item xs={6} >
+        <Grid container sx={{display:"flex", flexDirection:"column"}}>
+        <Grid item xs={12}>
         {provincia && (
-            <Grid item xs={12} p={1}>
         <Typography variant="h4">Selecciona la provincia donde deseas buscar empleo</Typography>
-        </Grid>
         )}
-    
-        <Grid item xs={12} p={1}>
-           <AndaluciaMap selectProvincia={setProvincia}/> 
-           </Grid>
         </Grid>
 
-        <Grid container item xs={6} alignItems={'center'} style={{ overflow: 'auto', maxHeight: 'calc(100vh - 64px)' }}>
-        {!provincia ? (<Grid item xs={12} p={1}><Typography variant="h4">¿Buscas trabajo?</Typography><br/>
-        <Typography variant="h6">Selecciona en el mapa la provincia en la que buscas trabajo</Typography></Grid>
+        <Grid item xs={12}>
+        <AndaluciaMap selectProvincia={setProvincia}/> 
+        </Grid>
+
+        </Grid>
+        </Grid>
+
+        <Grid item xs={6} alignItems={'center'} >
+        {!provincia ? (<Typography variant="h6">Selecciona en el mapa la provincia en la que buscas trabajo</Typography>
         ): 
         (
         <HomeCard provincia={provincia} />)

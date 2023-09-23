@@ -49,18 +49,20 @@ const navigate = useNavigate();
               <Grid item xs={6}>
               <Typography variant="body1"><Agriculture /> {empleo.especialidad}</Typography>
               </Grid>
+
           </Grid>
 
 
           <Grid container item xs={12} p={1}>
     
-              <Grid item xs={6}>
+              <Grid item xs={7}>
                 <Typography variant="body1"><b>Dirección:</b> {empleo.direccion}</Typography>
+                <Typography variant="body1"><b>Fecha de Publicación:</b> {empleo.fecha}</Typography>
               </Grid>
 
-              <Grid item xs={6}>
+              <Grid item xs={5}>
                 <Button
-                  variant="contained"
+                 variant="contained"
                   fullWidth
                   color="primary"
                   onClick={ (() => {

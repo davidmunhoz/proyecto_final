@@ -1,35 +1,53 @@
-import { Grid } from '@material-ui/';
+import  { useRef } from "react";
+import algodon from "../../../../../public/especialidad/algodon.jpg";
+import trigo from "../../../../../public/especialidad/trigo.jpg";
+import uva from "../../../../../public/especialidad/uva.jpg";
+import tomate from "../../../../../public/especialidad/tomate.jpg";
+import fresa from "../../../../../public/especialidad/uva.jpg";
 
-export default function carouselTrabajador(){
+import "@splidejs/react-splide/css";
+import { Splide, SplideSlide } from "@splidejs/react-splide";
+import { Grid } from "@mui/material";
 
-    return(
-        <Grid container>
-        <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
-  <ol className="carousel-indicators">
-    <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-    <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
-  </ol>
-  <div className="carousel-inner">
-    <div className="carousel-item active">
-      <img className="d-block w-100" src="..." alt="First slide"/>
-    </div>
-    <div className="carousel-item">
-      <img className="d-block w-100" src="..." alt="Second slide"/>
-    </div>
-    <div className="carousel-item">
-      <img className="d-block w-100" src="..." alt="Third slide"/>
-    </div>
-  </div>
-  <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span className="sr-only">Previous</span>
-  </a>
-  <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="sr-only">Next</span>
-  </a>
-</div>
-</Grid>
-    )
+export default function CarouselTrabajador() {
+  const images = [trigo, algodon, uva, tomate, fresa];
+  const splideRef = useRef(null);
+
+  const settings = {
+    dots: true,
+    arrows: false, // No muestra las flechas de "siguiente" y "anterior"
+    infinite: true,
+    autoplay: true,
+    interval: 5000, // Tiempo entre slides
+    rewind: true, // Permite rebobinar al final
+    onInit: (splide) => {
+      // Guarda una referencia al carrusel
+      splideRef.current = splide;
+    },
+    onChange: (splide) => {
+      // Detecta cuando se cambia de slide
+      if (splide.index === splide.length - 1) {
+        // Si es el último slide, reinicia el carrusel
+        setTimeout(() => {
+          splideRef.current.go(0);
+        }, 1000); // Espera un segundo antes de reiniciar
+      }
+    },
+  };
+
+  return (
+    <Grid container>
+      <Splide options={settings} style={{width:"100%"}}>
+        {images.map((image, index) => (
+          <SplideSlide key={index}>
+            <img src={image} alt={`Image ${index}`} width="100%" height="100%" />
+          </SplideSlide>
+        ))}
+      </Splide>
+    </Grid>
+  );
 }
+
+
+
+
