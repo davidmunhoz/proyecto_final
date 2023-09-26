@@ -3,14 +3,12 @@ import { useFormik } from "formik";
 import { Grid, TextField, Typography, Button } from "@mui/material";
 import { initialValues } from "./utils/initialValues";
 import { RegisterFormSchema } from "./RegisterFormSchema";
-import PopUpVerde from "../../../components/PopUp/PopUpVerde"
-import PopUpRojo from "../../../components/PopUp/PopUpRojo"
+import PopUpRegister from "../../../components/PopUp/PopUpRegister"
 import empresarioImagen from "../../../../public/imageRegister/tractor-empresario.jpg"
 
 export default function RegisterEmpresario(){
 
-  const [registerCorrect,setRegisterCorrect] = useState(false)
-  const [registerIncorrect,setRegisterIncorrect] = useState(false)
+  const [registerIncorrect,setRegisterIncorrect] = useState(null)
 
   async function onSubmit(values, actions) {
     console.log(values);
@@ -25,17 +23,16 @@ export default function RegisterEmpresario(){
       const data = await response.json()
       console.log(data)
 
-      if(response.status === 200){
-        setRegisterCorrect(true)}
-        else{
+      if(response.status !== 200){
           setRegisterIncorrect(true)
+          setRegisterIncorrect(null)
         }
 
     }catch(error){
       console.log(error)
     }
 
-    actions.resetForm();
+    // actions.resetForm();
   }
 
 
@@ -53,66 +50,85 @@ export default function RegisterEmpresario(){
     onSubmit,
   });
   return (
-    <form onSubmit={handleSubmit}>
-      <Grid container>
-      <Grid container item xs={6}>
-      <Grid item xs={12}>
-      <Typography variant="h2">Registrate como empresario</Typography>
-      </Grid>
-        <Grid  mb={2} item xs={12}>
-          <TextField
-            label="nombre"
-            type="text"
-            name="nombre"
-            value={values.nombre}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            size="medium"
-            className={errors.nombre && touched.nombre ? "input-error" : ""}
-          />
-          {errors.nombre && touched.nombre && (
-            <p className="error">{errors.nombre}</p>
-          )}
+    <>
+      <Grid container sx={{display:"flex" , flexDirection:"row"}}>
+
+{/* Contenedor de la imagen/carousel?*/}
+     <Grid  item xs={6}  >
+   <Grid container sx={{display:"flex", flexDirection:"column", pr:2}}>
+  <Grid item xs={12}>
+ <img src={empresarioImagen} style={{ position: "fixed", width:"500px"}}/>
+  </Grid>
+    </Grid>
         </Grid>
-        <Grid  mb={2} item xs={12}>
+
+      <Grid item xs={6}>
+      <form onSubmit={handleSubmit}>
+      <Grid container sx={{display:"flex", flexDirection:"column", pl:15}}>
+      <Grid item xs={12} >
+      <Typography sx={{pr:2.5}} variant="h3">Date de Alta como Empresario</Typography>
+      </Grid>
+
+      {/* Contenedor del titulo de datos de usuario */}
+      <Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+        <Grid item xs={1}>
+          <Typography variant="h5"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%", padding:1}}>1.</span>Datos de usuario</Typography>
+        </Grid>
+
+      </Grid>
+      {/* Contenedor del campo email */}
+        <Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+          <Grid item xs={7}>
           <TextField
-            label="email"
-            type="email"
+            label="Email"
+            type="text"
             name="email"
             value={values.email}
             onChange={handleChange}
             onBlur={handleBlur}
+            fullWidth
             size="medium"
             className={errors.email && touched.email ? "input-error" : ""}
           />
           {errors.email && touched.email && (
             <p className="error">{errors.email}</p>
           )}
+          </Grid>
+
         </Grid>
-        <Grid  mb={2} item xs={12}>
+
+         {/* Contenedor del campo contraseña */}
+         <Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+          <Grid item xs={7}>
           <TextField
-            label="contraseña"
-            type="password"
+            label="Contraseña"
+            type="text"
             name="password"
             value={values.password}
             onChange={handleChange}
             onBlur={handleBlur}
             size="medium"
+            fullWidth
             className={errors.password && touched.password ? "input-error" : ""}
           />
           {errors.password && touched.password && (
             <p className="error">{errors.password}</p>
           )}
+          </Grid>
         </Grid>
-        <Grid  mb={2} item xs={12}>
+{/* Contenedor del campo repetir la contraseña */}
+          <Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+
+          <Grid item xs={7}>
           <TextField
-            label="confirmar contraseña"
+            label="Confirmar Contraseña"
             type="password"
             name="confirmPassword"
             value={values.confirmPassword}
             onChange={handleChange}
             onBlur={handleBlur}
             size="medium"
+            fullWidth
             className={
               errors.confirmPassword && touched.confirmPassword
                 ? "input-error"
@@ -122,60 +138,109 @@ export default function RegisterEmpresario(){
           {errors.confirmPassword && touched.confirmPassword && (
             <p className="error">{errors.confirmPassword}</p>
           )}
+          </Grid>
         </Grid>
-        <Grid  mb={2} item xs={12}>
+
+   {/* Contenedor del titulo de datos de empresa */}
+   <Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+        <Grid item xs={7}>
+          <Typography variant="h5"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%", padding:1}}>2.</span>Datos de empresa</Typography>
+        </Grid>
+
+        <Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+          <Grid item xs={7}>
           <TextField
-            label="telefono"
+            label="Nombre del empresario"
+            type="text"
+            name="nombre"
+            value={values.nombre}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            size="medium"
+            fullWidth
+            className={errors.nombre && touched.nombre ? "input-error" : ""}
+          />
+          {errors.nombre && touched.nombre && (
+            <p className="error">{errors.nombre}</p>
+          )}
+          </Grid>
+
+        </Grid>
+
+{/* Contenedor del campo telefono */}
+<Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+          <Grid item xs={7}>
+          <TextField
+            label="Teléfono"
             type="number"
             name="telefono"
             value={values.telefono}
             onChange={handleChange}
             onBlur={handleBlur}
             size="medium"
+            fullWidth
             className={errors.telefono && touched.telefono ? "input-error" : ""}
           />
           {errors.telefono && touched.telofono && (
             <p className="error">{errors.telefono}</p>
           )}
+          </Grid>
+
         </Grid>
-        <Grid  mb={2} item xs={12}>
+
+        {/* Contenedor del campo CIF*/}
+<Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+          <Grid item xs={7}>
           <TextField
-            label="direccion"
+            label="CIF"
+            type="text"
+            name="CIF"
+            value={values.cif}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            size="medium"
+            fullWidth
+            className={errors.cif && touched.cif ? "input-error" : ""}
+          />
+          {errors.cif && touched.cif && (
+            <p className="error">{errors.cif}</p>
+          )}
+          </Grid>
+
+        </Grid>
+
+{/* Contenedor del campo dirección */}
+<Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+          <Grid item xs={7}>
+          <TextField
+            label="Direccion"
             type="text"
             name="direccion"
             value={values.direccion}
             onChange={handleChange}
             onBlur={handleBlur}
-            size="medium"
+            fullWidth
             className={
               errors.direccion && touched.direccion ? "input-error" : ""
             }
           />
-        </Grid>
-          <Grid mb={2} item xs={12}>
-            <TextField
-            type="text"
-            name="cif"
-              value={values.cif}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              label="Introduce tu C.I.F"
-              size="medium"
-              className={
-              errors.cif && touched.cif ? "input-error" : ""
-              }
-            />
           </Grid>
 
-          <Grid mb={2} item xs={12}>
-            <TextField
+        </Grid>
+
+{/* Contenedor de descripcion */}
+<Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+          <Grid item xs={10}>
+          <TextField
             fullWidth
+            multiline
+            rows={3}
             type="text"
             name="descripcion"
               value={values.descripcion}
               onChange={handleChange}
               onBlur={handleBlur}
-              label="descripcion de la empresa"
+              label="Descripcion de la Empresa"
               size="medium"
               className={
               errors.descripcion && touched.descripcion ? "input-error" : ""
@@ -183,27 +248,33 @@ export default function RegisterEmpresario(){
             />
           </Grid>
 
-        <Grid item xs={12}>
+        </Grid>
+
+{/* Contenedor del Button*/}
+<Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+<Grid item xs={10}>
           <Button type="submit" variant="contained" disabled={isSubmitting} fullWidth>
-            Crear cuenta
+            Date de Alta
           </Button>
         </Grid>
-        {registerCorrect  && (
-          <Grid item xs={12}>
-            <PopUpVerde />
-          </Grid>
-        )}
-        {registerIncorrect  && (
-          <Grid item xs={12}>
-            <PopUpRojo />
-          </Grid>
-        )}
-        </Grid> 
+</Grid>
 
-        <Grid container item xs={6} >
-          <img src={empresarioImagen}/>
+{/* Contenedor del Register Incorrecto*/}
+{registerIncorrect  && (
+  <Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+<Grid item xs={5}>
+            <PopUpRegister />
         </Grid>
+</Grid>
+)}
+
+        </Grid>
+        </Grid>
+        </form>
       </Grid>
-    </form>
+
+
+      </Grid>
+      </>
   );
 }

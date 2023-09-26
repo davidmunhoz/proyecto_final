@@ -1,54 +1,79 @@
-import { Grid, Typography, Paper} from "@mui/material";
-import Location from '@mui/icons-material/LocationOn';
-import AgricultureIcon from '@mui/icons-material/Agriculture';
-import { useAuthContext } from "../../../components/contexts/AuthContext";
+import { Grid, Typography, Paper, Button} from "@mui/material";
+import Agriculture from "@mui/icons-material/Agriculture";
+import { useState,useEffect } from "react";
 
 export default function EmpleoCard({autoData}){
-  
-  const {userEmpresario} = useAuthContext()
-  const empresarioName = userEmpresario.user[0].nombre
+console.log(autoData)
 
-  const imagen = `../../../public/especialidad/${autoData?.especialidad}.jpg`
-  const defaultImage = "../../../../public/especialidad/oliva.jpg"
+const [especialidad,setEspecialidad] = useState(null)
+const [imagen,setImagen] = useState(null)
+const defaultImage = "../../../../public/especialidad/oliva.jpg"
+
+console.log(especialidad,`especialidad`)
+useEffect(()=>{
+  setEspecialidad(autoData.especialidad)
+},[autoData])
+
+useEffect(()=>{
+  setImagen(`../../../public/especialidad/${especialidad}.jpg`)
+},[especialidad])
+
+
+
 
   return(
-    
       <Grid container>
-  <>
   <Paper elevation={2}>
-  <Grid container item xs={9}>
-  
-    <Grid  item xs={6}>
-    {autoData ? (<img src={defaultImage} height={95} alt="imagen" />)
-    :(<img src={imagen} height={95} alt="imagen" />)}
-    
-   </Grid>
- 
-          <Grid item xs={6}>
-          <Typography variant="h6">{autoData?.titulo}</Typography>
-          
-          </Grid>
-
-          <Grid container item xs={12} p={2}>
-            <Grid item xs={4}>
-              <Typography variant="body3"><AgricultureIcon/> {autoData?.tipotrabajo}</Typography>
-            </Grid>
-
-            <Grid item xs={4}>
-              <Typography variant="body3"><AgricultureIcon/> {autoData?.especialidad}</Typography>
-            </Grid>
-        
-          <Grid container item xs={12}>
-            <Grid item xs={12}>
-             <Typography variant="body3"><Location/>{autoData?.direccion}</Typography>
-            </Grid>
+        <Grid container item xs={12} p={2}>
+          <Grid container item xs={6} p={1}>
+          {especialidad ? (
+            <img src={imagen} height={120}  alt="imagen" />
+          ):(
+            <img src={defaultImage} height={120}  alt="imagen" />
+          )}
             
           </Grid>
+
+          <Grid container item xs={6} p={1}>
+          <Grid item xs={12}>
+          <Typography variant="h5">{autoData.titulo}</Typography>
+          </Grid>
+
+            <Grid item xs={6}>
+              <Typography variant="body1"><Agriculture /> {autoData.tipotrabajo}</Typography>
+              </Grid>
+
+              <Grid item xs={6}>
+              <Typography variant="body1"><Agriculture /> {autoData.especialidad}</Typography>
+              </Grid>
+
+          </Grid>
+
+
+          <Grid container item xs={12} p={1}>
+    
+              <Grid item xs={7}>
+                <Typography variant="body1"><b>Dirección:</b> {autoData.direccion}</Typography>
+                <Typography variant="body1"><b>Fecha de Publicación:</b> {autoData.fecha}</Typography>
+              </Grid>
+
+              <Grid item xs={5}>
+                <Button
+                 variant="contained"
+                  fullWidth
+                  color="primary"
+                >
+                  Ver Detalles
+                </Button>
+              </Grid>
+
+          </Grid>
         </Grid>
-        </Grid>
-        </Paper>
-        </>
-        <br/>
+      </Paper>
         
     </Grid>
   )}
+
+
+
+

@@ -11,6 +11,7 @@ import AuthContextProvider from "./components/contexts/AuthContext";
 import RegisterTrabajador from "./views/Register/RegisterTrabajador/RegisterTrabajador";
 import RegisterEmpresario from "./views/Register/RegisterEmpresario/RegisterEmpresario";
 import EmpleoPerfil from "./views/Empleo/EmpleoPerfil/EmpleoPerfil";
+import HomeJob from "./views/Home/HomeJob";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Routes>
           <Route path="/" element={<IndexLayout />}>
             <Route index element={<Home />} />
+            <Route path="job" element={<HomeJob/>}/>
             <Route path="login" element={<Login />} />
             <Route path="register" element={<RegisterRoute />} />
             <Route path="empleoPerfil" element={<EmpleoPerfil/>} />
@@ -29,6 +31,7 @@ function App() {
             <Route path="register2" element={<RegisterTrabajador/>} />
           </Route>
           <Route path="empleo" element={<Empleo />} />
+
         </Routes>
       </AuthContextProvider>
     </BrowserRouter>
