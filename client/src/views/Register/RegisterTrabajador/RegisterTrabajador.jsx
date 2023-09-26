@@ -5,6 +5,7 @@ import { initialValues } from "./utils/initialValues";
 import { RegisterFormSchema } from "./RegisterFormSchema";
 import PopUpRegister from "../../../components/PopUp/PopUpRegister";
 import jornaleroImagen from "../../../../public/imageRegister/jornalero1.jpg";
+import CarouselTrabajador from "../../../components/Carousel/CarouselTrabajador";
 // import CarouselTrabajador from './utils/CarouselTrabajador';
 
 export default function RegisterTrabajador() {
@@ -87,7 +88,7 @@ export default function RegisterTrabajador() {
    <Grid  item xs={6}  >
  <Grid container sx={{display:"flex", flexDirection:"column", pr:2}}>
 <Grid item xs={12}>
-<img src={jornaleroImagen} style={{ position: "fixed", width:"500px"}}/>
+<CarouselTrabajador/>
 </Grid>
   </Grid>
       </Grid>

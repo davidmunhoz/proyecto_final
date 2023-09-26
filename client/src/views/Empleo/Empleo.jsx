@@ -59,7 +59,7 @@ export default function Empleo(){
   
 console.log(autoData)
 
-  function handleOnchange(){
+  async function handleOnchange(){
     setAutoData(values)
   }
 

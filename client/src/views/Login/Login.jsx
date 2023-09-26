@@ -98,8 +98,10 @@ const {fetchLogin,errorMessage,} = useAuthContext()
 </Grid>
 
 <Grid item xs={6}>
-  <Grid container xs={12}>
-  <img src={imageLogin} alt="imagen" width="100%" height="662px" />
+  <Grid container>
+  <Grid item xs={12}>
+  <img src={imageLogin}  alt="imagen" width="135%" height="670px" />
+  </Grid>
   </Grid>
 </Grid>
 

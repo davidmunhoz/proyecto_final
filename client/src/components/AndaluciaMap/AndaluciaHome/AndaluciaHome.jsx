@@ -1,4 +1,6 @@
 import SvgIcon from "@mui/material/SvgIcon";
+import { useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 
 const idValues = {
   'huelva': 'huelvaValue',
@@ -13,17 +15,29 @@ const idValues = {
 
 
    
-export default function AndaluciaMap({selectProvincia}) {
+export default function AndaluciaHome({selectProvincia}) {
+    // const [fontSizeMap, setFontsizeMap] = useState("")
+	// console.log(fontSizeMap)
+
+	// useEffect(()=>{
+	// 	if(selectProvincia !== null){
+	// 		navigate("/job")
+	// 		setFontsizeMap("1500px")
+	// 	}else{
+	// 	setFontsizeMap("750px")	
+	// 	} },[selectProvincia])
 
   const handleClick = (id) =>{
     const values = idValues[id]
 	console.log(values)
 	selectProvincia(id)	
-
   }
 
+
+
+
   return (
-    <SvgIcon sx={{width:"530", height:"750", fontSize:"600px", } } viewBox="0 0 530 750 " >
+    <SvgIcon sx={{width:"530", height:"750", fontSize:"750px"} } viewBox="0 0 595.3 841.9  " >
 <g id="huelva" onClick={() =>handleClick('huelva')} className="huelva" >
 	<polygon className="st0" points="192.7,371.9 198.4,377.1 205.5,380 208.1,382.3 208.1,391.2 203.9,389.4 200.4,392.8 197.9,391.5 
 		189.8,395.4 184.9,399.5 184.9,402.2 192.4,402.2 192.7,406.6 196.5,414.7 194.3,416.8 192.7,421.1 195,424.8 194.3,428.8 

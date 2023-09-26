@@ -5,7 +5,6 @@ import HomeCard from "../../components/EmpleoCard/HomeCard/HomeCard"
 import AndaluciaMap from "../../components/AndaluciaMap/AndaluciaMap"
 
 const recoleccion = [
-    { label: '          ', value:'' },
     { label: 'Fresa', value:'fresa' },
     { label: 'Ajo', value: 'ajo'},
     { label: 'Oliva', value: 'oliva' },
@@ -13,23 +12,22 @@ const recoleccion = [
   ];
   
   const maquinaria =[
-    { label: '          ', value:'' },
     { label:'Tractorista', value:'tractorista'},
     {label:'Buggy' , value:'buggy'}
   ]
   
   const otros = [
-    { label: '          ', value:'' },
     { label:'Talador', value:'talador'},
     { label:'Tecnico de Riego', value:'riego'},
     { label:'Ingeniero agrícola', value:'ingeniero agricola'},
   
   ]
   const tipotrabajo = [
-    { label: '          ', value:'' },
+        { label: 'Recolector', value:'recolector' },
     { label: 'Recolector', value:'recolector' },
     { label: 'Maquinaria', value:'maquinaria' },
-    { label: 'Otros', value:'otros' } ];
+    { label: 'Otros', value:'otros' }
+  ];
 
 export default function Home(){
 const [provincia,setProvincia] = useState(null)
@@ -63,21 +61,15 @@ console.log(especialidadFilter)
 
                 {/* Home si se ha presionado el Mapa */}
                 {provincia &&(
-
-                    <Grid container >
-                    <Grid item xs={7} sx={{pr:4}}>
+                    <Grid container>
+                    <Grid item xs={7}>
                     <HomeCard provincia={provincia} />
                     </Grid>
 
                     <Grid item xs={5}>
                     <Grid container  >
                     <Grid item xs={12}>
-                    <Typography variant="h4">Selecciona la provincia donde deseas buscar empleo</Typography>
-                    </Grid> 
-                    </Grid>
-
-                    <Grid container  >
-                    <Grid item xs={12} >
+                    <Typography> Selecciona la provincia</Typography>
                     <AndaluciaMap selectProvincia={setProvincia}/> 
                     </Grid> 
                     </Grid>
@@ -165,12 +157,11 @@ console.log(especialidadFilter)
     </Grid>
     )}
                     </Grid>    
-                    
-     
-                        </Grid>     
+                        </Grid>
+                   
+                
                </Grid>
                )}
                 </Grid>
     )}
        
-
