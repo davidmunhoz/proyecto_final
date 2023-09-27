@@ -1,8 +1,10 @@
 import {useState} from "react"
 import { FormControl, Grid, MenuItem, Select, Typography} from "@mui/material"
-import AndaluciaHome from "../../components/AndaluciaMap/AndaluciaHome/AndaluciaHome"
+// import AndaluciaHome from "../../components/AndaluciaMap/AndaluciaHome/AndaluciaHome"
 import HomeCard from "../../components/EmpleoCard/HomeCard/HomeCard"
 import AndaluciaMap from "../../components/AndaluciaMap/AndaluciaMap"
+import AndaluciaG from "../../components/AndaluciaMap/MapaBueno/AndaluciaG"
+// import AndaluciaG from "../../components/AndaluciaMap/MapaBueno/AndaluciaG"
 
 const recoleccion = [
     { label: '          ', value:'' },
@@ -54,7 +56,7 @@ console.log(especialidadFilter)
                 <Grid container>
                 <Grid item xs={12} sx={{alignItems:"center"}}>
                 <Typography variant="h6">Selecciona en el mapa la provincia en la que buscas trabajo</Typography>
-                    <AndaluciaHome selectProvincia={setProvincia} />
+                    <AndaluciaG selectProvincia={setProvincia} />
                 </Grid>
                 </Grid>
                 </Grid>
@@ -78,7 +80,7 @@ console.log(especialidadFilter)
 
                     <Grid container  >
                     <Grid item xs={12} >
-                    <AndaluciaMap selectProvincia={setProvincia}/> 
+                    <AndaluciaG selectProvincia={setProvincia}/> 
                     </Grid> 
                     </Grid>
 

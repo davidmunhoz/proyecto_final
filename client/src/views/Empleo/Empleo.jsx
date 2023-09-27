@@ -52,9 +52,9 @@ export default function Empleo(){
       jornadas:"",
       vacante:"",
       direccion:"",
-      provincia:``,
-      tipotrabajo:``,
-      especialidad:``
+      provincia:`malaga`,
+      tipotrabajo:`recolector`,
+      especialidad:`oliva`
   });
   
 console.log(autoData)
@@ -122,32 +122,34 @@ console.log(autoData)
     <form onSubmit={handleSubmit} onChange={handleOnchange}>
       <Grid container >
 
-      <Grid container item xs={6} style={{color:"white", backgroundColor:"#5C8D3A"}} p={2}>
-
-      <Grid item xs={12}>
-      <img src={autoctono} alt="logo" width={360} height={60}/>
+      <Grid item xs={6} sx={{color:"white", backgroundColor:"#5C8D3A" , p:2, }}>
+      <Grid container>
+      <Grid item xs={12} sx={{p:1,pl:14}}>
+        <img src={autoctono}/>
+      </Grid>
+      <Grid item xs={12} sx={{p:1,pt:4, }}>
+      <Typography  variant="h3" p={1} > Rellena el Formulario de tu empleo</Typography>
+      </Grid>
       </Grid>
 
-      <Grid item xs={12}>
-      <Typography variant="h3" p={1} > Rellena el Formulario de tu empleo</Typography>
-      </Grid>
-
+      <Grid container sx={{pt:7,pl:4}}>
         <Grid item xs={12}>
-        <Typography variant="h6">Vista previa</Typography>
-        <br/>
+        <Typography sx={{pl:30,}} variant="h5"><b>Vista previa</b></Typography>
         <EmpleoCard autoData={autoData}/>
         </Grid>
       </Grid>
-
-
-      <Grid container item xs={6} style={{ overflow: 'auto', maxHeight: 'calc(100vh - 64px)' }} p={2}>
+      </Grid>
+    
+      <Grid  item xs={6} sx={{ p:1, pl:10 }}>
+      {/* Container de la descripción empleo */}
+      <Grid container>
       <Grid item xs={12}>
       <Grid xs={12} p={2}>
-        <Typography variant="h4" p={1}><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>1.</span> Describe tu empleo </Typography>
+        <Typography variant="h3" p={1}><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>1.</span> Describe tu empleo </Typography>
         </Grid>
 
         <Grid xs={12} p={1}>
-        <Typography>Título</Typography>
+        <Typography variant="h6">Título</Typography>
         <TextField
                 type="text"
                 name="titulo"
@@ -159,7 +161,7 @@ console.log(autoData)
         </Grid>
            
         <Grid xs={12} p={1}>
-        <Typography>Descripción</Typography>
+        <Typography variant="h6">Descripción</Typography>
           <TextField
             type="text"
             name="descripcion"
@@ -173,7 +175,7 @@ console.log(autoData)
      
 
             <Grid  xs={12} p={1}>
-            <Typography>Salario</Typography>
+            <Typography variant="h6">Salario</Typography>
           <TextField
             type="number"
             size="small"
@@ -188,7 +190,7 @@ console.log(autoData)
         </Grid>
 
         <Grid xs={12} p={1}>
-        <Typography>Jornadas Aproximadas</Typography>
+        <Typography variant="h6">Jornadas Aproximadas</Typography>
           <TextField
             type="number"
             size="small"
@@ -200,7 +202,7 @@ console.log(autoData)
         </Grid>
 
         <Grid xs={12} p={1}>
-        <Typography>Jornaleros necesarios</Typography>
+        <Typography variant="h6">Jornaleros necesarios</Typography>
           <TextField
             type="number"
             size="small"
@@ -211,13 +213,16 @@ console.log(autoData)
           />
         </Grid>
         </Grid>
+</Grid>
 
+{/* Container de la localización */}
+<Grid container>
         <Grid item xs={12} p={2}>
         <Grid xs={12} p={1} >
-          <Typography variant="h4"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>2.</span> Localización del Empleo</Typography>
+          <Typography variant="h3"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>2.</span> Localización del Empleo</Typography>
         </Grid> 
         <Grid xs={12} p={1} >
-        <Typography>Introduce la Provincia</Typography>
+        <Typography variant="h6">Introduce la Provincia</Typography>
       <FormControl size="big">
         <Select
           id="provincias"
@@ -235,7 +240,7 @@ console.log(autoData)
        </Grid>
 
         <Grid xs={12} p={1}>
-        <Typography>Introduce la Dirección</Typography>
+        <Typography variant="h6">Introduce la Dirección</Typography>
           <TextField
             type="text"
             size="small"
@@ -246,14 +251,18 @@ console.log(autoData)
           />
         </Grid>
         </Grid>
-       
-
-        <Grid item xs={12} p={2}>
-        <Grid xs={12} p={1}>
-          <Typography variant="h4"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>3.</span> Tipo de Empleo</Typography>
         </Grid>
-       <Grid xs={12} p={1}>
-       <Typography>Selecciona el tipo de trabajo</Typography>
+
+{/* Container del tipo de empleo */}
+        <Grid container>
+        <Grid item xs={12} p={1}>
+          <Typography variant="h3"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>3.</span> Tipo de Empleo</Typography>
+        </Grid>
+       <Grid item xs={12} p={1}>
+       <Typography variant="h6">Selecciona el tipo de trabajo</Typography>
+       </Grid>
+
+        <Grid item xs={12} p={1}>
   <FormControl size="big">
     <Select
       labelId="tipotrabajo"
@@ -274,7 +283,7 @@ console.log(autoData)
 </Grid>
 
 {tipoTrabajo === "recolector" && (
-<Grid xs={12} p={1}>
+<Grid item xs={12} p={1}>
 <Typography>Selecciona el tipo de fruto</Typography>
   
     <FormControl size="big">
@@ -296,7 +305,7 @@ console.log(autoData)
   )}
 
   {tipoTrabajo === "maquinaria" && (
-  <Grid xs={12} p={1}>
+  <Grid item xs={12} p={1}>
   <Typography>Selecciona el tipo de maquinaria</Typography>
     <FormControl size="big">
       <Select
@@ -317,7 +326,7 @@ console.log(autoData)
   )}
 
   {tipoTrabajo === "otros" && (
-  <Grid xs={12} p={1}>
+  <Grid item xs={12} p={1}>
   <Typography>Otros empleos</Typography>
     <FormControl size="big">
       <Select
@@ -336,8 +345,11 @@ console.log(autoData)
     </FormControl>
     </Grid>
   )}
+
 </Grid>
 
+{/* Container del button */}
+<Grid container>
         <Grid item xs={12} p={1}>
           <Button 
           size="large"
@@ -347,6 +359,7 @@ console.log(autoData)
           >
             Enviar
           </Button>
+        </Grid>
         </Grid>
       </Grid>
         

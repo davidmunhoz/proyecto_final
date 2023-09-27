@@ -8,6 +8,6 @@ applicationDao.getApplicationEmpresario = async(applicationData) => await applic
 
 applicationDao.deletebyEmpleo = async(applicationData) => await applicationQueries.deletebyEmpleo(applicationData);
 
-applicationDao.findApplication = async(applicationData) => await applicationQueries.findApplication(applicationData);
+applicationDao.findApplication = async(trabajador,empleo,empresario) => await applicationQueries.findApplication(trabajador,empleo,empresario);
 
 module.exports = applicationDao;

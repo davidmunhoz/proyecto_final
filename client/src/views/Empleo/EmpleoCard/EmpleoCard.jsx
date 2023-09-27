@@ -22,8 +22,8 @@ useEffect(()=>{
 
 
   return(
-      <Grid container>
-  <Paper elevation={2}>
+      <Grid container sx={{pt:5,}}>
+  <Paper elevation={3}>
         <Grid container item xs={12} p={2}>
           <Grid container item xs={6} p={1}>
           {especialidad ? (

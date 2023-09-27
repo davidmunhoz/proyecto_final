@@ -11,7 +11,8 @@ applicationController.addApplication = async (req, res) => {
 
     try {
         const existingApplication = await applicationDao.findApplication(trabajador, empleo, empresario);
-        if(existingApplication){
+        console.log(existingApplication)
+        if(existingApplication.length !== 0){
             return res.status(400).send({ message: "Solicitud ya existente" })
         }else{
             const application = await applicationDao.addApplication(req.body);

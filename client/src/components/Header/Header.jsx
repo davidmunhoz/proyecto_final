@@ -4,11 +4,13 @@ import {useState} from 'react'
 import { Link } from "react-router-dom";
 import { Grid, Box, Button, IconButton, Menu, MenuItem, Typography, } from "@mui/material";
 import { useAuthContext } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 import PersonIcon from '@mui/icons-material/Person';
+import AgricultureIcon from '@mui/icons-material/Agriculture';
 import logo3 from "../../../public/assets/logo3.png";
 
 export default function Header() {
-
+const navigate = useNavigate()
 const {userTrabajador, userEmpresario, logout} = useAuthContext()
 
 const [anchorEl, setAnchorEl] = useState(null);
@@ -27,22 +29,22 @@ const handleMenu = (event) => {
       <Toolbar
         sx={{ maxWidth: "1200px", margin: "0 auto", width: "100%", px: 2 }}
       >
-        <Grid p={2} container justifyContent="flex-start" alignItems={"center"}>
+        <Grid p={2} item xs={6}>
           <Link to="/">
             <Box component={"img"} sx={{ width: "180px", mr: 1 }} src={logo3} />
           </Link>
         </Grid>
 
-        <Grid container justifyContent="flex-end">
+
+        <Grid item xs={3} sx={{justifyContent:"flex-end", pl:75}}>
         {userTrabajador || userEmpresario ? (""):
-          (<Link to="/register" style={{ color: "white" }}>
+          (<Button onClick={()=>{navigate("/register")}} sx={{ color: "white" }}>
             Registrate
-          </Link>)
+          </Button>)
         }
         </Grid>
 
-
-        <Grid container justifyContent="flex-end">
+        <Grid item xs={3} sx={{justifyContent:"flex-end", pl:10}}>
         {userTrabajador ?(<div>
               <IconButton
                 size="large"
@@ -53,7 +55,7 @@ const handleMenu = (event) => {
                 color="inherit"
               >
              
-                <PersonIcon /><hr/><Typography variant="body2" sx={{color:"white"}}>Hola!,{userTrabajador.user[0].nombre}</Typography>
+                <PersonIcon /><Typography variant="body2" sx={{color:"white"}}>Hola!,{userTrabajador.user[0].nombre}</Typography>
               </IconButton>
              
               <Menu
@@ -71,8 +73,10 @@ const handleMenu = (event) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}><Link to="/perfil1">Perfil Trabajador</Link></MenuItem>
-                <MenuItem onClick={handleClose}><Button onClick={logout}>Logout</Button></MenuItem>
+                <MenuItem onClick={handleClose}>
+                <AgricultureIcon/>
+                <Button variant="text" sx={{color:"black", p:1, pl:1}}  onClick={()=>{navigate("/perfil1")}}><b>MI PERFIL</b></Button></MenuItem>
+                <MenuItem onClick={logout}><Typography sx={{color:"red",pl:1}}>Cerrar sesión</Typography></MenuItem>
               </Menu>
             </div>    
             ) 
@@ -102,14 +106,15 @@ const handleMenu = (event) => {
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}><Link to="/perfil2">Perfil Empresario</Link></MenuItem>
-                <MenuItem onClick={handleClose}><Link to="/empleo">Publicar Empleo</Link></MenuItem>
-                <MenuItem onClick={handleClose}><Button onClick={logout}>Logout</Button></MenuItem>
+              <MenuItem onClick={()=>{navigate("/perfil2")}}>
+                <AgricultureIcon/> <Typography><b>MI PERFIL</b></Typography></MenuItem>
+                <MenuItem onClick={()=>{navigate("/empleo"),handleClose}}><Typography>Publicar Empleo</Typography></MenuItem>
+                <MenuItem onClick={logout}><Typography sx={{color:"red",pl:1}}>Cerrar sesión</Typography></MenuItem>
               </Menu>
             </Grid>) 
-          : (<Link to="/login" style={{ color: "white" }}>
-            Iniciar sesión
-          </Link>)
+          : (<Button onClick={()=>{navigate("/login")}} sx={{ color: "white" }}>
+            Inicia sesión
+          </Button>)
           }
         </Grid>
 
