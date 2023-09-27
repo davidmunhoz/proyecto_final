@@ -1,4 +1,4 @@
-import {Button, Divider, Grid, Paper, Typography } from "@mui/material";
+import {Button, Divider, Grid, Paper, Typography,Box } from "@mui/material";
 import { useEffect,useState } from "react";
 import {useLocation} from 'react-router-dom';
 import LocationIcon from '@mui/icons-material/LocationOn';
@@ -38,9 +38,12 @@ const applicationValues = {
     empleo: empleo.id,
     empresario: empresarioID,
   }
-  
+
+
+
      async function handlePOST() {
         try{
+            console.log(applicationValues)
             const response = await fetch("http://localhost:3001/application/add",{
                 method: "POST",
                 body: JSON.stringify(applicationValues),
@@ -85,21 +88,38 @@ const applicationValues = {
            {/*Jornadas,Salario,Vacantes,Dirección,Fecha*/}
          <Grid container sx={{pt:5}}>
             <Grid item xs={12} sx={{pt:1}}>
-                <Typography variant="h6"> <CalendarIcon2 sx={{pr:1}}/><b>Jornadas aproximadas:</b> {empleo?.jornadas}</Typography>
+            <Box sx={{display:"flex", flexDirection:"row", width:"100%"}}>
+            <CalendarIcon2 sx={{pr:1,pt:0.3}}/>
+                <Typography variant="h6"> <b>Jornadas aproximadas:</b> {empleo?.jornadas}</Typography>
+                </Box>
             </Grid>
             <Grid item xs={12} sx={{pt:1}}>
-                <Typography variant="h6"> <EuroIcon sx={{pr:1}}/><b>Salario por hora:</b> {empleo?.salario}</Typography>
+            <Box sx={{display:"flex", flexDirection:"row", width:"100%"}}>
+            <EuroIcon sx={{pr:1,pt:0.3}}/>
+            <Typography variant="h6"><b>Salario por hora:</b> {empleo?.salario}</Typography>
+            </Box>
             </Grid>
             <Grid item xs={12} sx={{pt:1}}>
-                <Typography variant="h6"><PersonAdd sx={{pr:1}}/><b>Puestos Vacantes:</b>{empleo?.vacante}</Typography>
+            <Box sx={{display:"flex", flexDirection:"row", width:"100%"}}>
+            <PersonAdd sx={{pr:1,pt:0.3}}/>
+            <Typography variant="h6"><b>Puestos Vacantes:</b>{empleo?.vacante}</Typography>
+            </Box>
+         
             </Grid>
 
             <Grid item xs={12} sx={{pt:1}}>
-                <Typography variant="h6"><LocationIcon sx={{pr:1}}/><b>Dirección:</b>{empleo?.direccion}</Typography>
+            <Box sx={{display:"flex", flexDirection:"row", width:"100%"}}>
+            <LocationIcon sx={{pr:1,pt:0.3}}/>
+            <Typography variant="h6"><b>Dirección:</b>{empleo?.direccion}</Typography>
+            </Box>
+              
             </Grid>
 
             <Grid item xs={12} sx={{pt:1}}>
-                <Typography variant="h6"><b>Fecha de publicación:</b>{empleo?.fecha}</Typography>
+            <Box sx={{display:"flex", flexDirection:"row", width:"100%"}}>
+            <Typography variant="h6"><b>Fecha de publicación:</b>{empleo?.fecha}</Typography>
+            </Box>
+                
             </Grid>
  
             </Grid>
