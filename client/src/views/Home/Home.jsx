@@ -3,6 +3,7 @@ import { FormControl, Grid, MenuItem, Select, Typography} from "@mui/material"
 import AndaluciaHome from "../../components/AndaluciaMap/AndaluciaHome/AndaluciaHome"
 import HomeCard from "../../components/EmpleoCard/HomeCard/HomeCard"
 import AndaluciaMap from "../../components/AndaluciaMap/AndaluciaMap"
+// import AndaluciaG from "../../components/AndaluciaMap/MapaBueno/AndaluciaG"
 
 const recoleccion = [
     { label: '          ', value:'' },

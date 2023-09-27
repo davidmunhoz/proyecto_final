@@ -1,15 +1,17 @@
-import {Button, Grid, Typography } from "@mui/material";
+import {Button, Divider, Grid, Paper, Typography } from "@mui/material";
 import { useEffect,useState } from "react";
 import {useLocation} from 'react-router-dom';
 import LocationIcon from '@mui/icons-material/LocationOn';
-import CalendarIcon from '@mui/icons-material/CalendarMonth';
 import PersonPinIcon from '@mui/icons-material/PersonPin';
+import CalendarIcon2 from '@mui/icons-material/CalendarToday';
+import EuroIcon from '@mui/icons-material/Euro';
+import PersonAdd from '@mui/icons-material/PersonAddAlt1';
 import { useAuthContext } from "../../../components/contexts/AuthContext";
 
 export default function EmpleoPerfil(){
     const [empresarioData, setEmpresarioData] = useState("");
     const {userTrabajador} = useAuthContext()
-    const trabajadorID = userTrabajador._id
+    const trabajadorID = userTrabajador.user[0].id
     const location = useLocation();
     const empleo = location.state.empleo
     const empresarioID = empleo.empresario
@@ -21,9 +23,9 @@ useEffect(() =>{
     async function empresarioFetch(){
         try {
             const response = await fetch(`http://localhost:3001/user/getEmpresario/${empresarioID}`);
-            const data = response.json()
+            const data = await response.json()
             console.log(data)
-            setEmpresarioData(data)
+            setEmpresarioData(data.empresario[0])
         }catch(error){
             console.log(error)
         }
@@ -31,7 +33,12 @@ useEffect(() =>{
     empresarioFetch()
 },[empresarioID])
 
-
+const applicationValues = {
+    trabajador: trabajadorID,
+    empleo: empleo.id,
+    empresario: empresarioID,
+  }
+  
      async function handlePOST() {
         try{
             const response = await fetch("http://localhost:3001/application/add",{
@@ -39,81 +46,100 @@ useEffect(() =>{
                 body: JSON.stringify(applicationValues),
                 headers: { "Content-Type": "application/json" },
               })
-              const data = await response.json()
-              console.log(data)
-              alert("Solicitud enviada")
+              if(response===200){
+                const data = await response.json()
+                console.log(data)
+                if(data){alert("Solicitud enviada")}
+              }       
         }catch(error){
             console.log(error)
         }
     }
 
-    const applicationValues = {
-      trabajador: trabajadorID,
-      empleo: empleo.id,
-      empresario: empresarioID,
-    }
 
-  
-  
-  
+
   
 
     return(
       <Grid container sx={{display:"flex" , flexDirection:"row"}}>
-      <Grid item xs={12}>
-        <Grid container>
-            <Grid item xs={2}>
-                <img src={imagen} width="100px"/>
-            </Grid>
-            <Grid item xs={8}>
-                <Typography variant="h3">{empleo?.titulo}</Typography>
-            </Grid>
-            <Grid item xs={2}>
-                <Typography variant="h6"><PersonPinIcon/>Juanillo Mangas Verdes</Typography>
-            </Grid>
+      
+        <Grid item xs={8}>
+        {/*Titulo e imagen*/}
+        <Grid container sx={{display:"flex" , flexDirection:"row", p:2}} >
+        <Grid item xs={4} >
+        <img src={imagen} width="240px"/>
         </Grid>
-      </Grid>
-        <Grid item xs={7}>
-        {/*descripción,jornadas salario,vacantes*/}
-        <Grid container>
-            <Grid item xs={12}>
-                <Typography variant="h5">{empleo?.especialidad}</Typography>
-            </Grid>
-            <Grid item xs={12}>
+        <Grid item xs={8} sx={{pt:4}}>
+        <Typography variant="h4">{empleo?.titulo}</Typography>
+</Grid>
+        </Grid>
+
+        {/*Descripción*/}
+        <Grid container sx={{pt:4,pb:2}}>
+        <Grid item xs={12} sx={{pt:1}}>
+        <Divider><Typography variant="h5"><b>Descripción</b></Typography></Divider>
                 <Typography variant="h6">{empleo?.descripcion}</Typography>
             </Grid>
-            <Grid item xs={12}>
-                <Typography variant="h6">Jornadas: {empleo?.jornadas}</Typography>
             </Grid>
-            <Grid item xs={12}>
-                <Typography variant="h6">Salario: {empleo?.salario}</Typography>
+           
+           {/*Jornadas,Salario,Vacantes,Dirección,Fecha*/}
+         <Grid container sx={{pt:5}}>
+            <Grid item xs={12} sx={{pt:1}}>
+                <Typography variant="h6"> <CalendarIcon2 sx={{pr:1}}/><b>Jornadas aproximadas:</b> {empleo?.jornadas}</Typography>
             </Grid>
-            <Grid item xs={12}>
-                <Typography variant="h6">Vacantes: {empleo?.vacante}</Typography>
+            <Grid item xs={12} sx={{pt:1}}>
+                <Typography variant="h6"> <EuroIcon sx={{pr:1}}/><b>Salario por hora:</b> {empleo?.salario}</Typography>
             </Grid>
+            <Grid item xs={12} sx={{pt:1}}>
+                <Typography variant="h6"><PersonAdd sx={{pr:1}}/><b>Puestos Vacantes:</b>{empleo?.vacante}</Typography>
+            </Grid>
+
+            <Grid item xs={12} sx={{pt:1}}>
+                <Typography variant="h6"><LocationIcon sx={{pr:1}}/><b>Dirección:</b>{empleo?.direccion}</Typography>
+            </Grid>
+
+            <Grid item xs={12} sx={{pt:1}}>
+                <Typography variant="h6"><b>Fecha de publicación:</b>{empleo?.fecha}</Typography>
+            </Grid>
+ 
+            </Grid>
+
+        </Grid>
+
+        <Grid item xs={4} sx={{pl:10}}>
+        <Grid container>
+            <Grid item xs={12} sx={{pl:3,pb:2}}>
+                <Typography variant="h5">Publicado por:</Typography>
             </Grid>
         </Grid>
 
-        <Grid item xs={5}>
-        {/*Dirección*/}
-        <Grid container>
-            <Grid item xs={12}>
-                <Typography variant="h5"><LocationIcon/>{empleo.direccion}</Typography>
-            </Grid>
+             {/*Empresario del Empleo*/}
+             <Paper elevation={2}>
+           <Grid container>
+           <Grid item xs={12} sx={{pl:4}}>
+<Typography variant="h6"><PersonPinIcon/>{empresarioData?.nombre}</Typography>
+</Grid>
+
+<Grid item xs={12} sx={{pl:4}}>
+<Typography variant="body1"> <LocationIcon/> {empresarioData?.direccion}</Typography>
+</Grid>
+
+<Grid item xs={12} sx={{pl:6}}>
+<Typography variant="body1"><b>CIF:</b>{empresarioData?.cif}</Typography>
+</Grid>
         </Grid>
-        {/*Fecha*/}
-        <Grid container>
-        <Grid item xs={12}>
-        <Typography variant="h5"><CalendarIcon/>{empleo.fecha}</Typography>
+        </Paper>
         </Grid>
-        </Grid>
-          {/*Boton Solicitar Empleo*/}
-          <Grid container>
-          <Grid item xs={12}>
-            <Button variant="contained" onClick={handlePOST} >Solicitar Empleo</Button>
+
+      
+
+               {/*Boton Solicitar Empleo*/}
+               <Grid container>
+          <Grid item xs={10} sx={{pt:5,pl:25}}>
+            <Button variant="contained" fullWidth onClick={handlePOST} >Solicitar Empleo</Button>
           </Grid>
           </Grid>
+
         </Grid>
-      </Grid>
     )
 }
