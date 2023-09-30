@@ -8,7 +8,7 @@ userDao.loginUserEmpresario =async(email) => await userQueries.getUserbyEmailEmp
 userDao.addUserTrabajador = async(userData) => await userQueries.addUserTrabajador(userData);
 userDao.loginUserTrabajador =async(email) => await userQueries.getUserbyEmailTrabajador(email);
 
-userDao.getTrabajador = async(id) => await userQueries.getTrabajador(id);
+userDao.getTrabajadorbyIdEmpresario = async(id) => await userQueries.getTrabajadorbyIdEmpresario(id);
 userDao.getEmpresario = async(id) => await userQueries.getEmpresario(id);
 
 

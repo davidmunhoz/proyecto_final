@@ -1,111 +1,88 @@
 import { useEffect, useState } from "react";
-import { Grid, Typography } from "@mui/material";
+import { Divider, Grid, Typography } from "@mui/material";
 import { useAuthContext } from "../../components/contexts/AuthContext";
-import CheckBoxIcon from "@mui/icons-material/CheckBox";
-import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import HorizontalDivider from "../../components/Divider/HorizontalDivider";
 import PerfilCard from "../../components/EmpleoCard/PerfilCard/PerfilCard";
 import imagenMuleta from "../../../public/assets/mariachi.jpg"
+import LocationIcon from '@mui/icons-material/LocationOn';
+import PhoneAndroid from "@mui/icons-material/PhoneAndroid";
+import DirectionsCar from "@mui/icons-material/DirectionsCar";
+import CarnetIcon from '@mui/icons-material/CreditScore';
 
 export default function PerfilTrabajador() {
-  const [solicitud, setSolicitud] = useState("");
-  const [solicitud2, setSolicitud2] = useState("");
   const [empleo, setEmpleo] = useState("");
-  const [empleo2, setEmpleo2] = useState("");
+  console.log(empleo)
   const { userTrabajador } = useAuthContext();
-  const trabajador = userTrabajador.user[0];
-
-  useEffect(() => {
-    async function fetchSolicitud() {
-      try {
-        const response = await fetch(`http://localhost:3001/application/getTrabajador/${trabajador.id}`);
-        const data = await response.json();
-        setSolicitud(data.application[0]);
-        setSolicitud2(data.application[1]);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchSolicitud();
-  }, [trabajador]);
+  const trabajadorID = userTrabajador.id;
 
   useEffect(() => {
     async function fetchEmpleo() {
       try {
-        const response = await fetch(`http://localhost:3001/employment/getid/${solicitud.empleo}`);
+        const response = await fetch(`https://localhost:3001/getbyTrabajador/${trabajadorID}}`);
         const data = await response.json();
-        setEmpleo(data.employment[0]);
+        setEmpleo(data);
       } catch (error) {
         console.error(error);
       }
     }
     fetchEmpleo();
 
-    async function fetchEmpleo2() {
-      try {
-        const response = await fetch(`http://localhost:3001/employment/getid/${solicitud.empleo2}`);
-        const data = await response.json();
-        setEmpleo2(data.employment[0]);
-      } catch (error) {
-        console.error(error);
-      }
-    }
-    fetchEmpleo2();
-  }, [solicitud, solicitud2]);
+  }, [trabajadorID]);
 
   return (
     <Grid container>
-       <Grid container justifyContent="center" alignItems="center" style={{ height: "10vh" }}>
-        <Typography variant="h2">Mi Perfil</Typography>
-      </Grid>
+      <Grid item xs={12}>
 
-      <Grid container item xs={12}>
+      <Grid container sx={{pl:50}}>
+      <Grid item xs={12} sx={{p:1, pl:2}}>
+        <Typography variant="h2" >Perfil</Typography>
+      </Grid>
         <Grid item xs={12}>
-          <img src={imagenMuleta} alt="imagen de perfil" style={{ width: "200px", height: "200px", borderRadius: "50%" }} />
+        <img src={imagenMuleta} style={{borderRadius:"50%", overflow:"hidden",width:"20%"}}/>
         </Grid>
+
         <Grid item xs={12}>
-          <Typography variant="h5">{trabajador?.nombre}</Typography>
+        <Typography variant="h4">{trabajador?.nombre}</Typography>
         </Grid>
-      </Grid>
-      <HorizontalDivider />
 
-      <Grid container item xs={12}>
-        <Grid item xs={6}>
-          <Typography variant="body2">{trabajador?.direccion}</Typography>
-          <Typography variant="body2">{trabajador?.telefono}</Typography>
-          {trabajador?.carnet ? (
-            <div>
-              <CheckBoxIcon /> <Typography variant="body2">Carnet</Typography>
-            </div>
-          ) : (
-            <div>
-              <CheckBoxOutlineBlankIcon /> <Typography variant="body2"> Carnet</Typography>
-            </div>
-          )}
-          {trabajador?.coche ? (
-            <div>
-              <CheckBoxIcon /> <Typography variant="body2">Coche</Typography>
-            </div>
-          ) : (
-            <div>
-              <CheckBoxOutlineBlankIcon /> <Typography variant="body2"> Coche</Typography>
-            </div>
-          )}
-        </Grid>
-        <Grid item xs={6} style={{ display: "flex", flexDirection: "column", alignItems: "flex-start" }}>
-          <Typography variant="body1">{trabajador?.experiencia}</Typography>
-        </Grid>
       </Grid>
-      <HorizontalDivider />
+      <Divider sx={{ borderBottom: "2px solid black" }} />
+      </Grid>
+   
+      <Grid item xs={4} sx={{borderRight: "3px solid black" }}>
+      <Grid container>
+      <Grid item xs={10} sx={{p:1}}>
+      <Typography variant="h5"><LocationIcon sx={{pr:1}}/>{trabajador?.direccion}</Typography>
+      </Grid>
+      <Grid item xs={10} sx={{p:1}}>
+      <Typography variant="h5"><PhoneAndroid sx={{pr:1}}/>{trabajador?.telefono}</Typography>
+      </Grid>
+      <Grid item xs={8} sx={{p:1}}>
+        { trabajador.carnet === 1 ? (<Typography><CarnetIcon sx={{pr:1}}/>Tienes Carnet</Typography>): (<Typography><CarnetIcon sx={{pr:1}}/>No tienes Carnet</Typography>)}
+      </Grid>
+      <Grid item xs={8} sx={{p:1}}>
+      { trabajador.coche === 1 ? (<Typography><DirectionsCar sx={{pr:1}}/>Tienes Coche</Typography>): (<Typography><DirectionsCar sx={{pr:1}}/>No tienes Coche</Typography>)}
+      </Grid>
 
-      <Grid container item xs={12}>
-        <Grid item xs={6}>
-          <Grid item xs={12}>
-            <PerfilCard empleo={empleo} empleo2={empleo2} />
-          </Grid>
-        </Grid>
-        {/* Agregar el otro PerfilCard aquí si es necesario */}
       </Grid>
+      </Grid>
+
+      <Grid item xs={8}>
+      {/* Descripción */}
+      <Grid container sx={{p:1, pl:2}}>
+      <Grid item xs={12}>
+          <Typography variant="h4">{trabajador.experiencia}</Typography>
+        </Grid>
+      </Grid>
+
+      {/* Empleo */}
+      <Grid container>
+        <Grid item xs={12}>
+          <Typography variant="h4">Empleo</Typography>
+        </Grid>
+      </Grid>
+      </Grid>
+
+     
     </Grid>
   );
 }

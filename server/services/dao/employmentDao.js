@@ -7,6 +7,7 @@ employmentDao.addEmployment = async(employmentData) => await employmentQueries.a
 employmentDao.getEmploymentProvincia = async(employmentData) => await employmentQueries.getEmploymentProvincia(employmentData);
 employmentDao.getEmploymentID = async(employmentData) => await employmentQueries.getEmploymentID(employmentData);
 employmentDao.getEmploymentEmpresario = async(employmentData) => await employmentQueries.getEmploymentEmpresario(employmentData);
+employmentDao.getEmploymentTrabajador = async(employmentData) => await employmentQueries.getEmploymentTrabajador(employmentData);
 
 employmentDao.deleteEmployment = async(employmentData) => await employmentQueries.deleteEmployment(employmentData);
 

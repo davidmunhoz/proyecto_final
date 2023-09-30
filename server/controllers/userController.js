@@ -131,11 +131,11 @@ userController.userLoginTrabajador = async (req,res) =>{
 }
 
  
-userController.getTrabajador = async (req, res) => {
+userController.getTrabajadorbyIdEmpresario = async (req, res) => {
   
     const { id } = req.params;
     try {
-       const trabajador = await userDao.getTrabajador(id);
+       const trabajador = await userDao.getTrabajadorbyIdEmpresario(id);
   
       if (trabajador.length === 0) {
         return res.status(404).send({ message: "Trabajador no encontrado" });

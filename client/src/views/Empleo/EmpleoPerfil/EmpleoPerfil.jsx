@@ -134,7 +134,7 @@ const applicationValues = {
         </Grid>
 
              {/*Empresario del Empleo*/}
-             <Paper elevation={2}>
+             <Paper elevation={1} sx={{border:'1px solid black'}}>
            <Grid container>
            <Grid item xs={12} sx={{pl:4}}>
 <Typography variant="h6"><PersonPinIcon/>{empresarioData?.nombre}</Typography>

@@ -46,7 +46,7 @@ export default function AuthContextProvider({ children }) {
       console.log(data)
       if(response.status === 200){
        setUserEmpresario(data)
-       navigate("/")
+       navigate("/perfil2")
       }else{
           setErrorMessage(true)
         }
