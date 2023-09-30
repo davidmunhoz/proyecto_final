@@ -68,6 +68,22 @@ employmentController.getEmploymentProvincia = async (req, res) => {
     }
   };
 
+  employmentController.getEmploymentTrabajador = async (req, res) => {
+  
+    const { id } = req.params;
+    try {
+       const employment = await employmentDao.getEmploymentTrabajador(id);
+  
+      if (employment.length === 0) {
+        return res.status(404).send({ message: "Empleos no encontrados" });
+      }
+  
+      return res.send({ employment });
+    } catch (error) {
+      res.status(500).send({ message: error.message });
+    }
+  };
+
 
 //employmentController.updateEmployment = async (req, res)  =>{ }
 

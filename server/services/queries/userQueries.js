@@ -83,20 +83,27 @@ userQueries.getUserbyEmailTrabajador = async(email) =>{
         conn && conn.end()
     }
     }
-
-    userQueries.getTrabajador= async(id) =>{
+    
+    userQueries.getTrabajadorbyIdEmpresario = async (id) => {
         let conn = null;
-        
-        try{
-         conn = await db.createConnection();
-         return await db.query('SELECT * FROM trabajador WHERE id= ?', id, 'select', conn) 
-        
-        }catch(error){
-            throw new Error (error.message)
-        }finally{
-            conn && conn.end()
+      
+        try {
+          conn = await db.createConnection();
+          const query = `
+            SELECT *
+            FROM empresario
+            INNER JOIN solicitud ON empresario.id = solicitud.empresario
+            INNER JOIN trabajador ON trabajador.id = solicitud.trabajador
+            WHERE empresario.id = ?`;
+      
+          const result = await db.query(query, [id], 'select', conn);
+          return result;
+        } catch (error) {
+          throw new Error(error.message);
+        } finally {
+          conn && conn.end();
         }
-        }
+      };
 
         userQueries.getEmpresario= async(id) =>{
             let conn = null;

@@ -8,19 +8,15 @@ import { Link } from "react-router-dom";
 
 
 export default function Login() {
-
-const {fetchLogin,errorMessage,} = useAuthContext()
-
-
-  async function onSubmit(values, actions) {
-
-    console.log(values)
-    fetchLogin(values);
-
-    actions.resetForm();
-  }
+const { fetchLogin ,errorMessage} = useAuthContext()
 
 
+async function onSubmit(values, actions) {
+
+  fetchLogin(values);
+
+  actions.resetForm();
+}
   const {
     values,
     handleChange,
