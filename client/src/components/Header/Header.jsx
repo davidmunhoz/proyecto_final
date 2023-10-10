@@ -55,7 +55,7 @@ const handleMenu = (event) => {
                 color="inherit"
               >
              
-                <PersonIcon /><Typography variant="body2" sx={{color:"white"}}>Hola!,{userTrabajador.user[0].nombre}</Typography>
+                <PersonIcon /><Typography variant="body2" sx={{color:"white"}}>Hola!,{userTrabajador.nombre}</Typography>
               </IconButton>
              
               <Menu
@@ -89,7 +89,7 @@ const handleMenu = (event) => {
                 onClick={handleMenu}
                 color="inherit"
               >
-                <PersonIcon />  <Typography variant="body2" sx={{color:"white"}}>Bienvenido!, {userEmpresario.user[0].nombre}</Typography>
+                <PersonIcon />  <Typography variant="body2" sx={{color:"white"}}>Bienvenido!, {userEmpresario.nombre}</Typography>
               </IconButton>
               <Menu
                 id="menu-appbar"

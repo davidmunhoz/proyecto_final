@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
-import { Grid, TextField, Typography, Button, FormControl, Select, MenuItem, InputAdornment } from "@mui/material";
+import { Grid, TextField, Typography, Button, FormControl, Select, MenuItem, InputAdornment, Divider } from "@mui/material";
 import { useAuthContext } from "../../components/contexts/AuthContext";
 import EmpleoCard from "./EmpleoCard/EmpleoCard";
 import autoctono from "../../../public/assets/logo3.png"
@@ -45,22 +45,22 @@ const tipotrabajo = [
 export default function Empleo(){
   const navigate = useNavigate();
 
-  const [autoData,setAutoData] = useState({
+  const [formData,setFormData] = useState({
       titulo : "",
       descripcion:"",
       salario:"",
       jornadas:"",
       vacante:"",
       direccion:"",
-      provincia:`malaga`,
-      tipotrabajo:`recolector`,
-      especialidad:`oliva`
+      provincia:``,
+      tipotrabajo:``,
+      especialidad:``
   });
   
-console.log(autoData)
+console.log(formData)
 
   async function handleOnchange(){
-    setAutoData(values)
+    setFormData(values)
   }
 
   const [tipoTrabajo, setTipoTrabajo] = useState("")
@@ -68,7 +68,7 @@ console.log(autoData)
   // const [provincia, setProvincia] = useState("")
 
   const{userEmpresario} = useAuthContext()
-  const idEmpresario = userEmpresario.user[0].id
+  const idEmpresario = userEmpresario.id
   let date = new Date()
   
   async function onSubmit() {
@@ -77,7 +77,7 @@ console.log(autoData)
       try{
         const response = await fetch("http://localhost:3001/employment/add",{
           method: "POST",
-          body: JSON.stringify(autoData),
+          body: JSON.stringify(formData),
           headers: { "Content-Type": "application/json" }
       })
       const data = await response.json()
@@ -120,32 +120,34 @@ console.log(autoData)
 
   return (
     <form onSubmit={handleSubmit} onChange={handleOnchange}>
-      <Grid container >
+      <Grid container sx={{ width: '100%', display: 'flex'}} >
 
-      <Grid item xs={6} sx={{color:"white", backgroundColor:"#5C8D3A" , p:2, }}>
-      <Grid container>
-      <Grid item xs={12} sx={{p:1,pl:14}}>
-        <img src={autoctono}/>
-      </Grid>
-      <Grid item xs={12} sx={{p:1,pt:4, }}>
-      <Typography  variant="h3" p={1} > Rellena el Formulario de tu empleo</Typography>
-      </Grid>
+      <Grid item xs={6} sx={{color:"white", backgroundColor:"#5C8D3A" , position:"fixed", pt:6}}>
+      <Grid container sx={{ backgroundColor: "#5C8D3A"}}>
+      <Grid item xs={12} sx={{p:1,pl:18, }}>
+        <img src={autoctono}/>       
       </Grid>
 
-      <Grid container sx={{pt:7,pl:4}}>
-        <Grid item xs={12}>
-        <Typography sx={{pl:30,}} variant="h5"><b>Vista previa</b></Typography>
-        <EmpleoCard autoData={autoData}/>
+      <Grid item xs={12} sx={{pl:9}}>
+      <Typography  variant="h4" fontFamily="monospace" > <b>#1 PORTAL DE EMPLEO AGRÍCOLA</b></Typography>
+      </Grid>
+
+      </Grid>
+
+      <Grid container sx={{ backgroundColor: "#5C8D3A", pt:10}}>
+        <Grid item xs={12} sx={{pb:16, pl:4,pr:4 ,pt:12}}>
+        <Divider sx={{pb:2, }}><Typography variant="h5">VISTA PREVIA</Typography></Divider>
+        <EmpleoCard formData={formData}/>
         </Grid>
       </Grid>
       </Grid>
     
-      <Grid  item xs={6} sx={{ p:1, pl:10 }}>
+      <Grid  item xs={6} sx={{ p:1, pl:10, marginLeft:"50%" }}>
       {/* Container de la descripción empleo */}
       <Grid container>
       <Grid item xs={12}>
       <Grid xs={12} p={2}>
-        <Typography variant="h3" p={1}><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>1.</span> Describe tu empleo </Typography>
+        <Typography variant="h4" p={1}><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>1.</span> DESCRIBE TU EMPLEO </Typography>
         </Grid>
 
         <Grid xs={12} p={1}>
@@ -219,7 +221,7 @@ console.log(autoData)
 <Grid container>
         <Grid item xs={12} p={2}>
         <Grid xs={12} p={1} >
-          <Typography variant="h3"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>2.</span> Localización del Empleo</Typography>
+          <Typography variant="h4"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>2.</span> LOCALIZACIÓN DEL EMPLEO</Typography>
         </Grid> 
         <Grid xs={12} p={1} >
         <Typography variant="h6">Introduce la Provincia</Typography>
@@ -256,7 +258,7 @@ console.log(autoData)
 {/* Container del tipo de empleo */}
         <Grid container>
         <Grid item xs={12} p={1}>
-          <Typography variant="h3"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>3.</span> Tipo de Empleo</Typography>
+          <Typography variant="h4"><span style={{ display: 'inline', width: '35px', height: '40px', background: '#EEEEEE', color: 'green', borderRadius:"15%" }}>3.</span>TIPO DE EMPLEO</Typography>
         </Grid>
        <Grid item xs={12} p={1}>
        <Typography variant="h6">Selecciona el tipo de trabajo</Typography>

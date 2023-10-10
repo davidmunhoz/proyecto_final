@@ -31,7 +31,7 @@ const navigate = useNavigate();
   return(
     <Grid container>
     {empleos.map((empleo, index) => (
-      <Paper elevation={5} key={index}>
+      <Paper elevation={2} key={index} sx={{ border: "1px solid black",mb:1 }}>
         <Grid container item xs={12} sx={{p:1}}>
           <Grid container item xs={6} p={1}>
             <img src={`../../../public/especialidad/${empleo.especialidad}.jpg`} height={120}  alt="imagen" />
@@ -39,7 +39,7 @@ const navigate = useNavigate();
 
           <Grid container item xs={6} p={1}>
           <Grid item xs={12}>
-          <Typography variant="h5">{empleo.titulo}</Typography>
+          <Typography variant="h5"><b>{empleo.titulo}</b></Typography>
           </Grid>
 
             <Grid item xs={6}>
