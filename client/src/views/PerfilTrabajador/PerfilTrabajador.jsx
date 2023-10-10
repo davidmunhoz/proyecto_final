@@ -9,8 +9,8 @@ import DirectionsCar from "@mui/icons-material/DirectionsCar";
 import CarnetIcon from '@mui/icons-material/CreditScore';
 
 export default function PerfilTrabajador() {
-  const [empleo, setEmpleo] = useState("");
-  console.log(empleo)
+  const [empleos, setEmpleos] = useState("");
+  console.log(empleos)
   const { userTrabajador } = useAuthContext();
   const trabajadorID = userTrabajador.id;
 
@@ -19,7 +19,7 @@ export default function PerfilTrabajador() {
       try {
         const response = await fetch(`https://localhost:3001/getbyTrabajador/${trabajadorID}}`);
         const data = await response.json();
-        setEmpleo(data);
+        setEmpleos(data);
       } catch (error) {
         console.error(error);
       }
@@ -70,14 +70,14 @@ export default function PerfilTrabajador() {
       {/* Descripción */}
       <Grid container sx={{p:1, pl:2}}>
       <Grid item xs={12}>
-          <Typography variant="h4">{trabajador.experiencia}</Typography>
+          <Typography variant="h4">{trabajador?.experiencia}</Typography>
         </Grid>
       </Grid>
 
       {/* Empleo */}
       <Grid container>
         <Grid item xs={12}>
-          <Typography variant="h4">Empleo</Typography>
+          <PerfilCard empleos={empleos}/>
         </Grid>
       </Grid>
       </Grid>

@@ -31,15 +31,17 @@ async function onSubmit(values, actions) {
   return (
     
       <Grid container>
-
-<Grid item xs={6}>
+<Grid item xs={6} sx={{pt:2}}>
 <form onSubmit={handleSubmit}>
 
-<Grid container xs={10} sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+<Grid container sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+<Grid item xs={10} sx={{pl:6}}>
 <Typography variant="h3">¡Hola de Nuevo!</Typography>
 </Grid>
+</Grid>
 
-<Grid container xs={10} sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+<Grid container  sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+<Grid item xs={10} sx={{pb:2}}>
 <Typography variant="h6">Email</Typography>
           <TextField
             type="email"
@@ -52,7 +54,8 @@ async function onSubmit(values, actions) {
           />
 </Grid>
 
-<Grid container xs={10} sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+
+<Grid item xs={10} sx={{pb:2}}>
 <Typography variant="h6">Contraseña</Typography>
 <TextField
           size="medium"
@@ -65,7 +68,8 @@ async function onSubmit(values, actions) {
           />
 </Grid>
 
-<Grid container xs={10} sx={{display:"flex", flexDirection:"row", p:"16px 16px 16px 0"}}>
+
+<Grid item xs={10} sx={{pt:2}}>
 <Button
             size="large"
             type="submit"
@@ -77,6 +81,7 @@ async function onSubmit(values, actions) {
             Enviar
           </Button>
 </Grid>
+</Grid>
 
 <Grid container sx={{display:"flex", flexDirection:"column", p:"32px 16px 16px 64px"}}>
 <Grid item xs={10}>
@@ -85,7 +90,7 @@ async function onSubmit(values, actions) {
 </Grid>
 
 
-<Grid container xs={10}>
+<Grid container>
 {errorMessage  && (
             <PopUpLogin />
         )}
