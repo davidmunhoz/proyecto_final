@@ -81,11 +81,11 @@ employmentQueries.getEmploymentID = async(id) =>{
             try {
               conn = await db.createConnection();
               const query = `
-              SELECT * 
+              SELECT empleo.* 
               FROM trabajador
               INNER JOIN solicitud ON solicitud.trabajador = trabajador.id
               INNER JOIN empleo ON solicitud.empleo = empleo.id
-              WHERE trabajador.id = 1`;
+              WHERE trabajador.id= ?`;
           
               const result = await db.query(query, [id], 'select', conn);
               return result;
