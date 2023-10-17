@@ -41,9 +41,7 @@
   color: #888;
 }
 
-/* .huelva{
-  color: black;
+/* Estilo para el contenedor */
+.container-image {
+  position: relative;
 }
-.huelva:hover {
-  color: "red";
-} */ 

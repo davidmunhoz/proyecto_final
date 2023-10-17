@@ -6,7 +6,7 @@ import Phone from '@mui/icons-material/PhoneAndroid';
 import Location from '@mui/icons-material/LocationOn';
 
 export default function Solicitudes({empresario}) {
-  const [data,setData] = useState([]);
+  const [datos,setDatos] = useState([]);
   const [trabajador,setTrabajador] = useState([]);
 
   //Redondear al alza, Total de Paginas = Total de trabajadores / numero de paginations(5)
@@ -27,13 +27,13 @@ const endIndex = startIndex + trabajadoresPorPagina; // Índice de fin
   async function trueWorker() {
     let trabajadoresUnicos = [];
     // data.length -1 para que no se incluya el ultimo elemento del array al comparar
-    for(let i = 0; i < data.length-1; i++){
+    for(let i = 0; i < datos.length-1; i++){
     // Verificar si el trabajador actual es diferente al siguiente
-        if(data[i].id !== data[i+1].id && data[i]){
-            trabajadoresUnicos.push(data[i])   
+        if(datos[i].id !== datos[i+1].id && datos[i]){
+            trabajadoresUnicos.push(datos[i])   
         }
     }
-    trabajadoresUnicos.push(data[data.length-1])
+    trabajadoresUnicos.push(datos[datos.length-1])
     setTrabajador(trabajadoresUnicos)
     console.log(trabajadoresUnicos)
   }
@@ -42,9 +42,9 @@ const endIndex = startIndex + trabajadoresPorPagina; // Índice de fin
     async function fetchData() {
       try {
         const response = await fetch(`http://localhost:3001/user/trabajadorbyEmpresario/${empresario.id}`);
-        const datazo= await response.json();
+        const data= await response.json();
 
-        setData(datazo.trabajador);
+        setDatos(data.trabajador);
       } catch (error) {
         console.error(error);
       }
@@ -55,7 +55,7 @@ const endIndex = startIndex + trabajadoresPorPagina; // Índice de fin
   
   useEffect (()=>{
     trueWorker()
-  },[data])
+  },[datos])
 
 
   return (

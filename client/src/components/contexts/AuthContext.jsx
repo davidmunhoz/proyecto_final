@@ -27,7 +27,7 @@ export default function AuthContextProvider({ children }) {
      const data = await response.json()
      if(response.status === 200){
       console.log(data)
-      setUserTrabajador(data)
+      setUserTrabajador(data.user[0])
       navigate("/")
      }else{
          setErrorMessage(true)

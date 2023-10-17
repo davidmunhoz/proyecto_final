@@ -70,9 +70,9 @@ employmentController.getEmploymentProvincia = async (req, res) => {
 
   employmentController.getEmploymentTrabajador = async (req, res) => {
   
-    const { id } = req.params;
+    const { trabajador } = req.params;
     try {
-       const employment = await employmentDao.getEmploymentTrabajador(id);
+       const employment = await employmentDao.getEmploymentTrabajador(trabajador);
   
       if (employment.length === 0) {
         return res.status(404).send({ message: "Empleos no encontrados" });

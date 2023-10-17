@@ -1,7 +1,6 @@
 import { Grid, Typography } from "@mui/material";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
-import HorizontalDivider from "../../../components/Divider/HorizontalDivider";
 import imagenMuleta from "../../../../public/assets/mariachi.jpg"
 import { useLocation } from 'react-router-dom';
 
@@ -22,7 +21,6 @@ export default function TrabajadorView() {
           <img src={imagenMuleta} alt="imagen de perfil" style={{ width: "200px", height: "200px", borderRadius: "50%" }} />
         </Grid>
       </Grid>
-      <HorizontalDivider />
 
       <Grid container item xs={12}>
         <Grid item xs={6}>
@@ -51,8 +49,6 @@ export default function TrabajadorView() {
           <Typography variant="body1">{trabajador?.experiencia}</Typography>
         </Grid>
       </Grid>
-      <HorizontalDivider />
-
     </Grid>
   );
 }
